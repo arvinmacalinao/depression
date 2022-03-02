@@ -14,10 +14,6 @@ use App\Http\Controllers\MapDataController;
 */
 
 Route::get('/', [MapDataController::class,'showHome']);
-=======
-Route::get('/', function () {
-    return view('./home/home');
-});
 
 Route::get('/addproject', function () {
     return view('./projects/addproject');
