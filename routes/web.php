@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\MapDataController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,10 +13,11 @@
 |
 */
 
+Route::get('/', [MapDataController::class,'showHome']);
+=======
 Route::get('/', function () {
     return view('./home/home');
 });
-
 
 Route::get('/addproject', function () {
     return view('./projects/addproject');
