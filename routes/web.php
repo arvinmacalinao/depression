@@ -12,5 +12,4 @@ use App\Http\Controllers\MapDataController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', [MapDataController::class,'showHome']);
+Route::get('/', 'MapDataController@gmaps');
