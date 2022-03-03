@@ -15,6 +15,14 @@ use App\Http\Controllers\MapDataController;
 
 Route::get('/', [MapDataController::class,'showHome']);
 
+
+// Projects
+
 Route::get('/addproject', function () {
     return view('./projects/addproject');
 });
+
+Route::get('/projects', function () {
+    return view('./projects/projects');
+});
+
