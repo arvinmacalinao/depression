@@ -10,6 +10,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>
         <title>Depression</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('css/form.css') }}" rel="stylesheet"/>
         <script src="{{ asset('js/map.js') }}"></script>
     </head>
     <body>
@@ -50,8 +51,7 @@
 </nav>
         @yield('content')
     </body>
-
-    <footer id="footer" style="font-family: 'Roboto Condensed', sans-serif;">
+    <footer class="page-footer" id="footer" style="font-family: 'Roboto Condensed', sans-serif;">
      <div class="bg-light py-2">
          <div class="text-center">
               <a href="https://impression.dostcalabarzon.ph/privacy_policy.php" class="btn btn-danger mb-2" title="Privacy Policy">Privacy Policy</a>
@@ -59,8 +59,12 @@
               <br>
               Information & Monitoring of Projects, Services and S&T Interventions
               <br>
-              Powered by DOST CALABARZON Â· MIS Unit
+              Powered by DOST CALABARZON · MIS Unit
          </div>
      </div>
  </footer>
+  <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMDx-ejfVStxIBhfqtBuLj98OV79kqbdY&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
 </html>
