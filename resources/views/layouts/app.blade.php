@@ -10,6 +10,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>
         <title>Depression</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('css/map_style.css') }}" rel="stylesheet"/>
         <script src="{{ asset('js/map.js') }}"></script>
     </head>
     <body>
@@ -57,9 +58,9 @@
               <a href="https://impression.dostcalabarzon.ph/privacy_policy.php" class="btn btn-danger mb-2" title="Privacy Policy">Privacy Policy</a>
               <a href="https://www.privacy.gov.ph/data-privacy-act/" class="btn btn-danger mb-2" title="Republic Act 10173 - Data Privacy Act of 2012">Republic Act 10173 - Data Privacy Act of 2012</a>
               <br>
-              Information & Monitoring of Projects, Services and S&T Interventions
+               <p>Information & Monitoring of Projects, Services and S&T Interventions</p> 
               <br>
-              Powered by DOST CALABARZON Â· MIS Unit
+               <p>Powered by DOST CALABARZON - MIS Unit</p>
          </div>
      </div>
  </footer>
