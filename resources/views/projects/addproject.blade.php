@@ -648,12 +648,12 @@
 
                 <div class="form-group">
                     <label for="prj_longitude" class="control-label">Longitude</label>
-                    <input class="form-control input-sm" placeholder="Longitude" min="0" step="any" name="prj_longitude" id="longitude" type="number" value="">
+                    <input class="form-control input-sm" placeholder="Longitude" min="0" step="any" name="prj_longitude" id="lon" type="text" value="">
                 </div>
 
                 <div class="form-group">
                     <label for="prj_latitude" class="control-label">Latitude</label>
-                    <input class="form-control input-sm" placeholder="Latitude" min="0" step="any" name="prj_latitude" id="latitude" type="number" value="">
+                    <input class="form-control input-sm" placeholder="Latitude" min="0" step="any" name="prj_latitude" id="lat" type="text" value="">
                 </div>
 
                 <div class="form-group">
@@ -674,6 +674,10 @@
 </div>
 </form>
 
+<script type="text/javascript">
+
+
+</script>
 
 
 

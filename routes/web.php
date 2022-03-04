@@ -22,7 +22,6 @@ Route::get('/addproject', function () {
     return view('./projects/addproject');
 });
 
-Route::get('/projects', function () {
-    return view('./projects/projects');
-});
+Route::get('/projects', 'PsiProjectsController@index');
+
 
