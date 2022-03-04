@@ -5,6 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content=" {{ csrf_token() }} ">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="http://maps.google.com/maps/api/js?key=AIzaSyCMDx-ejfVStxIBhfqtBuLj98OV79kqbdY"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>
         <title>Depression</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet"/>
         <script src="{{ asset('js/map.js') }}"></script>
@@ -48,16 +51,16 @@
         @yield('content')
     </body>
 
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMDx-ejfVStxIBhfqtBuLj98OV79kqbdY&callback=initMap&libraries=&v=weekly"
-      async
-    ></script>
-    <footer id="footer" class="fixed-bottom text-center" style="font-family: 'Roboto Condensed', sans-serif;">
-        <a href="https://impression.dostcalabarzon.ph/privacy_policy.php" class="btn btn-danger mb-2" title="Privacy Policy">Privacy Policy</a>
-        <a href="https://www.privacy.gov.ph/data-privacy-act/" class="btn btn-danger mb-2" title="Republic Act 10173 - Data Privacy Act of 2012">Republic Act 10173 - Data Privacy Act of 2012</a>
-        <br>
-        Information & Monitoring of Projects, Services and S&T Interventions
-        <br>
-        Powered by DOST CALABARZON · MIS Unit
-    </footer>
+    <footer id="footer" style="font-family: 'Roboto Condensed', sans-serif;">
+     <div class="bg-light py-2">
+         <div class="text-center">
+              <a href="https://impression.dostcalabarzon.ph/privacy_policy.php" class="btn btn-danger mb-2" title="Privacy Policy">Privacy Policy</a>
+              <a href="https://www.privacy.gov.ph/data-privacy-act/" class="btn btn-danger mb-2" title="Republic Act 10173 - Data Privacy Act of 2012">Republic Act 10173 - Data Privacy Act of 2012</a>
+              <br>
+              Information & Monitoring of Projects, Services and S&T Interventions
+              <br>
+              Powered by DOST CALABARZON Â· MIS Unit
+         </div>
+     </div>
+ </footer>
 </html>

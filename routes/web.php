@@ -13,7 +13,7 @@ use App\Http\Controllers\MapDataController;
 |
 */
 
-Route::get('/', [MapDataController::class,'showHome']);
+Route::get('/', 'MapDataController@gmaps');
 
 Route::get('/addproject', function () {
     return view('./projects/addproject');
