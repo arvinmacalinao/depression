@@ -12,17 +12,10 @@ use App\Http\Controllers\MapDataController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', 'MapDataController@gmaps');
-
+Route::get('/', 'MapDataController@index');
 
 // Projects
-
-Route::get('/addproject', function () {
-    return view('./projects/addproject');
-});
 
 Route::get('/projects', function () {
     return view('./projects/projects');
 });
-
