@@ -8,6 +8,7 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet"/>
         <link href="{{ asset('css/map_style.css') }}" rel="stylesheet"/>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <link href="{{ asset('css/form.css') }}" rel="stylesheet"/>
         <script src="{{ asset('js/map.js') }}"></script>
         <script src="http://maps.google.com/maps/api/js?key=AIzaSyCMDx-ejfVStxIBhfqtBuLj98OV79kqbdY"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -52,8 +53,7 @@
 </nav>
         @yield('content')
     </body>
-
-    <footer id="footer" style="font-family: 'Roboto Condensed', sans-serif;">
+    <footer class="page-footer" id="footer" style="font-family: 'Roboto Condensed', sans-serif;">
      <div class="bg-light py-2">
          <div class="text-center">
               <a href="https://impression.dostcalabarzon.ph/privacy_policy.php" class="btn btn-danger mb-2" title="Privacy Policy">Privacy Policy</a>
@@ -64,4 +64,8 @@
          </div>
      </div>
  </footer>
+  <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMDx-ejfVStxIBhfqtBuLj98OV79kqbdY&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
 </html>

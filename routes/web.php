@@ -14,6 +14,8 @@ use App\Http\Controllers\MapDataController;
 */
 Route::get('/', 'MapDataController@index');
 
-Route::get('/addproject', function () {
-    return view('./projects/addproject');
+// Projects
+
+Route::get('/projects', function () {
+    return view('./projects/projects');
 });
