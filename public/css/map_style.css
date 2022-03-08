@@ -2,3 +2,25 @@
     background: transparent
     url(../images/map_loading.gif) no-repeat center center;
 }
+
+div.map-filter {
+    position: absolute;
+    top: 60px;
+    left: 1px;
+    width: 280px;
+    height: 640px;
+    
+    background-color: white;
+    box-shadow: 10px 10px 11px -4px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 10px 10px 11px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 11px -4px rgba(0,0,0,0.75);
+  }
+
+  div.map-filter-header {
+    left: 1px;
+  }
+
+  .close {
+    cursor: pointer;
+  }
+

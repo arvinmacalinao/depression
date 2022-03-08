@@ -3,11 +3,28 @@
 @section('content')
 <div id="map_canvas">
     <div id="map" style="height: 660px; width: 100%;"></div>
-</div>
 <nav class="navbar navbar-expand-md navbar-dark bg-primary"><h4 class="text-light">Legends</h4></nav>
 
-<script>
+<div class="map-filter w3-animate-left" id="mpFilter">
+    <div class="container">
+        Map Filters<span class="close">x</span>
+        <div class="form-group">
+            <label><b>Search</b></label>
+            <input type="text" class="form-control" id="mf_search" placeholder="Keyword">
+        </div>
 
+        <div class="form-group">
+            <label><b>Region</b></label>
+            <select class="form-control" id="mf_cmb_region">
+                <option>All</option>
+            </select>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
 let map;
 google.maps.event.addDomListener(window, 'load', initialize);
 var markers = {!! json_encode($markers->toArray()) !!};
@@ -26,6 +43,62 @@ function initialize() { // Initialize Google Maps
         mapTypeControl: false
     });
 
+    const centerControlDiv = document.createElement("div");
+    CenterControl(centerControlDiv, map);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
+    addMarkers();
+    }
+
+function CenterControl(controlDiv, map) {
+    // Set CSS for the control border.
+    const controlUI = document.createElement("div");
+  
+    controlUI.style.backgroundColor = "#fff";
+    controlUI.style.border = "2px solid #fff";
+    controlUI.style.borderRadius = "4px";
+    controlUI.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
+    controlUI.style.cursor = "pointer";
+    controlUI.style.marginTop = "8px";
+    controlUI.style.marginBottom = "22px";
+    controlUI.style.marginLeft = "8px";
+    controlUI.style.textAlign = "center";
+    controlDiv.appendChild(controlUI);
+  
+    // Set CSS for the control interior.
+    const controlText = document.createElement("div");
+  
+    controlText.style.color = "rgb(25,25,25)";
+    controlText.style.fontFamily = "Roboto,Arial,sans-serif";
+    controlText.style.fontSize = "16px";
+    controlText.style.lineHeight = "38px";
+    controlText.style.paddingLeft = "5px";
+    controlText.style.paddingRight = "5px";
+    controlText.innerHTML = "Map Filters";
+    controlUI.appendChild(controlText);
+    controlUI.addEventListener("click", () => {
+        document.getElementById("mpFilter").style.display = "block";
+    });
+}
+
+function removeMarkers(){ // Removes
+    for(i=0; i<m1.length; i++){
+        m1[i].setMap(null);
+    }
+
+    for(i=0; i<m2.length; i++){
+        m2[i].setMap(null);
+    }
+
+    for(i=0; i<m3.length; i++){
+        m3[i].setMap(null);
+    }
+
+    for(i=0; i<m4.length; i++){
+        m4[i].setMap(null);
+    }
+}
+
+function addMarkers(){
     $.each( markers, function( index, value ){
 
         var icon1;
@@ -196,7 +269,7 @@ function initialize() { // Initialize Google Maps
 
         //-----------------MARKERS-----------------------------------------------------//
         setTimeout(() => {  
-           var p1 = new google.maps.Marker({
+        var p1 = new google.maps.Marker({
                 position: { lat: parseFloat(value.prj_lat), lng: parseFloat(value.prj_long) },
                 map,
                 icon: icon1,
@@ -250,60 +323,7 @@ function initialize() { // Initialize Google Maps
 
 
         });
-
-    const centerControlDiv = document.createElement("div");
-    CenterControl(centerControlDiv, map);
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
-    }
-
-function CenterControl(controlDiv, map) {
-    // Set CSS for the control border.
-    const controlUI = document.createElement("div");
-  
-    controlUI.style.backgroundColor = "#fff";
-    controlUI.style.border = "2px solid #fff";
-    controlUI.style.borderRadius = "4px";
-    controlUI.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
-    controlUI.style.cursor = "pointer";
-    controlUI.style.marginTop = "8px";
-    controlUI.style.marginBottom = "22px";
-    controlUI.style.marginLeft = "8px";
-    controlUI.style.textAlign = "center";
-    controlDiv.appendChild(controlUI);
-  
-    // Set CSS for the control interior.
-    const controlText = document.createElement("div");
-  
-    controlText.style.color = "rgb(25,25,25)";
-    controlText.style.fontFamily = "Roboto,Arial,sans-serif";
-    controlText.style.fontSize = "16px";
-    controlText.style.lineHeight = "38px";
-    controlText.style.paddingLeft = "5px";
-    controlText.style.paddingRight = "5px";
-    controlText.innerHTML = "Map Filters";
-    controlUI.appendChild(controlText);
-    controlUI.addEventListener("click", () => {
-    
-    });
 }
 
-function removeMarkers(){
-    for(i=0; i<m1.length; i++){
-        m1[i].setMap(null);
-    }
-
-    for(i=0; i<m2.length; i++){
-        m2[i].setMap(null);
-    }
-
-    for(i=0; i<m3.length; i++){
-        m3[i].setMap(null);
-    }
-
-    for(i=0; i<m4.length; i++){
-        m4[i].setMap(null);
-    }
-}
-   
 </script>
 @endsection()
