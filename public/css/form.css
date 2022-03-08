@@ -57,3 +57,21 @@ html, body {
     display: table-row;
     height: 0;
 }
+table {
+    counter-reset: tableCount;     
+}
+.counterCell:before {              
+    content: counter(tableCount); 
+    counter-increment: tableCount; 
+}
+.thead-proj{
+    background-color: rgb(197, 197, 197);
+
+}
+
+.navbar{
+    background-color: #0392d3;
+
+
+}
+
