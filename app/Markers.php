@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Markers extends Model
 {
-    protected $fillable = [
-        'prj_lat', 'prj_long', 'project_name', 'project_desc'
-    ];
+    //Table Name
+    protected $table = "map_markers";
+    //Prmary Key
+    public $primaryKey = 'id';
 }
