@@ -14,26 +14,29 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet"/>
         <link href="{{ asset('css/form.css') }}" rel="stylesheet"/>
         <script src="{{ asset('js/map.js') }}"></script>
+        <link href='https://fonts.googleapis.com/css?family=Roboto:500,900,100,300,700,400' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </head>
     <body>
+    <!--Navbar -->
     <nav class="navbar navbar-expand-md navbar-dark">
           <a class="navbar-brand" href="#"></a>
           <img src="{{URL::asset('/images/brand_white.png')}}" width="25" height="25" alt="">
       
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link disabled" href="#"> </a>
             </li>
 
-            <li class="nav-item active">
-              <a class="nav-link" href="#"><i class="bi bi-bar-chart-steps"></i> Project Summaries</span></a>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fa fa-bar-chart"></i> Project Summaries</span></a>
             </li>
             
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Projects</span></a>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fa fa-list"></i> Projects</span></a>
             </li>
 
             <li class="nav-item">
@@ -47,50 +50,135 @@
                     </div>
                 </form>
             </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
           </ul>
           <ul class="navbar-nav">
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link disabled" href="#"> </a>
             </li>
 
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bi bi-bar-chart-line-fill"></i>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-signal"></i>
                 BSC
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Something else here</a>
+                  <a class="dropdown-item" href="#">Customer Perspective</a>
+                  <a class="dropdown-item" href="#">Financial Perspective</a>
+                  <a class="dropdown-item" href="#">Internal Process Perspective</a>
+                  <a class="dropdown-item" href="#">Learning & Growth Perspective</a>
                 </div>
               </li>
             
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Projects</span></a>
-            </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-industry"></i>
+                Projects
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">All Projects</a>
+                  <a class="dropdown-item" href="#">Status Reports</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Project Gallery</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Project Data Quality Monitoring</a>
+                  <a class="dropdown-item" href="#">Project Document Files Monitoring</a>
+                  <a class="dropdown-item" href="#">Project Liquidation Monitoring</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">SETUP Projects Productivity Information</a>
+                  
+                </div>
+              </li>
 
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Others</span></a>
-            </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-wrench"></i>
+                Others
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Possible Problematic SETUP Projects March 2022</a>
+                  <a class="dropdown-item" href="#">User Activity 2022</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Equipment Suppliers</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Consultancies</a>
+                  <a class="dropdown-item" href="#">CSF Ratings</a>
+                  <a class="dropdown-item" href="#">DRR-CCAM</a>
+                  <a class="dropdown-item" href="#">Fora/Training/Seminars</a>
+                  <a class="dropdown-item" href="#">Innovatiove Hubs</a>
+                  <a class="dropdown-item" href="#">International Collaborations</a>
+                  <a class="dropdown-item" href="#">ISO Accreditation</a>
+                  <a class="dropdown-item" href="#">Library Monitoring</a>
+                  <a class="dropdown-item" href="#">Packaging & Labeling</a>
+                  <a class="dropdown-item" href="#">R & D Agenda</a>
+                  <a class="dropdown-item" href="#">R & D Projects</a>
+                  <a class="dropdown-item" href="#">Regional Communications Plan</a>
+                  <a class="dropdown-item" href="#">S & T Fairs & Promotional Activities</a>
+                  <a class="dropdown-item" href="#">S & T Information and Referal</a>
+                  <a class="dropdown-item" href="#">Scholarship Monitoring</a>
+                  <a class="dropdown-item" href="#">SUC Assistance</a>
+                  <a class="dropdown-item" href="#">Testing & Calibration</a>
+                  <a class="dropdown-item" href="#">Technology Promotion</a>
+                  <a class="dropdown-item" href="#">Technology Adaption</a>
+                </div>
+              </li>
 
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Contacts</span></a>
-            </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-address-card"></i>
+                Contacts
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Cooperators</a>
+                  <a class="dropdown-item" href="#">Service Providers</a>
+                </div>
+              </li>
             
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Contacts</span></a>
-            </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Collaborating Agencies</a>
+                  <a class="dropdown-item" href="#">Collaborating Agency Categories</a>
+                  <a class="dropdown-item" href="#">Colsultancy Categories</a>
+                  <a class="dropdown-item" href="#">Document Categories</a>
+                  <a class="dropdown-item" href="#">Equipment Names</a>
+                  <a class="dropdown-item" href="#">Location Listings</a>
+                  <a class="dropdown-item" href="#">Organization Categories</a>
+                  <a class="dropdown-item" href="#">Product Units</a>
+                  <a class="dropdown-item" href="#">Project Categories</a>
+                  <a class="dropdown-item" href="#">S&T Activity Categories</a>
+                  <a class="dropdown-item" href="#">Sectors</a>
+                  <a class="dropdown-item" href="#">Technology</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Course Categories</a>
+                  <a class="dropdown-item" href="#">Courses</a>
+                  <a class="dropdown-item" href="#">Scholarship Programs</a>
+                  <a class="dropdown-item" href="#">Schools</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Users</a>
+                  <a class="dropdown-item" href="#">User Groups</a>
+                  <a class="dropdown-item" href="#">User Logs</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Agency Profile</a>
+                </div>
+              </li>
 
-            <li class="nav-item active">
-              <a class="nav-link" href="#"></span></a>
-            </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Project Data Quality Monitoring</a>
+                  <a class="dropdown-item" href="#">Project Document Files Monitoring</a>
+                  <a class="dropdown-item" href="#">Project Liquidation Monitoring</a>
+                </div>
+              </li>
 
-            <li class="nav-item active">
-              <a class="nav-link" href="#"></span></a>
-            </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#"><i class="fa fa-user"></i>Profile</a>
+                  <a class="dropdown-item" href="#"><i class="fa fa-power-off"></i>Logout</a>
+                </div>
+              </li>
+
+            
 
             
 
