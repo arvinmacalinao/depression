@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Markers extends Model
 {
     //Table Name
-    protected $table = "map_markers";
+    protected $table = "psi_projects";
     //Prmary Key
-    public $primaryKey = 'id';
+    public $primaryKey = 'prj_id';
 }

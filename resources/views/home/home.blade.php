@@ -2,39 +2,157 @@
 
 @section('content')
 <div id="map_canvas">
-    <div id="map" style="height: 660px; width: 100%;"></div>
+    <div id="map" style="height: 720px; width: 100%;"></div>
 <nav class="navbar navbar-expand-md navbar-dark bg-primary"><h4 class="text-light">Legends</h4></nav>
+<div>
+    <img src="" id="lugo" />
+</div>
+<!-- Legends Div -->
+<small>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4 mt-2">
+                <h5><b>Project Type</b></h5>
+                <ul class="list-group">
+                <li class="list-group-item"><img src="{{URL::asset('/images/legends/t1.png')}}">   Setup</li>
+                <li class="list-group-item"><img src="{{URL::asset('/images/legends/t2.png')}}">   Roll-out</li>
+                <li class="list-group-item"><img src="{{URL::asset('/images/legends/t3.png')}}">   Tapi Assisted</li>
+                <li class="list-group-item"><img src="{{URL::asset('/images/legends/t4.png')}}">   GIA Community Based</li>
+                <li class="list-group-item"><img src="{{URL::asset('/images/legends/t5.png')}}">   GIA Internally Funded</li>
+                <li class="list-group-item"><img src="{{URL::asset('/images/legends/t6.png')}}">   GIA Externally Funded</li>
+                </ul>                
+            </div>
+            
+            <div class="col-sm-4 mt-2">
+                <h5><b>Sectors</b></h5>
+                <ul class="list-group">
+                <li class="list-group-item"><img src="{{URL::asset('/images/legends/sec1.png')}}">  Food Processing</li>
+                <li class="list-group-item"><img src="{{URL::asset('/images/legends/sec2.png')}}">  Furniture</li>
+                <li class="list-group-item"><img src="{{URL::asset('/images/legends/sec3.png')}}">  Gifts / Decors / Handicrafts</li>
+                <li class="list-group-item"><img src="{{URL::asset('/images/legends/sec4.png')}}">  Metals & Engineering</li>
+                <li class="list-group-item"><img src="{{URL::asset('/images/legends/sec5.png')}}">  Agriculture / Marine / Aquaculture / Forestry / Livestock</li>
+                <li class="list-group-item"><img src="{{URL::asset('/images/legends/sec6.png')}}">  Health & Wellness Products</li>
+                <li class="list-group-item"><img src="{{URL::asset('/images/legends/sec7.png')}}">  ICT</li>
+                <li class="list-group-item"><img src="{{URL::asset('/images/legends/sec8.png')}}">  Halal Products & Service</li>
+                <li class="list-group-item"><img src="{{URL::asset('/images/legends/sec9.png')}}">  Other Regional Industry Priorities</li>
+                </ul>
+            </div>
 
+            <div class="col-sm-4 mt-2">
+                <h5><b>Status</b></h5>
+                <ul class="list-group">
+                    <li class="list-group-item"><img src="{{URL::asset('/images/legends/sta1.png')}}">  Completed</li>
+                    <li class="list-group-item"><img src="{{URL::asset('/images/legends/sta2.png')}}">  On-going</li>
+                    <li class="list-group-item"><img src="{{URL::asset('/images/legends/sta3.png')}}">  New</li>
+                    <li class="list-group-item"><img src="{{URL::asset('/images/legends/sta4.png')}}">  Graduated</li>
+                    <li class="list-group-item"><img src="{{URL::asset('/images/legends/sta5.png')}}">  Widthdrawn</li>
+                    <li class="list-group-item"><img src="{{URL::asset('/images/legends/sta6.png')}}">  Terminated</li>
+                </ul>                
+            </div>
+        </div>
+
+    </div>
+</small>
+<!-- End of Legends Div -->
+
+<!-- Map Filter Div -->
 <div class="map-filter w3-animate-left" id="mpFilter">
     <div class="container">
         Map Filters<span class="close">x</span>
-        <div class="form-group">
+    <small>
+        <div class="form-group input-group-sm">
             <label><b>Search</b></label>
             <input type="text" class="form-control" id="mf_search" placeholder="Keyword">
         </div>
-
-        <div class="form-group">
+    
+        <div class="form-group input-group-sm">
             <label><b>Region</b></label>
             <select class="form-control" id="mf_cmb_region">
                 <option>All</option>
             </select>
         </div>
 
+        <div class="form-group input-group-sm">
+            <label><b>Province</b></label>
+            <select class="form-control" id="mf_cmb_region">
+                <option>All</option>
+            </select>
+        </div>
+
+        <div class="form-group input-group-sm">
+            <label><b>District</b></label>
+            <select class="form-control" id="mf_cmb_region">
+                <option>All</option>
+            </select>
+        </div>
+
+        <div class="form-group input-group-sm">
+            <label><b>Project Type</b></label>
+            <select class="form-control" id="mf_cmb_region">
+                <option>All</option>
+            </select>
+        </div>
+
+        <div class="form-group input-group-sm">
+            <label><b>Equipment</b></label>
+            <select class="form-control" id="mf_cmb_region">
+                <option>All</option>
+            </select>
+        </div>
+
+        <div class="form-group input-group-sm">
+            <label><b>Sector</b></label>
+            <select class="form-control" id="mf_cmb_region">
+                <option>All</option>
+            </select>
+        </div>
+
+        <div class="form-group input-group-sm">
+            <label><b>Status</b></label>
+            <select class="form-control" id="mf_cmb_region">
+                <option>All</option>
+            </select>
+        </div>
+
+        <div class="form-group input-group-sm">
+            <div class="row">
+                <div class="col-sm-6">
+                    <label for="exampleFormControlSelect1"><b>Year From</b></label>
+                    <select class="form-control" id="exampleFormControlSelect1">
+                    <option>--</option>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <label for="exampleFormControlSelect1"><b>Year To</b></label>
+                    <select class="form-control" id="exampleFormControlSelect1">
+                    <option>--</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group float-right">
+            <button type="button" class="btn btn-danger btn-sm" id="mf_close">Close</button>
+            <button type="button" class="btn btn-primary btn-sm">Apply</button>
+        </div>
+
+    </small>
     </div>
 </div>
-
+<!-- End of Map Filter Div -->
 
 <script>
+
 let map;
 google.maps.event.addDomListener(window, 'load', initialize);
-var markers = {!! json_encode($markers->toArray()) !!};
-var m1 = [];
-var m2 = [];
-var m3 = [];
-var m4 = [];
+
+m1 = [];
+m2 = [];
+m3 = [];
+m4 = [];
+imagePath = "../images/markers/"
 
 function initialize() { // Initialize Google Maps
-
     map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: 14.1724416, lng: 121.2234637 },
         zoom: 11,
@@ -46,8 +164,12 @@ function initialize() { // Initialize Google Maps
     const centerControlDiv = document.createElement("div");
     CenterControl(centerControlDiv, map);
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
-    addMarkers();
-    }
+
+    setIcons();
+    //addMarkers();
+    
+}
+
 
 function CenterControl(controlDiv, map) {
     // Set CSS for the control border.
@@ -80,250 +202,186 @@ function CenterControl(controlDiv, map) {
     });
 }
 
-function removeMarkers(){ // Removes
-    for(i=0; i<m1.length; i++){
-        m1[i].setMap(null);
-    }
 
-    for(i=0; i<m2.length; i++){
-        m2[i].setMap(null);
-    }
+function setIcons(){
 
-    for(i=0; i<m3.length; i++){
-        m3[i].setMap(null);
-    }
+    @foreach($icons as $icon)
+        iCon = {{$icon->prj_type_id}}
+        iConTwo = {{$icon->sector_id}}
+        iConThree = {{$icon->prj_status_id}}
+        iConFour = {{$icon->region_id}}
 
-    for(i=0; i<m4.length; i++){
-        m4[i].setMap(null);
-    }
-}
-
-function addMarkers(){
-    $.each( markers, function( index, value ){
-
-        var icon1;
-        var icon2;
-        var icon3;
-        var icon4;
-        var imagePath = "../images/markers/"
-        if(value.prj_id == '1' ){ //Setup Icon
-        icon1 = imagePath + "prj_0.png"
+        if( iCon == '6' ){ //Setup Icon
+            icon1 = imagePath + "prj_0.png"
         }
 
-        if(value.prj_id == '2' ){ //Roll-out Icon
+        if(iCon  == '8' ){ //Roll-out Icon
             icon1 = imagePath + "prj_1.png"
         }
 
-        if(value.prj_id == '3' ){ //Tapi Assisted Icon
+        if(iCon  == '9' ){ //Tapi Assisted Icon
             icon1 = imagePath + "prj_2.png"
         }
 
-        if(value.prj_id == '4' ){ //GIA Community Based Icon
+        if(iCon  == '12' ){ //GIA Community Based Icon
             icon1 = imagePath + "prj_3.png"
         }
 
-        if(value.prj_id == '5' ){ //GIA Internally Funded
+        if(iCon  == '13' ){ //GIA Internally Funded
             icon1 = imagePath + "prj_4.png"
         }
 
-        if(value.prj_id == '6' ){ //GIA Externally Funded
+        if(iCon  == '14' ){ //GIA Externally Funded
             icon1 = imagePath + "prj_5.png"
         }
 
-        //---------------Sectors---------------------------//
-        if(value.sec_id == '1' ){ //Food Processing
+        //Sector Icons---------------------------------------
+
+        if(iConTwo == '1' ){ //Food Processing
             icon2 = imagePath + "sec_0.png"
         }
 
-        if(value.sec_id == '2' ){ //Furniture
+        if(iConTwo == '2' ){ //Furniture
             icon2 = imagePath + "sec_1.png"
         }
 
-        if(value.sec_id == '3' ){ //Gifts / Decors / Handicrafts
+        if(iConTwo == '3' ){ //Gifts / Decors / Handicrafts
             icon2 = imagePath + "sec_2.png"
         }
 
-        if(value.sec_id == '4' ){ //Metals & Engineering
+        if(iConTwo == '4' ){ //Metals & Engineering
             icon2 = imagePath + "sec_3.png"
         }
 
-        if(value.sec_id == '5' ){ //Agriculture / Marine / Agriculture / Forestry / Livestock
+        if(iConTwo == '5' ){ //Agriculture / Marine / Agriculture / Forestry / Livestock
             icon2 = imagePath + "sec_4.png"
         }
 
-        if(value.sec_id == '6' ){ //Health & Wellness Products
+        if(iConTwo == '7' ){ //Health & Wellness Products
             icon2 = imagePath + "sec_5.png"
         }
 
-        if(value.sec_id == '7' ){ //ICT
+        if(iConTwo == '8' ){ //ICT
             icon2 = imagePath + "sec_6.png"
         }
 
-        if(value.sec_id == '8' ){ //Halal Products & Service
+        if(iConTwo == '21' ){ //Halal Products & Service
             icon2 = imagePath + "sec_7.png"
         }
 
-        if(value.sec_id == '9' ){ //Other Regional Insdustry Priorites
+        if(iConTwo == '18' ){ //Other Regional Insdustry Priorites
             icon2 = imagePath + "sec_8.png"
         }
 
         //---------------Status---------------------------//
-        if(value.stat_id == '1' ){ //Completed
+        if(iConThree == '8' ){ //Completed
             icon3 = imagePath + "stat_0.png"
         }
-
-        if(value.stat_id == '2' ){ //On-going
+        if(iConThree == '1' ){ //On-going
             icon3 = imagePath + "stat_1.png"
         }
-
-        if(value.stat_id == '3' ){ //New
+        if(iConThree == '3' ){ //New
             icon3 = imagePath + "stat_2.png"
         }
-
-        if(value.stat_id == '4' ){ //Graduated
+        if(iConThree == '4' ){ //Graduated
             icon3 = imagePath + "stat_3.png"
         }
-
-        if(value.stat_id == '5' ){ //Widthdrawn
+        if(iConThree == '7' ){ //Widthdrawn
             icon3 = imagePath + "stat_4.png"
         }
-
-        if(value.stat_id == '6' ){ //Terminated
+        if(iConThree == '6' ){ //Terminated
             icon3 = imagePath + "stat_5.png"
         }
 
         //---------------Regional---------------------------//
-        if(value.reg_id == '1' ){ //NCR
+        if(iConFour == '1' ){ //NCR
             icon4 = imagePath + "reg_0.png"
         }
-
-        if(value.reg_id == '2' ){ //CAR
+        if(iConFour == '2' ){ //CAR
             icon4 = imagePath + "reg_1.png"
         }
-
-        if(value.reg_id == '3' ){ //REGION 1
+        if(iConFour == '3' ){ //REGION 1
             icon4 = imagePath + "reg_2.png"
         }
-
-        if(value.reg_id == '4' ){ //REGION 2
+        if(iConFour == '4' ){ //REGION 2
             icon4 = imagePath + "reg_3.png"
         }
-
-        if(value.reg_id == '5' ){ //REGION 3
+        if(iConFour == '5' ){ //REGION 3
             icon4 = imagePath + "reg_4.png"
         }
-
-        if(value.reg_id == '6' ){ //REGION 4A
+        if(iConFour == '6' ){ //REGION 4A
             icon4 = imagePath + "reg_5.png"
         }
-
-        if(value.reg_id == '7' ){ //REGION 4B
+        if(iConFour == '7' ){ //REGION 4B
             icon4 = imagePath + "reg_6.png"
         }
-
-        if(value.reg_id == '8' ){ //REGION 5
+        if(iConFour == '8' ){ //REGION 5
             icon4 = imagePath + "reg_7.png"
         }
-
-        if(value.reg_id == '9' ){ //REGION 6
+        if(iConFour == '9' ){ //REGION 6
             icon4 = imagePath + "reg_8.png"
         }
-
-        if(value.reg_id == '10' ){ //REGION 7
+        if(iConFour == '10' ){ //REGION 7
             icon4 = imagePath + "reg_9.png"
         }
-
-        if(value.reg_id == '11' ){ //REGION 8
+        if(iConFour == '11' ){ //REGION 8
             icon4 = imagePath + "reg_10.png"
         }
-
-        if(value.reg_id == '12' ){ //REGION 9
+        if(iConFour == '12' ){ //REGION 9
             icon4 = imagePath + "reg_11.png"
         }
-
-        if(value.reg_id == '13' ){ //REGION 10
+        if(iConFour == '13' ){ //REGION 10
             icon4 = imagePath + "reg_12.png"
         }
-
-        if(value.reg_id == '14' ){ //REGION 11
+        if(iConFour == '14' ){ //REGION 11
             icon4 = imagePath + "reg_13.png"
         }
-
-        if(value.reg_id == '15' ){ //REGION 12
+        if(iConFour == '15' ){ //REGION 12
             icon4 = imagePath + "reg_14.png"
         }
-
-        if(value.reg_id == '16' ){ //CARAGA 
+        if(iConFour == '16' ){ //CARAGA 
             icon4 = imagePath + "reg_15.png"
         }
-
-        if(value.reg_id == '17' ){ //ARMM
+        if(iConFour == '17' ){ //ARMM
             icon4 = imagePath + "reg_16.png"
         }
 
-
-        const infowindow = new google.maps.InfoWindow({
-            content: value.project_name,
-        });
-
-
-        //-----------------MARKERS-----------------------------------------------------//
-        setTimeout(() => {  
-        var p1 = new google.maps.Marker({
-                position: { lat: parseFloat(value.prj_lat), lng: parseFloat(value.prj_long) },
+        mergeImages([icon1, icon2, icon3, icon4])
+        .then(b64 => {
+                const p1 = new google.maps.Marker({
+                position: { lat: parseFloat({{$icon->prj_latitude}}), lng: parseFloat({{$icon->prj_longitude}}) },
                 map,
-                icon: icon1,
+                icon: b64
             });
+
+            const infowindow = new google.maps.InfoWindow({
+                content: "{{$icon->prj_title}}",
+            });
+
             m1.push(p1);
-        }, 500);
-
-        setTimeout(() => {  
-            var p2 = new google.maps.Marker({
-                position: { lat: parseFloat(value.prj_lat), lng: parseFloat(value.prj_long) },
-                map,
-                icon: icon2,
-            });
-            m2.push(p2);
-        }, 550);
-
-        setTimeout(() => {  
-            var p3 = new google.maps.Marker({
-                position: { lat: parseFloat(value.prj_lat), lng: parseFloat(value.prj_long) },
-                map,
-                icon: icon3,
-            });
-            m3.push(p3);
-        }, 600);
-
-        setTimeout(() => {  
-            const marky = new google.maps.Marker({
-                position: { lat: parseFloat(value.prj_lat), lng: parseFloat(value.prj_long) },
-                map,
-                icon: icon4,
-            });
-
-            marky.addListener("mouseover", () => {
+            p1.addListener("mouseover", () => {
                 infowindow.open({
-                anchor: marky,
+                anchor: p1,
                 map,
                 shouldFocus: false,
-            });
+                });
             });
 
-            marky.addListener('mouseout', function() {
+            p1.addListener('mouseout', function() {
                 infowindow.close();
-            });
-
-            m4.push(marky);
-
-        }, 700);
-        //-----------------MARKERS-----------------------------------------------------//
-
-
-
-
+            });  
         });
+
+
+    @endforeach
+}
+
+function removeMarkers(){ // Removes
+    for(i=0; i<m1.length; i++){
+        m1[i].setMap(null);
+    }
 }
 
 </script>
+
 @endsection()
