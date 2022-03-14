@@ -56,6 +56,7 @@
 <!-- End of Legends Div -->
 
 <!-- Map Filter Div -->
+<form id="mp_Form">
 <div class="map-filter w3-animate-left" id="mpFilter">
     <div class="container">
         Map Filters<span class="close">x</span>
@@ -68,49 +69,70 @@
         <div class="form-group input-group-sm">
             <label><b>Region</b></label>
             <select class="form-control" id="mf_cmb_region">
-                <option>All</option>
+                    <option>All</option>
+                @foreach($mf_regions as $mf_region)
+                    <option>{{$mf_region->region_code}} ({{$mf_region->region_name}})</option>
+                @endforeach
             </select>
         </div>
 
         <div class="form-group input-group-sm">
             <label><b>Province</b></label>
-            <select class="form-control" id="mf_cmb_region">
+            <select class="form-control" id="mf_cmb_province">
                 <option>All</option>
+                @foreach($mf_provinces as $mf_province)
+                    <option id="{{$mf_province->province_id}}">{{$mf_province->province_name}}</option>
+                @endforeach
             </select>
         </div>
 
         <div class="form-group input-group-sm">
             <label><b>District</b></label>
-            <select class="form-control" id="mf_cmb_region">
+            <select class="form-control" id="mf_cmb_district">
                 <option>All</option>
+                @foreach($mf_districts as $mf_district)
+                    <option>{{$mf_district->district_name}}</option>
+                @endforeach
             </select>
         </div>
 
         <div class="form-group input-group-sm">
             <label><b>Project Type</b></label>
-            <select class="form-control" id="mf_cmb_region">
+            <select class="form-control" id="mf_cmb_prjtype">
                 <option>All</option>
+                @foreach($mf_projtypes as $mf_projtype)
+                    <option>{{$mf_projtype->prj_type_name}}</option>
+                @endforeach
             </select>
         </div>
 
         <div class="form-group input-group-sm">
             <label><b>Equipment</b></label>
-            <select class="form-control" id="mf_cmb_region">
+            <select class="form-control" id="mf_cmb_equipment">
                 <option>All</option>
+                @foreach($mf_equipments as $mf_equipment)
+                    <option>{{$mf_equipment->brand_name}}</option>
+                @endforeach
             </select>
         </div>
 
         <div class="form-group input-group-sm">
             <label><b>Sector</b></label>
-            <select class="form-control" id="mf_cmb_region">
+            <select class="form-control" id="mf_cmb_sector">
                 <option>All</option>
+                @foreach($mf_sectors as $mf_sector)
+                    <option>{{$mf_sector->sector_name}}</option>
+                @endforeach
             </select>
         </div>
 
         <div class="form-group input-group-sm">
             <label><b>Status</b></label>
-            <select class="form-control" id="mf_cmb_region">
+            <select class="form-control" id="mf_cmb_status">
                 <option>All</option>
+                @foreach($mf_status as $mf_statu)
+                    <option>{{$mf_statu->prj_status_name}}</option>
+                @endforeach
             </select>
         </div>
 
@@ -133,12 +155,14 @@
 
         <div class="form-group float-right">
             <button type="button" class="btn btn-danger btn-sm" id="mf_close">Close</button>
-            <button type="button" class="btn btn-primary btn-sm">Apply</button>
+            <button type="button" class="btn btn-primary btn-sm" id="mf_apply">Apply</button>
         </div>
 
     </small>
     </div>
 </div>
+</form>
+<
 <!-- End of Map Filter Div -->
 
 <script>
@@ -147,9 +171,6 @@ let map;
 google.maps.event.addDomListener(window, 'load', initialize);
 
 m1 = [];
-m2 = [];
-m3 = [];
-m4 = [];
 imagePath = "../images/markers/"
 
 function initialize() { // Initialize Google Maps
@@ -166,12 +187,9 @@ function initialize() { // Initialize Google Maps
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
 
     setIcons();
-    //addMarkers();
-    
 }
 
-
-function CenterControl(controlDiv, map) {
+function CenterControl(controlDiv, map) { // Adding Mapfilter button to google maps
     // Set CSS for the control border.
     const controlUI = document.createElement("div");
   
@@ -202,8 +220,7 @@ function CenterControl(controlDiv, map) {
     });
 }
 
-
-function setIcons(){
+function setIcons(){ // Setting and Placing Icons
 
     @foreach($icons as $icon)
         iCon = {{$icon->prj_type_id}}
@@ -376,12 +393,11 @@ function setIcons(){
     @endforeach
 }
 
-function removeMarkers(){ // Removes
+function removeMarkers(){ // Removes markers
     for(i=0; i<m1.length; i++){
         m1[i].setMap(null);
     }
 }
-
 </script>
 
 @endsection()

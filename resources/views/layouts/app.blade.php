@@ -18,6 +18,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Varela&display=swap" rel="stylesheet">
         <link rel="stylesheet" href=https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css>
         <script src="https://unpkg.com/merge-images"></script>
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <title>Depression</title>
     </head>
     <body>
