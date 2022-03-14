@@ -11,6 +11,106 @@
             <a class="btn btn-primary btn-sm" href="./addproject" title="Add Projects"><span class="fa fa-plus"></span> Add Projects</a>
             </div>
         </div>
+        <div class="card-body">
+            <form action="">
+                <div class="form-row">
+                    <div class="col-auto">
+                        <div class="input-group mb-2">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">Project Type</div>
+                          </div>
+                        <select class="form-control input-sm" id="qtype" name="qtype">
+                            <option>{{ $psi_projects->project_type_name }}</option>
+                            
+                        </select>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="input-group mb-2">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">Status</div>
+                          </div>
+                          <select class="form-control input-sm" id="qstatus" name="qstatus">
+                            <option>All</option>
+                            <option>Completed</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="input-group mb-2">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">Year Approved</div>
+                          </div>
+                          <select class="form-control input-sm" id="qyear" name="qyear">
+                            <option>All</option>
+                            <option>2011</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="input-group mb-2">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">Province</div>
+                          </div>
+                          <select class="form-control input-sm region_provinces_select" id="qprovince" name="qprovince">
+                            <option>All</option>
+                            <option>2011</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="input-group mb-2">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">Disctrict</div>
+                          </div>
+                          <select class="form-control input-sm" id="qdistrict" name="qdistrict">
+                            <option>All</option>
+                            <option>2011</option>
+                        </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-auto">
+                        <div class="input-group mb-2">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">Sector</div>
+                          </div>
+                          <select class="form-control input-sm" id="qsector" name="qsector">
+                            <option>All</option>
+                            <option>Agriculture / Marine / Aquaculture / Forestry / Livestock</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="input-group mb-2">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">Implementor</div>
+                          </div>
+                          <select class="form-control input-sm region_groups_select" id="qusergroup" name="qusergroup">
+                            <option>All</option>
+                            <option>RO-Document Custodian</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Search text..">
+                            <button type="button" class="btn search-btn">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="col-sm-3">
+                    Total No of Projects: {{ $psi_project->total() }}
+                </div>
+                <div class="col-sm-5"></div>
+                <div class="col-sm-4">
+                    {{ $psi_project }}
+                </div>
+            </div>
+        </div>
         <div class="row">
                 <div class="col-md-12">
                     <table class="table table-bordered table-hover">
@@ -64,6 +164,15 @@
             
         </div>
         <div class="card-footer">
+            <div class="row">
+                <div class="col-sm-3">
+                    Total No of Projects: {{ $psi_project->total() }}
+                </div>
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                    {{ $psi_project }}
+                </div>
+            </div>
         <table class="table table-condensed">
             <thead>
             <tr>

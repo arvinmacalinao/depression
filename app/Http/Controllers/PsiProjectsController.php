@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Projects;
-use DB;
+use App\psi_projects;
+
 
 class PsiProjectsController extends Controller
 {
@@ -14,9 +14,11 @@ class PsiProjectsController extends Controller
      */
     public function index()
     {
-
-        $psi_project = DB::select('select * from psi_projects', array(1));
+        $psi_project = psi_projects::paginate(20);
+        $psi_total_projects = count(psi_projects::all());
         return view('./projects/projects', compact('psi_project'));
+        
+
     }
 
     /**

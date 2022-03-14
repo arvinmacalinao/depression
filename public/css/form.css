@@ -70,10 +70,43 @@ table {
 }
 
 .navbar{
-    background-color: #0392d3;
+    background-color: #2ab1f0;
 
 
 }
 .nav-item {
     font-size:medium;
+}
+
+.form-row-search {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -5px;
+    margin-left: -5px;
+    background-color: aqua;
+
+}
+.input-group-prepend{
+    margin-left: 1%;
+}
+
+.search-btn{
+  padding: 0.25rem 0.5rem;
+  font-size: 0.7875rem;
+  line-height: 1;
+  height: 37px;
+  border-radius: 0;
+  background-color: #2ab1f0;
+  font-family: sans-serif;
+  color:aliceblue;
+  font-size: small;
+  border-style: solid;
+  border: 5px;
+
+}
+
+.page-item{
+    display: inline-block;
+       
+
 }
