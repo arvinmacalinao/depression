@@ -18,11 +18,8 @@ Route::get('/', 'MapDataController@gmaps');
 
 // Projects
 
-Route::get('/addproject', function () {
-    return view('./projects/addproject');
-});
 
 Route::get('/projects', 'PsiProjectsController@index');
-
+Route::get('/addproject', 'PsiProjectsController@addproject')->name('/addproject');
 
 

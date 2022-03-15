@@ -9,17 +9,19 @@
                 <div class="row-proj">
                     <div class="col-sm-3">
                         <label>Project Code *</label>
-                        <input class="form-control input-sm" placeholder="Project Code" maxLength="255" required="required"></input>
+                        <input class="form-control input-sm" placeholder="Project Code" maxLength="255" required="required">
                     </div>
                     <div class="col-sm-3">
                         <label for="prj_type_id">Project Type</label>
-                        <select class="form-control input-sm project-type-select" id="prj_type_id" name="prj_type_id">
-                            <!-- NO Option yet -->
+                        <select class="form-control input-sm chosen-select" id="prj_type_id" name="prj_type_id">
+                            @foreach ($sel_project_types as $sel_project_type)
+                            <option value="{{ $sel_project_type->prj_type_id }}">{{ $sel_project_type->prj_type_name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-sm-2">
                         <label>Year Approved *</label>
-                        <input class="form-control input-sm" placeholder="Year Approved" maxLength="4" min="1958" max="2022" required="required" type="number" defaultValue="2022"></input>
+                        <input class="form-control input-sm" placeholder="Year Approved" maxLength="4" min="1958" max="2022" required="required" type="number" value="2022">
                     </div>
                     <div class="col-sm-2 mt-3">
                         <div >
@@ -35,23 +37,23 @@
                 <div class="row-proj">
                     <div class="container-fluid">
                         <label class="control-label">Project Title *</label>
-                        <input class="form-control" placeholder="Project Title" type="text" maxLength="255" required="required"></input>
+                        <input class="form-control" placeholder="Project Title" type="text" maxLength="255" required="required">
                     </div>
                 </div>
                 <div class="row-proj">
                     <div class="container-fluid">
                         <label class="control-label">Program Title</label>
-                        <input class="form-control" placeholder="Program Title" type="text" maxLength="255" required="required"></input>
+                        <input class="form-control" placeholder="Program Title" type="text" maxLength="255" required="required">
                     </div>
                 </div>
                 <div class="row-proj">
                     <div class="col-sm-6">
                         <label class="control-label">Project Duration From *</label>
-                        <input class="form-control input-sm" placeholder="Project Duration From" maxLength="10" required="required" name="prj_duration_from" id="prj_duration_from" type="text" value="02/21/2022"></input>
+                        <input class="form-control input-sm" placeholder="Project Duration From" maxLength="10" required="required" name="prj_duration_from" id="prj_duration_from" type="text" value="02/21/2022">
                     </div>
                     <div class="col-sm-6">
                         <label class="control-label">Project Duration To *</label>
-                        <input class="form-control input-sm" placeholder="Project Duration To" maxLength="10"  required="required" name="prj_duration_to" id="prj_duration_to" type="text" value="02/21/2023"></input>
+                        <input class="form-control input-sm" placeholder="Project Duration To" maxLength="10"  required="required" name="prj_duration_to" id="prj_duration_to" type="text" value="02/21/2023">
                     </div>
                 </div>
                 <div class="row-proj">

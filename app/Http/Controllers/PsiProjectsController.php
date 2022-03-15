@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
 use App\psi_projects;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 
 class PsiProjectsController extends Controller
@@ -14,11 +16,37 @@ class PsiProjectsController extends Controller
      */
     public function index()
     {
-        $psi_project = psi_projects::paginate(20);
+        $psi_projects = psi_projects::paginate(20);
         $psi_total_projects = count(psi_projects::all());
-        return view('./projects/projects', compact('psi_project'));
         
-
+        //Option Values
+        $sel_project_types = DB::table('psi_project_types')
+                            ->select('prj_type_id', 'prj_type_name')
+                            ->get();
+        $sel_project_statuses = DB::table('psi_project_status')
+                            ->select('prj_status_id', 'prj_status_name')
+                            ->get();
+        $sel_project_years = DB::table('psi_projects')
+                            ->groupBy('prj_year_approved')
+                            ->select('prj_year_approved')
+                            ->Orderby('prj_year_approved', 'desc')
+                            ->get();
+        $sel_project_provinces = DB::table('psi_provinces')
+                            ->select('province_id', 'province_name')
+                            ->Orderby('province_name', 'asc')
+                            ->get();
+        $sel_project_districts = DB::table('psi_districts')
+                            ->select('district_id', 'district_name')
+                            ->get();
+        $sel_project_sectors = DB::table('psi_sectors')
+                            ->select('sector_id', 'sector_name')
+                            ->get();
+        $sel_project_implementors = DB::table('psi_usergroups')
+                            ->select('ug_id', 'ug_name')
+                            ->get();
+        // dd($sel_project_provinces);
+        return view('./projects/projects', compact('psi_projects', 'sel_project_types', 'sel_project_statuses', 'sel_project_years', 'sel_project_provinces', 'sel_project_districts', 'sel_project_sectors', 'sel_project_implementors'));
+        
     }
 
     /**
@@ -26,9 +54,14 @@ class PsiProjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function addproject()
     {
-        //
+        $sel_project_types = DB::table('psi_project_types')
+        ->select('prj_type_id', 'prj_type_name')
+        ->get();
+
+
+        return view('./projects/addproject', compact('sel_project_types'));
     }
 
     /**
@@ -39,7 +72,7 @@ class PsiProjectsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
