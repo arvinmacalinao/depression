@@ -14,12 +14,45 @@ $( document ).ready(function() {
       event.preventDefault();
       removeMarkers();
       let prov_id =  $('#mf_cmb_province option:selected').attr('id');
+      let district_id =  $('#mf_cmb_district option:selected').attr('id');
+      let projtyp_id =  $('#mf_cmb_prjtype option:selected').attr('id');
+      let brand_id =  $('#mf_cmb_equipment option:selected').attr('id');
+      let sector_id =  $('#mf_cmb_sector option:selected').attr('id');
+      let status_id =  $('#mf_cmb_status option:selected').attr('id');
+      let keyWordz =  document.getElementById("mf_search").value;
+      
       let _token   = $('meta[name="csrf-token"]').attr('content');
+
+      if(prov_id == null){
+        prov_id = "*"
+      }
+
+      if(district_id == null){
+        district_id = "*"
+      }
+
+      if(projtyp_id == null){
+        projtyp_id = "*"
+      }
+
+      if(brand_id == null){
+        brand_id = "*"
+      }
+
+      if(sector_id == null){
+        sector_id = "*"
+      }
+
+      if(status_id == null){
+        status_id = "*"
+      }
+
+      console.log(keyWordz);
 
       $.ajax({
         url: "/map-filter",
         type: "GET",
-        data:{ prov_id: prov_id, _token: _token },
+        data:{ prov_id: prov_id, district_id: district_id, projtyp_id: projtyp_id, brand_id: brand_id, sector_id: sector_id, status_id:status_id, keyWordz: keyWordz, _token: _token },
         success:function(response){
           var data=response
           jQuery.each(data,function(index, value){
@@ -196,6 +229,10 @@ $( document ).ready(function() {
     });
   });
 
+    for (var i = 2012; i <= new Date().getFullYear() + 2; i++) {
+        $('#mf_cmb_yrFrm').append( '<option value="'+i+'">'+i+'</option>' );
+        $('#mf_cmb_yrTo').append( '<option value="'+i+'">'+i+'</option>' );
+    }
 });
 
 

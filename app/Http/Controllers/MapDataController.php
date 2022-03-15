@@ -22,17 +22,17 @@ class MapDataController extends Controller
                     ->select('district_name')
                     ->get();
         $mf_projtypes = DB::table('psi_project_types')
-                    ->select('prj_type_name')
+                    ->select('prj_type_name','prj_type_id')
                     ->get();
         $mf_equipments = DB::table('psi_equipment_brands')
                     ->select('brand_name')
                     ->orderBy('brand_name', 'ASC')
                     ->get();
         $mf_sectors = DB::table('psi_sectors')
-                    ->select('sector_name')
+                    ->select('sector_name', 'sector_id')
                     ->get();
         $mf_status = DB::table('psi_project_status')
-                    ->select('prj_status_name')
+                    ->select('prj_status_name', 'prj_status_id')
                     ->get();
         return view('home.home', compact('icons', 'mf_regions','mf_provinces','mf_districts','mf_projtypes','mf_equipments','mf_sectors','mf_status'));
     }

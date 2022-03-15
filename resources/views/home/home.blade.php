@@ -91,7 +91,7 @@
             <select class="form-control" id="mf_cmb_district">
                 <option>All</option>
                 @foreach($mf_districts as $mf_district)
-                    <option>{{$mf_district->district_name}}</option>
+                    <option id="{{$mf_district->district_name}}">{{$mf_district->district_name}}</option>
                 @endforeach
             </select>
         </div>
@@ -101,7 +101,7 @@
             <select class="form-control" id="mf_cmb_prjtype">
                 <option>All</option>
                 @foreach($mf_projtypes as $mf_projtype)
-                    <option>{{$mf_projtype->prj_type_name}}</option>
+                    <option id="{{$mf_projtype->prj_type_id}}">{{$mf_projtype->prj_type_name}}</option>
                 @endforeach
             </select>
         </div>
@@ -111,7 +111,7 @@
             <select class="form-control" id="mf_cmb_equipment">
                 <option>All</option>
                 @foreach($mf_equipments as $mf_equipment)
-                    <option>{{$mf_equipment->brand_name}}</option>
+                    <option id="{{$mf_equipment->brand_name}}">{{$mf_equipment->brand_name}}</option>
                 @endforeach
             </select>
         </div>
@@ -121,7 +121,7 @@
             <select class="form-control" id="mf_cmb_sector">
                 <option>All</option>
                 @foreach($mf_sectors as $mf_sector)
-                    <option>{{$mf_sector->sector_name}}</option>
+                    <option id="{{$mf_sector->sector_id}}">{{$mf_sector->sector_name}}</option>
                 @endforeach
             </select>
         </div>
@@ -131,7 +131,7 @@
             <select class="form-control" id="mf_cmb_status">
                 <option>All</option>
                 @foreach($mf_status as $mf_statu)
-                    <option>{{$mf_statu->prj_status_name}}</option>
+                    <option id="{{$mf_statu->prj_status_id}}">{{$mf_statu->prj_status_name}}</option>
                 @endforeach
             </select>
         </div>
@@ -139,14 +139,14 @@
         <div class="form-group input-group-sm">
             <div class="row">
                 <div class="col-sm-6">
-                    <label for="exampleFormControlSelect1"><b>Year From</b></label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                    <option>--</option>
+                    <label><b>Year From</b></label>
+                    <select class="form-control" id="mf_cmb_yrFrm">
+                        <option>--</option>
                     </select>
                 </div>
                 <div class="col-sm-6">
-                    <label for="exampleFormControlSelect1"><b>Year To</b></label>
-                    <select class="form-control" id="exampleFormControlSelect1">
+                    <label><b>Year To</b></label>
+                    <select class="form-control" id="mf_cmb_yrTo">
                     <option>--</option>
                     </select>
                 </div>
