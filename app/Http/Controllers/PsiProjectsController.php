@@ -56,12 +56,46 @@ class PsiProjectsController extends Controller
      */
     public function addproject()
     {
-        $sel_project_types = DB::table('psi_project_types')
+        $sel_types = DB::table('psi_project_types')
         ->select('prj_type_id', 'prj_type_name')
         ->get();
 
+        $sel_benefeciaries = DB::table('psi_cooperators')
+        ->select('coop_id', 'coop_name')
+        ->Orderby('coop_name', 'asc')
+        ->get();
 
-        return view('./projects/addproject', compact('sel_project_types'));
+        $sel_collaborators = DB::table('psi_collaborators')
+        ->select('col_id', 'col_name')
+        ->Orderby('col_name', 'asc')
+        ->get();
+
+        $sel_usergroups = DB::table('psi_usergroups')
+        ->select('ug_id', 'ug_name')
+        ->Orderby('ug_name', 'asc')
+        ->get();
+
+        $sel_statuses = DB::table('psi_project_status')
+                            ->select('prj_status_id', 'prj_status_name')
+                            ->Orderby('prj_status_name', 'asc')
+                            ->get();
+        
+        $sel_sectors = DB::table('psi_sectors')
+        ->select('sector_id', 'sector_name')
+        ->Orderby('sector_name', 'asc')
+        ->get();
+
+        $sel_provinces = DB::table('psi_provinces')
+                            ->select('province_id', 'province_name')
+                            ->Orderby('province_name', 'asc')
+                            ->get();
+
+        $sel_provinces = DB::table('psi_provinces')
+        ->select('province_id', 'province_name')
+        ->Orderby('province_name', 'asc')
+        ->get();
+               
+        return view('./projects/addproject', compact('sel_types', 'sel_collaborators', 'sel_benefeciaries', 'sel_usergroups', 'sel_statuses', 'sel_sectors', 'sel_provinces'));
     }
 
     /**

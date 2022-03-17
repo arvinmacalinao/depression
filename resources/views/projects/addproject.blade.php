@@ -13,9 +13,9 @@
                     </div>
                     <div class="col-sm-3">
                         <label for="prj_type_id">Project Type</label>
-                        <select class="form-control input-sm chosen-select" id="prj_type_id" name="prj_type_id">
-                            @foreach ($sel_project_types as $sel_project_type)
-                            <option value="{{ $sel_project_type->prj_type_id }}">{{ $sel_project_type->prj_type_name }}</option>
+                        <select class="form-control input-sm" id="prj_type_id" name="prj_type_id">
+                            @foreach ($sel_types as $sel_type)
+                            <option value="{{ $sel_type->prj_type_id }}">{{ $sel_type->prj_type_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -49,11 +49,11 @@
                 <div class="row-proj">
                     <div class="col-sm-6">
                         <label class="control-label">Project Duration From *</label>
-                        <input class="form-control input-sm" placeholder="Project Duration From" maxLength="10" required="required" name="prj_duration_from" id="prj_duration_from" type="text" value="02/21/2022">
+                        <input class="form-control input-sm" placeholder="Project Duration From" maxLength="10" required="required" name="prj_duration_from" id="prj_duration_from" type="text" value="">
                     </div>
                     <div class="col-sm-6">
                         <label class="control-label">Project Duration To *</label>
-                        <input class="form-control input-sm" placeholder="Project Duration To" maxLength="10"  required="required" name="prj_duration_to" id="prj_duration_to" type="text" value="02/21/2023">
+                        <input class="form-control input-sm" placeholder="Project Duration To" maxLength="10"  required="required" name="prj_duration_to" id="prj_duration_to" type="text" value="">
                     </div>
                 </div>
                 <div class="row-proj">
@@ -84,8 +84,10 @@
                 <div class="row-proj">
                     <div class="col-sm-6">
                         <label for="coop_id" class="control-label">Beneficiaries *</label>
-                        <select class="form-control input-sm chosen-select" id="coop_id" name="coop_id[]" multiple="multiple">
-                            <!-- NO Option yet -->
+                        <select class="form-control input-sm chosen-select" id="coop_id" name="coop_id[]" multiple="multiple" placeholder="Select some option">
+                            @foreach ($sel_benefeciaries as $sel_benefeciary)
+                            <option value="{{ $sel_benefeciary->coop_id }}">{{ $sel_benefeciary->coop_name }}</option>
+                            @endforeach 
                         </select>
                     </div>
 
@@ -93,47 +95,19 @@
                     <div class="col-sm-6">
                         <label for="col_id" class="control-label">Collaborating Agencies</label>
                         <select class="form-control input-sm chosen-select" id="col_id" name="col_id[]" multiple="multiple">
-                            <!-- NO Option yet -->
+                            @foreach ($sel_collaborators as $sel_collaborator)
+                            <option value="{{ $sel_collaborator->col_id }}">{{ $sel_collaborator->col_name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
-                    <div class="row-proj">
-                    <div class="col-sm-6">
-                        <label for="prj_coordinator" class="control-label">Signing Coordinator/Leader</label>
-                        <select class="form-control input-sm" id="prj_coordinator" name="prj_coordinator">
-                            <!-- NO Option yet -->
-                        </select>
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="prj_head" class="control-label">Agency Head or Authorized Representative</label>
-                        <select class="form-control input-sm" id="prj_head" name="prj_head">
-                            <!-- NO Option yet -->
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row-proj">
-                    <div class="col-sm-6">
-                        <label for="coop_id" class="control-label">Beneficiaries *</label>
-                        <select class="form-control input-sm chosen-select" id="coop_id" name="coop_id[]" multiple="multiple">
-                            <!-- NO Option yet -->
-                        </select>
-                    </div>
-
-
-                    <div class="col-sm-6">
-                        <label for="col_id" class="control-label">Collaborating Agencies</label>
-                        <select class="form-control input-sm chosen-select" id="col_id" name="col_id[]" multiple="multiple">
-                            <!-- NO Option yet -->
-                        </select>
-                    </div>
-                </div>
-
                 <div class="row-proj">
                     <div class="container-fluid">
                         <label for="ug_id" class="control-label">Implementor</label>
                         <select class="form-control input-sm" id="ug_id" name="ug_id">
-                            <!-- NO Option yet -->
+                            @foreach ($sel_usergroups as $sel_usergroup)
+                            <option value="{{ $sel_usergroup->ug_id }}">{{ $sel_usergroup->ug_name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -158,7 +132,9 @@
                     <div class="form-group form-group-sm col-sm-6">
                         <label for="prj_status_id" class="control-label">Project Status</label>
                         <select class="form-control input-sm" id="prj_status_id" name="prj_status_id">
-                            <!-- NO Option yet -->
+                            @foreach ($sel_statuses as $sel_status)
+                            <option value="{{ $sel_status->prj_status_id }}">{{ $sel_status->prj_status_name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -168,7 +144,9 @@
                     </div>
                     <div class="container-fluid">
                         <select class="form-control input-sm" id="sector_id" name="sector_id">
-                        <!-- NO Option yet -->
+                            @foreach ($sel_sectors as $sel_sector)
+                            <option value="{{ $sel_sector->sector_id }}">{{ $sel_sector->sector_name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -188,7 +166,9 @@
                     <div class="col-sm-4">
                         <label for="province_id" class="control-label">Province</label>
                         <select class="form-control input-sm province_select" id="province_id" name="province_id" required="required">
-                            <!-- NO Option yet -->
+                            @foreach ($sel_provinces as $sel_province)
+                            <option value="{{ $sel_province->province_id }}">{{ $sel_province->province_name }}</option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -675,13 +655,17 @@
     </div>
 </div>
 </form>
-
 <script type="text/javascript">
+    $(document).ready(function () {
+      $(".chosen-select").chosen();
+   });
+    $(document).on('change','.province_select', function(){
+        // console.log("hmm its change");
+        
+        var province_id=$(this).val();
+        console.log(province_id);
+        
 
-
+    });
 </script>
-
-
-
-
 @endsection()

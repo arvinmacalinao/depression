@@ -21,5 +21,3 @@ Route::get('/', 'MapDataController@gmaps');
 
 Route::get('/projects', 'PsiProjectsController@index');
 Route::get('/addproject', 'PsiProjectsController@addproject')->name('/addproject');
-
-
