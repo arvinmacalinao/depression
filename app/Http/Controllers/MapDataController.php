@@ -9,7 +9,7 @@ class MapDataController extends Controller
 {
     public function index(){
         $icons = DB::table('psi_projects')
-                    ->select('prj_type_id', 'sector_id', 'prj_status_id', 'region_id', 'prj_title','prj_latitude', 'prj_longitude')
+                    ->select('prj_type_id', 'sector_id', 'prj_status_id', 'region_id', 'prj_title','prj_latitude', 'prj_longitude','prj_status_id','prj_address','region_code','province_name','district_name','prj_type_name','sector_name','coop_names','collaborator_names','prj_code','prj_year_approved')
                     ->get();
         $mf_regions = DB::table('psi_regions')
                     ->select('region_code', 'region_name')
@@ -34,6 +34,7 @@ class MapDataController extends Controller
         $mf_status = DB::table('psi_project_status')
                     ->select('prj_status_name', 'prj_status_id')
                     ->get();
+
         return view('home.home', compact('icons', 'mf_regions','mf_provinces','mf_districts','mf_projtypes','mf_equipments','mf_sectors','mf_status'));
     }
 }

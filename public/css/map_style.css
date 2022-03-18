@@ -38,3 +38,10 @@ div.map-filter {
   text-align: center;
 }
 
+#mf_prj_title {
+  font-size : 13px;
+  padding : 0;
+  margin : 0;
+  line-height : 15px;
+}
+

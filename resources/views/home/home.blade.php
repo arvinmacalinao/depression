@@ -56,7 +56,6 @@
 <!-- End of Legends Div -->
 
 <!-- Map Filter Div -->
-<form id="mp_Form">
 <div class="map-filter w3-animate-left" id="mpFilter">
     <div class="container">
         Map Filters<span class="close">x</span>
@@ -161,8 +160,62 @@
     </small>
     </div>
 </div>
-</form>
-<
+
+<div class="modal fade" id="mf_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="mf_prj_title"></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
+    </div>
+        <div class="container mt-2 d-flex align-items-center justify-content-center">
+            <h6><span class="badge badge-primary" id="b_prj_code">Primary</span> 
+            <span class="badge badge-success" id="b_prj_year_approved">Secondary</span>
+            <span class="badge badge-warning" id="b_prj_status_name">Success</span>
+            </h6>
+        </div>
+
+        <div class="container mt-2 d-flex align-items-center justify-content-center">
+            <a class="btn btn-success btn-sm" href="" target="_blank" title="View Hazard Assessment"><img class="img-responsive link-icon-24" alt="https://hazardhunter.georisk.gov.ph" src="images/hh_logo.png" width="24px"> View Hazard Assessment</a>
+        </div>
+        <hr>
+
+        <div class="container">
+            <b>Street Address</b>
+            <div id="mf_addrs"></div>
+        </div>
+            <hr>
+        <div class="container">
+            <b>Location</b>
+            <div id="mf_location"></div> 
+        </div>
+            <hr>
+        <div class="container">
+            <b>Project Type</b>
+            <div id="mf_prjtype"></div>
+        </div>       
+            <hr>
+        <div class="container">
+            <b>Sector</b>
+            <div id="mf_sector"></div> 
+        </div>   
+            <hr>
+        <div class="container">
+            <b>Beneficiaries</b>
+            <div id="mf_coopnames"></div>  
+        </div>   
+            <hr>
+        <div class="container">
+            <b>Collaborators</b>
+            <div id="mf_collabnames"></div>
+            <br>
+        </div>   
+
+
+    </div>
+  </div>
+</div>
+
 <!-- End of Map Filter Div -->
 
 <script>
@@ -375,6 +428,58 @@ function setIcons(){ // Setting and Placing Icons
                 content: "{{$icon->prj_title}}",
             });
 
+            p1.addListener('click', function() {
+                pj_addrs = `{{$icon->prj_address}}`;
+                pj_title = "{{$icon->prj_title}}";
+                pj_prjcode = "{{$icon->prj_code}}";
+                pj_prjya = "{{$icon->prj_year_approved}}";
+                pj_prjstat = "{{$icon->prj_status_id}}";
+                
+                pj_region = "{{$icon->region_code}}";
+                pj_provname = "{{$icon->province_name}}";
+                pj_distName = "{{$icon->district_name}}";
+                pj_prjtype = "{{$icon->prj_type_name}}";
+                pj_sector= "{{$icon->sector_name}}";
+                pj_coop = "{{$icon->coop_names}}";
+                pj_collab = "{{$icon->collaborator_names}}";
+                res_loc = pj_region + "," + pj_provname + "," + pj_distName
+
+                window.document.getElementById("mf_addrs").innerText = pj_addrs;
+                window.document.getElementById("mf_prj_title").innerText = pj_title;
+                window.document.getElementById("b_prj_code").innerText = pj_prjcode;
+                window.document.getElementById("b_prj_year_approved").innerText = pj_prjya;
+                
+                window.document.getElementById("mf_location").innerText = res_loc;
+                // window.document.getElementById("mf_prov").innerText = pj_provname;
+                // window.document.getElementById("mf_district").innerText = pj_distName;
+
+                window.document.getElementById("mf_prjtype").innerText = pj_prjtype;
+                window.document.getElementById("mf_sector").innerText = pj_sector;
+                window.document.getElementById("mf_coopnames").innerText = pj_coop;
+                window.document.getElementById("mf_collabnames").innerText = pj_collab;
+
+                if(pj_prjstat == 1){
+                    window.document.getElementById("b_prj_status_name").innerText = "On-going";
+                }
+                if(pj_prjstat == 3){
+                    window.document.getElementById("b_prj_status_name").innerText = "New";
+                }
+                if(pj_prjstat == 4){
+                    window.document.getElementById("b_prj_status_name").innerText = "Graduated";
+                }
+                if(pj_prjstat == 6){
+                    window.document.getElementById("b_prj_status_name").innerText = "Terminated";
+                }
+                if(pj_prjstat == 7){
+                    window.document.getElementById("b_prj_status_name").innerText = "Withdrawn";
+                }
+                if(pj_prjstat == 8){
+                    window.document.getElementById("b_prj_status_name").innerText = "Completed";
+                }      
+                
+                $('#mf_modal').modal('show');
+            });
+
             m1.push(p1);
             p1.addListener("mouseover", () => {
                 infowindow.open({
@@ -388,6 +493,7 @@ function setIcons(){ // Setting and Placing Icons
                 infowindow.close();
             });  
         });
+
 
 
     @endforeach
