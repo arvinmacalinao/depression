@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\psi_projects;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Datatables;
 
 
 
@@ -16,10 +17,9 @@ class PsiProjectsController extends Controller
      */
     public function index()
     {
-        $psi_projects = psi_projects::paginate(20);
-        $psi_total_projects = count(psi_projects::all());
-        
-        //Option Values
+        $psi_projects = psi_projects::all();
+                        
+       
         $sel_project_types = DB::table('psi_project_types')
                             ->select('prj_type_id', 'prj_type_name')
                             ->get();
@@ -48,6 +48,14 @@ class PsiProjectsController extends Controller
         return view('./projects/projects', compact('psi_projects', 'sel_project_types', 'sel_project_statuses', 'sel_project_years', 'sel_project_provinces', 'sel_project_districts', 'sel_project_sectors', 'sel_project_implementors'));
         
     }
+
+    public function projectList()
+    {
+        $psi_projects = DB::table('psi_projects')->select('*');
+        return datatables()->of($psi_projects)
+            ->make(true);
+    }
+
 
     /**
      * Show the form for creating a new resource.

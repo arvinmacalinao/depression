@@ -19,12 +19,14 @@
                           <div class="input-group-prepend">
                             <div class="input-group-text">Project Type</div>
                           </div>
-                        <select class="form-control input-sm" id="" name="">
-                            <option value="">ALL</option>
-                            @foreach ($sel_project_types as $sel_project_type)
-                            <option value="{{ $sel_project_type->prj_type_id }}">{{ $sel_project_type->prj_type_name }}</option>
-                            @endforeach
-                        </select>
+                            
+                                <select class="form-control input-sm" id="projectFilter" name="">
+                                    <option value="">ALL</option>
+                                    @foreach ($sel_project_types as $sel_project_type)
+                                    <option value="{{ $sel_project_type->prj_type_id }}">{{ $sel_project_type->prj_type_name }}</option>
+                                    @endforeach
+                                </select>
+                            
                         </div>
                     </div>
                     <div class="col-auto">
@@ -117,21 +119,19 @@
             </form>
             <div class="row">
                 <div class="col-sm-3">
-                    Total No of Projects: {{ $psi_projects->total() }}
+                    {{-- Total No of Projects: {{ $psi_projects->total() }} --}}
                 </div>
                 <div class="col-sm-5"></div>
                 <div class="col-sm-4">
-                    {{ $psi_projects }}
+                    {{-- {{ $psi_projects }} --}}
                 </div>
             </div>
         </div>
         <div class="row">
                 <div class="col-md-12">
-                    <table class="table table-bordered table-hover">
-                        <thead class="thead-proj">
-                            <tr class="">
-                                <th></th>
-                                <th>#</th>
+                   <table id="project_datatable" class="table responsive protable-bordered">
+                        <thead>
+                            <tr>
                                 <th>Code</th>
                                 <th>Project</th>
                                 <th>Type</th>
@@ -141,16 +141,17 @@
                                 <th>Sector</th>
                                 <th>Region</th>
                                 <th>Province</th>
+                                <th>City</th>
                                 <th>District</th>
                                 <th>Status</th>
                                 <th>Project Cost</th>
                                 <th>Amount Due</th>
                                 <th>Refunded</th>
-                                <th>Refund Rate</th>
+                                {{-- <th>Refund Rate</th> --}}
                                 <th>Implementor </th>
                             </tr>
                     </thead>
-                            @foreach($psi_projects as $psi_project)
+                            {{-- @foreach($psi_projects as $psi_project)
                             <tr>
                                 <td></td>
                                 <td class="counterCell"></td>
@@ -166,12 +167,13 @@
                                 <td>{{$psi_project->city_name}}</td>
                                 <td>{{$psi_project->district_name}}</td>
                                 <td>{{$psi_project->prj_status_name}}</td>
-                                <td>{{$psi_project->prj_cost_setup}}</td>
-                                <td>{{$psi_project->rep_total_due}}</td>
+                                <td>Php&nbsp;{{$psi_project->prj_cost_setup}}</td>
+                                <td>Php{{$psi_project->rep_total_due}}</td>
+                                <td>Php{{$psi_project->rep_total_paid}}</td>
                                 <td>{{$psi_project->rep_refund_rate}}</td>
                                 <td>{{$psi_project->ug_name}}</td>
                             </tr>
-                            @endforeach
+                            @endforeach --}}
                         </table>
                 </div>
             </div>
@@ -180,11 +182,11 @@
         <div class="card-footer">
             <div class="row">
                 <div class="col-sm-3">
-                    Total No of Projects: {{ $psi_projects->total() }}
+                    {{-- Total No of Projects: {{ $psi_projects->total() }} --}}
                 </div>
                 <div class="col-sm-3"></div>
                 <div class="col-sm-6">
-                    {{ $psi_projects }}
+                    {{-- {{ $psi_projects }} --}}
                 </div>
             </div>
         <table class="table table-condensed">
@@ -208,7 +210,39 @@
         </div>
     </div>
     </div>
-
+<script>
+  $(document).ready( function () {
+    let _token   = $('meta[name="csrf-token"]').attr('content');
+    $('#project_datatable').DataTable({
+        pageLength: 25,
+        pagingType: 'first_last_numbers',
+        autoWidth: false, 
+        processing: true,
+        responsive: true,
+        serverSide: true,
+        ajax: "{{ url('project-list') }}",
+        columns: [
+                    { data:'prj_id' , name:'prj_id' },
+                    { data:'prj_title' , name:'prj_title' },
+                    { data:'prj_type_name' , name:'prj_type_name'},
+                    { data:'prj_year_approved' , name:'prj_year_approved' },
+                    { data:'coop_names' , name:'coop_names' },
+                    { data:'collaborator_names' , name:'collaborator_names' },
+                    { data:'sector_name' , name:'sector_name' },
+                    { data:'region_code' , name:'region_code' },
+                    { data:'province_name' , name:'province_name' },
+                    { data:'city_name' , name:'city_name' },
+                    { data:'district_name' , name:'district_name' },
+                    { data:'prj_status_name' , name:'prj_status_name' },
+                    { data:'prj_cost_setup' , render: $.fn.dataTable.render.number(",", ".", 2), name:'prj_cost_setup' },
+                    { data:'rep_total_due' , render: $.fn.dataTable.render.number(",", ".", 2), name:'rep_total_due' },
+                    { data:'rep_total_paid' , render: $.fn.dataTable.render.number(",", ".", 2), name:'rep_total_paid' },
+                    // { data:'rep_refund_rate' , name:'rep_refund_rate' },
+                    { data:'ug_name' , name:'ug_name' }
+                 ]
+        });
+     });
+</script>
 
 
 @endsection()

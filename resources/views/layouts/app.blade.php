@@ -4,11 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content=" {{ csrf_token() }} ">
-        
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="http://maps.google.com/maps/api/js?key=AIzaSyCMDx-ejfVStxIBhfqtBuLj98OV79kqbdY"></script>
-        
+        <script src="https://cdn.usebootstrap.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>
         <title>Depression</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
@@ -19,7 +17,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         
-        
+        {{-- Datatable --}}
+        <link  href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet"> 
+        <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
         
         {{-- Chosen --}}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.css" integrity="sha512-0nkKORjFgcyxv3HbE4rzFUlENUMNqic/EzDIeYCgsKa/nwqr2B91Vu/tNAu4Q0cBuG4Xe/D1f/freEci/7GDRA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -28,15 +28,16 @@
         {{-- Date Picker --}}
         
 
-        
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
 
       </head>
     <body>
     <!--Navbar -->
     <nav class="navbar navbar-expand-md navbar-dark">
-          <a class="navbar-brand" href="#"></a>
-          <img src="{{URL::asset('/images/brand_white.png')}}" width="25" height="25" alt="">
-      
+          <a class="navbar-brand" href="./" style="margin-right: 0%">
+            <img src="{{URL::asset('/images/brand_white.png')}}" width="25" height="25" alt="">
+          </a>
+          
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
               <a class="nav-link disabled" href="#"> </a>
@@ -47,7 +48,7 @@
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fa fa-list"></i> Projects</span></a>
+              <a class="nav-link" href="./projects"><i class="fa fa-list"></i> Projects</span></a>
             </li>
 
             <li class="nav-item">
