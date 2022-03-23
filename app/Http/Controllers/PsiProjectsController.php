@@ -53,7 +53,10 @@ class PsiProjectsController extends Controller
     {
         $psi_projects = DB::table('psi_projects')->select('*');
         return datatables()->of($psi_projects)
-            ->make(true);
+        //->setRowData([ 'data-prj_cost_setup' => 'Php {{ $prj_cost_setup }}' ])
+        // ->setRowClass('{{ $prj_id % 2 == 0 ? "alert-success" : "alert-warning" }}')
+        ->addColumn('row', 'row')
+        ->make(true);
     }
 
 

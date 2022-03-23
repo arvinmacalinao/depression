@@ -20,7 +20,7 @@
                             <div class="input-group-text">Project Type</div>
                           </div>
                             
-                                <select class="form-control input-sm" id="projectFilter" name="">
+                                <select class="form-control input-sm" id="table-filter" name="">
                                     <option value="">ALL</option>
                                     @foreach ($sel_project_types as $sel_project_type)
                                     <option value="{{ $sel_project_type->prj_type_id }}">{{ $sel_project_type->prj_type_name }}</option>
@@ -34,7 +34,7 @@
                           <div class="input-group-prepend">
                             <div class="input-group-text">Status</div>
                           </div>
-                          <select class="form-control input-sm" id="qstatus" name="qstatus">
+                          <select class="filter-select form-control input-sm" id="qstatus" name="qstatus">
                             <option value="">ALL</option>
                             @foreach ($sel_project_statuses as $sel_project_status)
                             <option value="{{ $sel_project_status->prj_status_id }}">{{ $sel_project_status->prj_status_name }}</option>
@@ -111,8 +111,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="input-group mb-2">
-                            <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Search text..">
-                            <button type="button" class="btn search-btn">Search</button>
+                            <input type="text" class="form-control mb-2 filter-input" id="" placeholder="Search text..">
                         </div>
                     </div>
                 </div>
@@ -129,9 +128,11 @@
         </div>
         <div class="row">
                 <div class="col-md-12">
+                    
                    <table id="project_datatable" class="table responsive protable-bordered">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Code</th>
                                 <th>Project</th>
                                 <th>Type</th>
@@ -213,15 +214,26 @@
 <script>
   $(document).ready( function () {
     let _token   = $('meta[name="csrf-token"]').attr('content');
-    $('#project_datatable').DataTable({
+    var table = $('#project_datatable').DataTable({
+        processing: true,
         pageLength: 25,
         pagingType: 'first_last_numbers',
-        autoWidth: false, 
-        processing: true,
-        responsive: true,
+        autoWidth: true, 
         serverSide: true,
-        ajax: "{{ url('project-list') }}",
-        columns: [
+        sDom: 'ltipr',
+        ajax: {
+            url:"{{ url('project-list') }}",
+                }, 
+        columnDefs: [ {
+            searchable: false,
+            orderable: false,
+            targets: 0
+        } ],
+        order: [1, 'asc'],
+        
+        
+        columns: [  
+                    { data: 'row', name:'row'},
                     { data:'prj_id' , name:'prj_id' },
                     { data:'prj_title' , name:'prj_title' },
                     { data:'prj_type_name' , name:'prj_type_name'},
@@ -234,14 +246,34 @@
                     { data:'city_name' , name:'city_name' },
                     { data:'district_name' , name:'district_name' },
                     { data:'prj_status_name' , name:'prj_status_name' },
-                    { data:'prj_cost_setup' , render: $.fn.dataTable.render.number(",", ".", 2), name:'prj_cost_setup' },
+                    { data:'prj_cost_setup', render: $.fn.dataTable.render.number(",", ".", 2), name:'prj_cost_setup' },
                     { data:'rep_total_due' , render: $.fn.dataTable.render.number(",", ".", 2), name:'rep_total_due' },
                     { data:'rep_total_paid' , render: $.fn.dataTable.render.number(",", ".", 2), name:'rep_total_paid' },
                     // { data:'rep_refund_rate' , name:'rep_refund_rate' },
                     { data:'ug_name' , name:'ug_name' }
                  ]
         });
-     });
+
+        $('.filter-select').on( 'change', function () {
+        table.column(1).search($(this).val()).draw();
+
+        });
+        
+
+        $('#table-filter').on('change', function(){
+        table.search(this.value).draw();   
+        });
+        
+
+        // Row 1 Counter cell
+        table.on( 'draw.dt', function () {
+            var PageInfo = $('#project_datatable').DataTable().page.info();
+            table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
+            cell.innerHTML = i + 1 + PageInfo.start;
+            });
+        }).draw();
+    
+});
 </script>
 
 
