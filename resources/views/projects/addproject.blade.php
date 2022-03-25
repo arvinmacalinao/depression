@@ -9,11 +9,11 @@
                 <div class="row-proj">
                     <div class="col-sm-3">
                         <label>Project Code *</label>
-                        <input class="form-control input-sm" placeholder="Project Code" maxLength="255" required="required">
+                        <input class="form-control input-sm" placeholder="Project Code" maxlength="255" name="prj_code" id="prj_code" type="text" required="required">
                     </div>
                     <div class="col-sm-3">
                         <label for="prj_type_id">Project Type</label>
-                        <select class="form-control input-sm" id="prj_type_id" name="prj_type_id">
+                        <select class="form-control input-sm project-type-select" id="prj_type_id" name="prj_type_id">
                             @foreach ($sel_types as $sel_type)
                             <option value="{{ $sel_type->prj_type_id }}">{{ $sel_type->prj_type_name }}</option>
                             @endforeach
@@ -40,7 +40,7 @@
                         <input class="form-control" placeholder="Project Title" type="text" maxLength="255" required="required">
                     </div>
                 </div>
-                <div class="row-proj">
+                <div class="row-proj" id="project-type-rtgg">
                     <div class="container-fluid">
                         <label class="control-label">Program Title</label>
                         <input class="form-control" placeholder="Program Title" type="text" maxLength="255" required="required">
@@ -49,14 +49,14 @@
                 <div class="row-proj">
                     <div class="col-sm-6">
                         <label class="control-label">Project Duration From *</label>
-                        <input class="form-control input-sm" placeholder="Project Duration From" maxLength="10" required="required" name="prj_duration_from" id="prj_duration_from" type="text" value="">
+                        <input class="form-control input-sm datepicker" placeholder="Project Duration From" maxLength="10" required="required" name="prj_duration_from" id="prj_duration_from" type="text" value="">
                     </div>
                     <div class="col-sm-6">
                         <label class="control-label">Project Duration To *</label>
-                        <input class="form-control input-sm" placeholder="Project Duration To" maxLength="10"  required="required" name="prj_duration_to" id="prj_duration_to" type="text" value="">
+                        <input class="form-control input-sm datepicker" placeholder="Project Duration To" maxLength="10"  required="required" name="prj_duration_to" id="prj_duration_to" type="text" value="">
                     </div>
                 </div>
-                <div class="row-proj">
+                <div class="row-proj" id="project-type-rtgg">
                     <div class="col-sm-6">
                         <label for="prj_lead" class="control-label">Coordinator/Leader *</label>
                         <input class="form-control input-sm" placeholder="Coordinator/Leader" maxlength="255" required="required" name="prj_lead" id="prj_lead" type="text" value="">
@@ -66,19 +66,19 @@
                         <input class="form-control input-sm" placeholder="Agency" maxlength="255" required="required" name="prj_agency" id="prj_agency" type="text" value="">
                     </div>
                 </div>
-                <div class="row-proj">
-                <div class="col-sm-6">
-                    <label for="prj_coordinator" class="control-label">Signing Coordinator/Leader</label>
-                    <select class="form-control input-sm" id="prj_coordinator" name="prj_coordinator">
-                        <!-- NO Option yet -->
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <label for="prj_head" class="control-label">Agency Head or Authorized Representative</label>
-                    <select class="form-control input-sm" id="prj_head" name="prj_head">
-                        <!-- NO Option yet -->
-                    </select>
-                </div>
+                <div class="row-proj" id="project-type-rtgg">
+                    <div class="col-sm-6">
+                        <label for="prj_coordinator" class="control-label">Signing Coordinator/Leader</label>
+                        <select class="form-control input-sm" id="prj_coordinator" name="prj_coordinator">
+                            <!-- NO Option yet -->
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="prj_head" class="control-label">Agency Head or Authorized Representative</label>
+                        <select class="form-control input-sm" id="prj_head" name="prj_head">
+                            <!-- NO Option yet -->
+                        </select>
+                    </div>
                 </div>
 
                 <div class="row-proj">
@@ -166,6 +166,7 @@
                     <div class="col-sm-4">
                         <label for="province_id" class="control-label">Province</label>
                         <select class="form-control input-sm province_select" id="province_id" name="province_id" required="required">
+                            <option selected="false">Province</option>
                             @foreach ($sel_provinces as $sel_province)
                             <option value="{{ $sel_province->province_id }}">{{ $sel_province->province_name }}</option>
                             @endforeach
@@ -175,14 +176,22 @@
                     <div class="col-sm-4">
                         <label for="city_id" class="control-label">Municipality/City</label>
                         <select class="form-control input-sm city_select" id="city_id" name="city_id" required="required">
-                            <!-- NO Option yet -->
+                            <option selected="false">Municipalities/Cities</option>
+
+                            {{-- @foreach ($sel_cities as $sel_city)
+                            <option value="{{ $sel_city->city_id }}">{{ $sel_city->city_name }}</option>
+                            @endforeach --}}
                         </select>
                     </div>
 
                     <div class="col-sm-4">
                         <label for="barangay_id" class="control-label">Barangay</label>
                         <select class="form-control input-sm barangay_select" id="barangay_id" name="barangay_id" required="required">
-                            <!-- NO Option yet -->
+                            <option selected="false">Barangays</option>
+                            {{-- <option value="" placeholder="Please select barangay"></option>
+                            @foreach ($sel_barangays as $sel_barangay)
+                            <option value="{{ $sel_barangay->barangay_id }}">{{ $sel_barangay->barangay_name }}</option>
+                            @endforeach --}}
                         </select>
                     </div>
                 </div>
@@ -655,17 +664,91 @@
     </div>
 </div>
 </form>
+
 <script type="text/javascript">
-    $(document).ready(function () {
-      $(".chosen-select").chosen();
-   });
-    $(document).on('change','.province_select', function(){
-        // console.log("hmm its change");
-        
-        var province_id=$(this).val();
-        console.log(province_id);
+    //Project type form option
+$(document).ready(function() {
+    $(".chosen-select").chosen();
+    $('#project-type-rtgg').hide();
+    $(".project-type-select").on('change', function() {
+            $(this).find("option:selected").each(function(){
+            var optionValue = $(this).attr("value");
+        if(optionValue == 6){
+            $('#project-type-rtgg').hide();
+        }
+        if(optionValue == 8){
+            $('#project-type-rtgg').show();
+        }
+        if(optionValue == 9){
+            $('#project-type-rtgg').show();
+        }
+        if(optionValue == 12){
+            $('#project-type-rtgg').hide();
+        }
+        if(optionValue == 13){
+            $('#project-type-rtgg').show();
+        }
+        if(optionValue == 14){
+            $('#project-type-rtgg').show();
+        }
+        });
+    });
+
+    //ADDRESS SELECT OPTION
+    $(".province_select").on('change', function() {
+        $(this).find("option:selected").each(function(){
+            var provinceID = $(this).attr("value");
+            if(provinceID)
+            {
+                $.ajax({
+                    url:'./getCities/' + provinceID,
+                    type: "GET",
+                    dataType: "JSON",
+                    success:function(data)
+                    {
+                        $(".city_select").empty(); //remove last selected itmes
+                        $.each(data, function(key, value){
+                            $(".city_select").append('<option value="'+ key+'">'+ value +'</option>');
+                        })
+                    }
+                })
+            }
+            else
+            {
+                $(".city_select").empty();
+                $(".barangay_select").empty();
+            }
+        });
+    });
+    $(".city_select").on('change', function() {
+        $(this).find("option:selected").each(function(){
+            var citiesID = $(this).attr("value");
+            if(citiesID)
+            {
+                $.ajax({
+                    url:'./getBarangays/' + citiesID,
+                    type: "GET",
+                    dataType: "JSON",
+                    success:function(data)
+                    {
+                        $(".barangay_select").empty(); //remove last selected itmes
+                        $.each(data, function(key, value){
+                            $(".barangay_select").append('<option value="'+ key+'">'+ value +'</option>');
+                        })
+                    }
+                })
+            }
+            else
+            {
+                $(".barangay_select").empty();
+            }
+        });
+    });
+
+
+    
         
 
-    });
+});
 </script>
 @endsection()

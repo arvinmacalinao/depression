@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\psi_projects;
+use App\psi_cities;
+use App\psi_barangays;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Datatables;
@@ -15,13 +17,13 @@ class PsiProjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $psi_projects = psi_projects::all();
-                        
+    public function index(Request $request)
+    {   
+        
+        $psi_projects = psi_projects::all();        
        
         $sel_project_types = DB::table('psi_project_types')
-                            ->select('prj_type_id', 'prj_type_name')
+                            ->select('prj_type_name')
                             ->get();
         $sel_project_statuses = DB::table('psi_project_status')
                             ->select('prj_status_id', 'prj_status_name')
@@ -50,7 +52,8 @@ class PsiProjectsController extends Controller
     }
 
     public function projectList()
-    {
+    {           
+        
         $psi_projects = DB::table('psi_projects')->select('*');
         return datatables()->of($psi_projects)
         //->setRowData([ 'data-prj_cost_setup' => 'Php {{ $prj_cost_setup }}' ])
@@ -101,13 +104,35 @@ class PsiProjectsController extends Controller
                             ->Orderby('province_name', 'asc')
                             ->get();
 
-        $sel_provinces = DB::table('psi_provinces')
-        ->select('province_id', 'province_name')
-        ->Orderby('province_name', 'asc')
-        ->get();
+        // $sel_cities = DB::table('psi_cities')
+        // ->select('city_id', 'city_name')
+        // ->Orderby('city_name', 'asc')
+        // ->get();
+
+        // $sel_barangays = DB::table('psi_barangays')
+        // ->select('barangay_id', 'barangay_name')
+        // ->Orderby('barangay_name', 'asc')
+        // ->get();
                
         return view('./projects/addproject', compact('sel_types', 'sel_collaborators', 'sel_benefeciaries', 'sel_usergroups', 'sel_statuses', 'sel_sectors', 'sel_provinces'));
     }
+
+    public function getCities($id)
+    {
+
+        $cities = psi_cities::where('province_id', $id)->pluck("city_name","city_id");
+        return json_encode($cities);
+        
+    }
+
+    public function getBarangays($id)
+    {
+
+        $barangays = psi_barangays::where('city_id', $id)->pluck("barangay_name","barangay_id");
+        return json_encode($barangays);
+        
+    }
+
 
     /**
      * Store a newly created resource in storage.

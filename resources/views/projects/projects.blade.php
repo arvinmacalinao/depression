@@ -20,10 +20,10 @@
                             <div class="input-group-text">Project Type</div>
                           </div>
                             
-                                <select class="form-control input-sm" id="table-filter" name="">
+                                <select class="form-control input-sm type-select" id="type-select" name="">
                                     <option value="">ALL</option>
                                     @foreach ($sel_project_types as $sel_project_type)
-                                    <option value="{{ $sel_project_type->prj_type_id }}">{{ $sel_project_type->prj_type_name }}</option>
+                                    <option value="{{ $sel_project_type->prj_type_name}}">{{ $sel_project_type->prj_type_name }}</option>
                                     @endforeach
                                 </select>
                             
@@ -111,7 +111,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="input-group mb-2">
-                            <input type="text" class="form-control mb-2 filter-input" id="" placeholder="Search text..">
+                            <input type="text" class="form-control mb-2 table-search" id="" placeholder="Search text..">
                         </div>
                     </div>
                 </div>
@@ -177,8 +177,7 @@
                             @endforeach --}}
                         </table>
                 </div>
-            </div>
-            
+            </div>    
         </div>
         <div class="card-footer">
             <div class="row">
@@ -213,13 +212,21 @@
     </div>
 <script>
   $(document).ready( function () {
-    let _token   = $('meta[name="csrf-token"]').attr('content');
+    $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    
+
     var table = $('#project_datatable').DataTable({
+        
         processing: true,
         pageLength: 25,
         pagingType: 'first_last_numbers',
         autoWidth: true, 
         serverSide: true,
+        deferRender: true,
         sDom: 'ltipr',
         ajax: {
             url:"{{ url('project-list') }}",
@@ -251,19 +258,26 @@
                     { data:'rep_total_paid' , render: $.fn.dataTable.render.number(",", ".", 2), name:'rep_total_paid' },
                     // { data:'rep_refund_rate' , name:'rep_refund_rate' },
                     { data:'ug_name' , name:'ug_name' }
-                 ]
+                 ],
+                 
+        });    
+        //sum
+        // var costsum = table.column( 13 ).data().sum();
+        // console.log(costsum);
+
+        // Text input search
+        $('.table-search').on( 'keyup', function () {
+        table.search( this.value ).draw();
         });
 
-        $('.filter-select').on( 'change', function () {
-        table.column(1).search($(this).val()).draw();
-
-        });
         
-
-        $('#table-filter').on('change', function(){
-        table.search(this.value).draw();   
-        });
         
+        $('.type-select').on('change', function(){
+        var selectedValue=$('.type-select').val();  
+        table.column(98).search( selectedValue ).draw(); 
+        
+        console.log(selectedValue);
+        });
 
         // Row 1 Counter cell
         table.on( 'draw.dt', function () {
@@ -272,7 +286,6 @@
             cell.innerHTML = i + 1 + PageInfo.start;
             });
         }).draw();
-    
 });
 </script>
 

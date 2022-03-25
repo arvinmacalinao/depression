@@ -18,7 +18,10 @@ Route::get('/', 'MapDataController@gmaps');
 
 // Projects
 
-
 Route::get('/projects', 'PsiProjectsController@index');
 Route::get('/addproject', 'PsiProjectsController@addproject')->name('/addproject');
 Route::get('project-list', 'PsiProjectsController@projectList');
+
+//Select dropdown address
+Route::get('/getCities/{id}', 'PsiProjectsController@getCities')->name('getCities');
+Route::get('/getBarangays/{id}', 'PsiProjectsController@getBarangays')->name('getBarangays');
