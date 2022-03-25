@@ -18,6 +18,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Varela&display=swap" rel="stylesheet">
         <link rel="stylesheet" href=https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css>
         <script src="https://unpkg.com/merge-images"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.6/dist/sweetalert2.all.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <title>Depression</title>
     </head>
@@ -38,7 +40,7 @@
     <ul class="navbar-nav">
  
       <li class="nav-item">
-        <a class="nav-link" href="#" style="color: #FFFFFF"><i class="fa fa-bar-chart" aria-hidden="true"></i>   Project Summaries</a>
+        <a class="nav-link" href="/summary" style="color: #FFFFFF"><i class="fa fa-bar-chart" aria-hidden="true"></i>   Project Summaries</a>
       </li>
  
       <li class="nav-item">
@@ -59,6 +61,7 @@
 </nav>
         @yield('content')
 
+        <script src="{{ asset('js/charts.js') }}"></script>
         <div class="footer">
         <a href="https://impression.dostcalabarzon.ph/privacy_policy.php" class="btn btn-danger mb-2" title="Privacy Policy">Privacy Policy</a>
         <a href="https://www.privacy.gov.ph/data-privacy-act/" class="btn btn-danger mb-2" title="Republic Act 10173 - Data Privacy Act of 2012">Republic Act 10173 - Data Privacy Act of 2012</a>

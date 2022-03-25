@@ -16,27 +16,158 @@ class MapFilterController extends Controller
         $sector_id = $_GET['sector_id'];
         $status_id = $_GET['status_id'];
         $keyWordz = $_GET['keyWordz'];
+        $yrFrom = $_GET['yrFrom'];
+        $yrTo = $_GET['yrTo'];
+
+        if($prov_id == "*" && $district_id == "*" && $projtyp_id == "*" && $brand_id == "*" && $sector_id == "*" && $status_id == "*" && $yrFrom == "*" && $yrTo == "*"){
+            $filter_prov = DB::table('psi_projects')
+            ->select('*')
+            ->get();
+            return $filter_prov;
+        }
+
+        if($prov_id != "*" && $district_id == "*" && $projtyp_id == "*" && $brand_id == "*" && $sector_id == "*" && $status_id == "*" && $yrFrom == "*" && $yrTo == "*"){
+            $filter_prov = DB::table('psi_projects')
+            ->select('*')
+            ->where('province_id', '=', $prov_id)
+            ->get();
+            return $filter_prov;           
+        }
+
+        if($prov_id == "*" && $district_id != "*" && $projtyp_id == "*" && $brand_id == "*" && $sector_id == "*" && $status_id == "*" && $yrFrom == "*" && $yrTo == "*"){
+            $filter_prov = DB::table('psi_projects')
+            ->select('*')
+            ->where('district_name', '=', $district_id)
+            ->get();
+            return $filter_prov;           
+        }
+
+        if($prov_id == "*" && $district_id == "*" && $projtyp_id != "*" && $brand_id == "*" && $sector_id == "*" && $status_id == "*" && $yrFrom == "*" && $yrTo == "*"){
+            $filter_prov = DB::table('psi_projects')
+            ->select('*')
+            ->where('prj_type_id', '=', $projtyp_id)
+            ->get();
+            return $filter_prov;           
+        }
+
+        if($prov_id == "*" && $district_id == "*" && $projtyp_id == "*" && $brand_id != "*" && $sector_id == "*" && $status_id == "*" && $yrFrom == "*" && $yrTo == "*"){
+            $filter_prov = DB::table('psi_projects')
+            ->select('*')
+            ->where('prj_pis_assistance_equipment', 'like', '%' . $brand_id . '%')
+            ->get();
+            return $filter_prov;           
+        }
+
+        if($prov_id == "*" && $district_id == "*" && $projtyp_id == "*" && $brand_id == "*" && $sector_id != "*" && $status_id == "*" && $yrFrom == "*" && $yrTo == "*"){
+            $filter_prov = DB::table('psi_projects')
+            ->select('*')
+            ->where('sector_id', '=', $sector_id)
+            ->get();
+            return $filter_prov;           
+        }
+
+        if($prov_id == "*" && $district_id == "*" && $projtyp_id == "*" && $brand_id == "*" && $sector_id == "*" && $status_id != "*" && $yrFrom == "*" && $yrTo == "*"){
+            $filter_prov = DB::table('psi_projects')
+            ->select('*')
+            ->where('prj_status_id', '=', $status_id)
+            ->get();
+            return $filter_prov;           
+        }
+
+        if($prov_id == "*" && $district_id == "*" && $projtyp_id == "*" && $brand_id == "*" && $sector_id == "*" && $status_id == "*" && $yrFrom != "*" && $yrTo == "*"){
+            $filter_prov = DB::table('psi_projects')
+            ->select('*')
+            ->where('prj_year_approved', '=', $yrFrom)
+            ->get();
+            return $filter_prov;           
+        }
+
+        if($prov_id == "*" && $district_id == "*" && $projtyp_id == "*" && $brand_id == "*" && $sector_id == "*" && $status_id == "*" && $yrFrom == "*" && $yrTo != "*"){
+            $filter_prov = DB::table('psi_projects')
+            ->select('*')
+            ->where('prj_year_approved', '=', $yrTo)
+            ->get();
+            return $filter_prov;           
+        }
+
+        if($prov_id == "*" && $district_id == "*" && $projtyp_id == "*" && $brand_id == "*" && $sector_id == "*" && $status_id == "*" && $yrFrom != "*" && $yrTo != "*"){
+            $filter_prov = DB::table('psi_projects')
+            ->select('*')
+            ->whereBetween('prj_year_approved', [$yrFrom, $yrTo])
+            ->get();
+            return $filter_prov;           
+        }
+
+        if($prov_id != "*"  && $district_id != "*" && $projtyp_id == "*" && $brand_id == "*" && $sector_id == "*" && $status_id == "*" && $yrFrom == "*" && $yrTo == "*"){
+            $filter_prov = DB::table('psi_projects')
+            ->select('*')
+            ->where('province_id', '=', $prov_id)
+            ->where('district_name', '=', $district_id)
+            ->get();
+            return $filter_prov;           
+        }
+
+        if($prov_id != "*"  && $district_id != "*" && $projtyp_id != "*" && $brand_id == "*" && $sector_id == "*" && $status_id == "*" && $yrFrom == "*" && $yrTo == "*"){
+            $filter_prov = DB::table('psi_projects')
+            ->select('*')
+            ->where('province_id', '=', $prov_id)
+            ->where('district_name', '=', $district_id)
+            ->where('prj_type_id', '=', $projtyp_id)
+            ->get();
+            return $filter_prov;           
+        }
+
+        if($prov_id != "*"  && $district_id != "*" && $projtyp_id != "*" && $brand_id != "*" && $sector_id == "*" && $status_id == "*" && $yrFrom == "*" && $yrTo == "*"){
+            $filter_prov = DB::table('psi_projects')
+            ->select('*')
+            ->where('province_id', '=', $prov_id)
+            ->where('district_name', '=', $district_id)
+            ->where('prj_type_id', '=', $projtyp_id)
+            ->where('prj_pis_assistance_equipment', 'like', '%' . $brand_id . '%')
+            ->get();
+            return $filter_prov;           
+        }
+
+        if($prov_id != "*"  && $district_id != "*" && $projtyp_id != "*" && $brand_id != "*" && $sector_id != "*" && $status_id == "*" && $yrFrom == "*" && $yrTo == "*"){
+            $filter_prov = DB::table('psi_projects')
+            ->select('*')
+            ->where('province_id', '=', $prov_id)
+            ->where('district_name', '=', $district_id)
+            ->where('prj_type_id', '=', $projtyp_id)
+            ->where('prj_pis_assistance_equipment', 'like', '%' . $brand_id . '%')
+            ->where('sector_id', '=', $sector_id)
+            ->get();
+            return $filter_prov;           
+        }
+
+        if($prov_id != "*"  && $district_id != "*" && $projtyp_id != "*" && $brand_id != "*" && $sector_id != "*" && $status_id != "*" && $yrFrom == "*" && $yrTo == "*"){
+            $filter_prov = DB::table('psi_projects')
+            ->select('*')
+            ->where('province_id', '=', $prov_id)
+            ->where('district_name', '=', $district_id)
+            ->where('prj_type_id', '=', $projtyp_id)
+            ->where('prj_pis_assistance_equipment', 'like', '%' . $brand_id . '%')
+            ->where('sector_id', '=', $sector_id)
+            ->where('prj_status_id', '=', $status_id)
+            ->get();
+            return $filter_prov;           
+        }
+
+        if($prov_id != "*"  && $district_id != "*" && $projtyp_id != "*" && $brand_id != "*" && $sector_id != "*" && $status_id != "*" && $yrFrom != "*" && $yrTo == "*"){
+            $filter_prov = DB::table('psi_projects')
+            ->select('*')
+            ->where('province_id', '=', $prov_id)
+            ->where('district_name', '=', $district_id)
+            ->where('prj_type_id', '=', $projtyp_id)
+            ->where('prj_pis_assistance_equipment', 'like', '%' . $brand_id . '%')
+            ->where('sector_id', '=', $sector_id)
+            ->where('prj_status_id', '=', $status_id)
+            ->where('prj_year_approved', '=', $yrFrom)
+            ->get();
+            return $filter_prov;           
+        }
 
 
-        $filter_prov = DB::table('psi_projects')
-                    ->select('prj_type_id', 'sector_id', 'prj_status_id', 'region_id', 'prj_title','prj_latitude', 'prj_longitude','prj_title','prj_code','prj_year_approved')
-                    ->where([
-                        ['province_id', '=', $prov_id],
-                        ['district_name', '=', $district_id],
-                        ['prj_type_id', '=', $projtyp_id],
-                        ['prj_pis_assistance_equipment', 'like', '%' . $brand_id . '%'],
-                        ['sector_id', '=', $sector_id],
-                        ['prj_status_id', '=', $status_id]
-                        ])
 
-                    // ->orWhere('province_id', 'like', '%' . $keyWordz . '%')
-                    // ->orWhere('district_name', 'like', '%' . $keyWordz . '%')
-                    // ->orWhere('prj_type_id', 'like', '%' . $keyWordz . '%')
-                    // ->orWhere('prj_pis_assistance_equipment', 'like', '%' . $keyWordz . '%')
-                    // ->orWhere('sector_id', 'like', '%' . $keyWordz . '%')
-                    // ->orWhere('prj_status_id', 'like', '%' . $keyWordz . '%')
-                    
-                    ->get();
-        return $filter_prov;
     }
 }

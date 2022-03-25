@@ -10,6 +10,27 @@ $( document ).ready(function() {
     });
 
     $("#mf_apply").on('click', function(event){
+        let timerInterval
+        Swal.fire({
+        title: 'Loading...',
+        html: '',
+        timer: 2000,
+        didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+            b.textContent = Swal.getTimerLeft()
+            }, 100)
+        },
+        willClose: () => {
+            clearInterval(timerInterval)
+        }
+        }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+        }
+        })
       // alert($('#mf_cmb_province option:selected').attr('id'));
       event.preventDefault();
       removeMarkers();
@@ -19,6 +40,8 @@ $( document ).ready(function() {
       let brand_id =  $('#mf_cmb_equipment option:selected').attr('id');
       let sector_id =  $('#mf_cmb_sector option:selected').attr('id');
       let status_id =  $('#mf_cmb_status option:selected').attr('id');
+      let yrFrom =  $('#mf_cmb_yrFrm option:selected').attr('value'); 
+      let yrTo =  $('#mf_cmb_yrTo option:selected').attr('value');
       let keyWordz =  document.getElementById("mf_search").value;
       
       let _token   = $('meta[name="csrf-token"]').attr('content');
@@ -47,12 +70,37 @@ $( document ).ready(function() {
         status_id = "*"
       }
 
-      console.log(keyWordz);
+      if(yrFrom == "--"){
+        yrFrom = "*"
+      }
+
+      if(yrTo == "--"){
+        yrTo = "*"
+      }
+
+      if(keyWordz == ""){
+        keyWordz = "*"
+      }
+      
+
+      console.log(yrFrom);
+      console.log(yrTo);
 
       $.ajax({
         url: "/map-filter",
         type: "GET",
-        data:{ prov_id: prov_id, district_id: district_id, projtyp_id: projtyp_id, brand_id: brand_id, sector_id: sector_id, status_id:status_id, keyWordz: keyWordz, _token: _token },
+        data:{ 
+            prov_id: prov_id, 
+            district_id: district_id, 
+            projtyp_id: projtyp_id, 
+            brand_id: brand_id, 
+            sector_id: sector_id, 
+            status_id:status_id, 
+            keyWordz: keyWordz, 
+            yrFrom: yrFrom,
+            yrTo: yrTo, 
+            _token: _token 
+        },
         success:function(response){
           var data=response
           jQuery.each(data,function(index, value){
@@ -207,6 +255,61 @@ $( document ).ready(function() {
             const infowindow = new google.maps.InfoWindow({
                 content: value.prj_title,
             });
+
+            p1.addListener('click', function() {
+                pj_addrs = value.prj_address;
+                pj_title = value.prj_title;
+                pj_prjcode = value.prj_code;
+                pj_prjya = value.prj_year_approved;
+                pj_prjstat = value.prj_status_id;
+                
+                pj_region = value.region_code;
+                pj_provname = value.province_name;
+                pj_distName = value.district_name;
+                pj_prjtype = value.prj_type_name;
+                pj_sector= value.sector_name;
+                pj_coop = value.coop_names;
+                pj_collab = value.collaborator_names;
+                res_loc = pj_region + "," + pj_provname + "," + pj_distName
+
+                window.document.getElementById("mf_addrs").innerText = value.prj_address;
+                window.document.getElementById("mf_prj_title").innerText = value.prj_title;
+                window.document.getElementById("b_prj_code").innerText = value.prj_code;
+                window.document.getElementById("b_prj_year_approved").innerText = value.prj_year_approved;
+                
+                window.document.getElementById("mf_location").innerText = res_loc;
+                // window.document.getElementById("mf_prov").innerText = pj_provname;
+                // window.document.getElementById("mf_district").innerText = pj_distName;
+
+                window.document.getElementById("mf_prjtype").innerText = pj_prjtype;
+                window.document.getElementById("mf_sector").innerText = pj_sector;
+                window.document.getElementById("mf_coopnames").innerText = pj_coop;
+                window.document.getElementById("mf_collabnames").innerText = pj_collab;
+
+                if(pj_prjstat == 1){
+                    window.document.getElementById("b_prj_status_name").innerText = "On-going";
+                }
+                if(pj_prjstat == 3){
+                    window.document.getElementById("b_prj_status_name").innerText = "New";
+                }
+                if(pj_prjstat == 4){
+                    window.document.getElementById("b_prj_status_name").innerText = "Graduated";
+                }
+                if(pj_prjstat == 6){
+                    window.document.getElementById("b_prj_status_name").innerText = "Terminated";
+                }
+                if(pj_prjstat == 7){
+                    window.document.getElementById("b_prj_status_name").innerText = "Withdrawn";
+                }
+                if(pj_prjstat == 8){
+                    window.document.getElementById("b_prj_status_name").innerText = "Completed";
+                }      
+                
+                $("a").attr("href", "https://hazardhunter.georisk.gov.ph/index.php?" + "lat=" + value.prj_latitude + "&lng=" + value.prj_longitude);
+
+                $('#mf_modal').modal('show');
+            });
+
 
             m1.push(p1);
             p1.addListener("mouseover", () => {

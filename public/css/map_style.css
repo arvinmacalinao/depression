@@ -29,7 +29,8 @@ div.map-filter {
 }
 
 .footer {
-  position: fixed;
+  /* position: fixed; */
+  margin-top: 100px;
   left: 0;
   bottom: 0;
   width: 100%;

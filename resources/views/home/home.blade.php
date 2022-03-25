@@ -140,13 +140,13 @@
                 <div class="col-sm-6">
                     <label><b>Year From</b></label>
                     <select class="form-control" id="mf_cmb_yrFrm">
-                        <option>--</option>
+                        <option value="--">--</option>
                     </select>
                 </div>
                 <div class="col-sm-6">
                     <label><b>Year To</b></label>
                     <select class="form-control" id="mf_cmb_yrTo">
-                    <option>--</option>
+                    <option value="--">--</option>
                     </select>
                 </div>
             </div>
@@ -176,7 +176,7 @@
         </div>
 
         <div class="container mt-2 d-flex align-items-center justify-content-center">
-            <a class="btn btn-success btn-sm" href="" target="_blank" title="View Hazard Assessment"><img class="img-responsive link-icon-24" alt="https://hazardhunter.georisk.gov.ph" src="images/hh_logo.png" width="24px"> View Hazard Assessment</a>
+            <a class="btn btn-success btn-sm" href="https://hazardhunter.georisk.gov.ph/index.php?" id="hazardLink" target="_blank" title="View Hazard Assessment"><img class="img-responsive link-icon-24" alt="https://hazardhunter.georisk.gov.ph" src="images/hh_logo.png" width="24px"> View Hazard Assessment</a>
         </div>
         <hr>
 
@@ -477,6 +477,8 @@ function setIcons(){ // Setting and Placing Icons
                     window.document.getElementById("b_prj_status_name").innerText = "Completed";
                 }      
                 
+                $("a").attr("href", "https://hazardhunter.georisk.gov.ph/index.php?" + "lat=" + {{$icon->prj_latitude}} + "&lng=" + {{$icon->prj_longitude}});
+
                 $('#mf_modal').modal('show');
             });
 
