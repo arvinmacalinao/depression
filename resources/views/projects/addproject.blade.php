@@ -9,17 +9,19 @@
                 <div class="row-proj">
                     <div class="col-sm-3">
                         <label>Project Code *</label>
-                        <input class="form-control input-sm" placeholder="Project Code" maxLength="255" required="required"></input>
+                        <input class="form-control input-sm" placeholder="Project Code" maxlength="255" name="prj_code" id="prj_code" type="text" required="required">
                     </div>
                     <div class="col-sm-3">
                         <label for="prj_type_id">Project Type</label>
                         <select class="form-control input-sm project-type-select" id="prj_type_id" name="prj_type_id">
-                            <!-- NO Option yet -->
+                            @foreach ($sel_types as $sel_type)
+                            <option value="{{ $sel_type->prj_type_id }}">{{ $sel_type->prj_type_name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-sm-2">
                         <label>Year Approved *</label>
-                        <input class="form-control input-sm" placeholder="Year Approved" maxLength="4" min="1958" max="2022" required="required" type="number" defaultValue="2022"></input>
+                        <input class="form-control input-sm" placeholder="Year Approved" maxLength="4" min="1958" max="2022" required="required" type="number" value="2022">
                     </div>
                     <div class="col-sm-2 mt-3">
                         <div >
@@ -35,67 +37,36 @@
                 <div class="row-proj">
                     <div class="container-fluid">
                         <label class="control-label">Project Title *</label>
-                        <input class="form-control" placeholder="Project Title" type="text" maxLength="255" required="required"></input>
+                        <input class="form-control" placeholder="Project Title" type="text" maxLength="255" required="required">
                     </div>
                 </div>
-                <div class="row-proj">
+                <div class="row-proj" id="project-type-rtgg">
                     <div class="container-fluid">
                         <label class="control-label">Program Title</label>
-                        <input class="form-control" placeholder="Program Title" type="text" maxLength="255" required="required"></input>
+                        <input class="form-control" placeholder="Program Title" type="text" maxLength="255" required="required">
                     </div>
                 </div>
                 <div class="row-proj">
                     <div class="col-sm-6">
                         <label class="control-label">Project Duration From *</label>
-                        <input class="form-control input-sm" placeholder="Project Duration From" maxLength="10" required="required" name="prj_duration_from" id="prj_duration_from" type="text" value="02/21/2022"></input>
+                        <input class="form-control input-sm datepicker" placeholder="Project Duration From" maxLength="10" required="required" name="prj_duration_from" id="prj_duration_from" type="text" value="">
                     </div>
                     <div class="col-sm-6">
                         <label class="control-label">Project Duration To *</label>
-                        <input class="form-control input-sm" placeholder="Project Duration To" maxLength="10"  required="required" name="prj_duration_to" id="prj_duration_to" type="text" value="02/21/2023"></input>
+                        <input class="form-control input-sm datepicker" placeholder="Project Duration To" maxLength="10"  required="required" name="prj_duration_to" id="prj_duration_to" type="text" value="">
                     </div>
                 </div>
-                <div class="row-proj">
+                <div class="row-proj" id="project-type-rtgg">
                     <div class="col-sm-6">
                         <label for="prj_lead" class="control-label">Coordinator/Leader *</label>
-                        <input class="form-control input-sm" placeholder="Coordinator/Leader" maxlength="255" required="required" name="prj_lead" id="prj_lead" type="text" value="">
+                        <input class="form-control input-sm" placeholder="Coordinator/Leader" maxlength="255" required="required" name="prj_lead" id="prj_lead" type="text" value="{{ $proj_lead }}">
                     </div>
                     <div class="col-sm-6">
                         <label for="prj_agency" class="control-label">Agency *</label>
                         <input class="form-control input-sm" placeholder="Agency" maxlength="255" required="required" name="prj_agency" id="prj_agency" type="text" value="">
                     </div>
                 </div>
-                <div class="row-proj">
-                <div class="col-sm-6">
-                    <label for="prj_coordinator" class="control-label">Signing Coordinator/Leader</label>
-                    <select class="form-control input-sm" id="prj_coordinator" name="prj_coordinator">
-                        <!-- NO Option yet -->
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <label for="prj_head" class="control-label">Agency Head or Authorized Representative</label>
-                    <select class="form-control input-sm" id="prj_head" name="prj_head">
-                        <!-- NO Option yet -->
-                    </select>
-                </div>
-                </div>
-
-                <div class="row-proj">
-                    <div class="col-sm-6">
-                        <label for="coop_id" class="control-label">Beneficiaries *</label>
-                        <select class="form-control input-sm chosen-select" id="coop_id" name="coop_id[]" multiple="multiple">
-                            <!-- NO Option yet -->
-                        </select>
-                    </div>
-
-
-                    <div class="col-sm-6">
-                        <label for="col_id" class="control-label">Collaborating Agencies</label>
-                        <select class="form-control input-sm chosen-select" id="col_id" name="col_id[]" multiple="multiple">
-                            <!-- NO Option yet -->
-                        </select>
-                    </div>
-                </div>
-                    <div class="row-proj">
+                <div class="row-proj" id="project-type-rtgg">
                     <div class="col-sm-6">
                         <label for="prj_coordinator" class="control-label">Signing Coordinator/Leader</label>
                         <select class="form-control input-sm" id="prj_coordinator" name="prj_coordinator">
@@ -113,8 +84,10 @@
                 <div class="row-proj">
                     <div class="col-sm-6">
                         <label for="coop_id" class="control-label">Beneficiaries *</label>
-                        <select class="form-control input-sm chosen-select" id="coop_id" name="coop_id[]" multiple="multiple">
-                            <!-- NO Option yet -->
+                        <select class="form-control input-sm chosen-select" id="coop_id" name="coop_id[]" multiple="multiple" placeholder="Select some option">
+                            @foreach ($sel_benefeciaries as $sel_benefeciary)
+                            <option value="{{ $sel_benefeciary->coop_id }}">{{ $sel_benefeciary->coop_name }}</option>
+                            @endforeach 
                         </select>
                     </div>
 
@@ -122,16 +95,19 @@
                     <div class="col-sm-6">
                         <label for="col_id" class="control-label">Collaborating Agencies</label>
                         <select class="form-control input-sm chosen-select" id="col_id" name="col_id[]" multiple="multiple">
-                            <!-- NO Option yet -->
+                            @foreach ($sel_collaborators as $sel_collaborator)
+                            <option value="{{ $sel_collaborator->col_id }}">{{ $sel_collaborator->col_name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
-
                 <div class="row-proj">
                     <div class="container-fluid">
                         <label for="ug_id" class="control-label">Implementor</label>
                         <select class="form-control input-sm" id="ug_id" name="ug_id">
-                            <!-- NO Option yet -->
+                            @foreach ($sel_usergroups as $sel_usergroup)
+                            <option value="{{ $sel_usergroup->ug_id }}">{{ $sel_usergroup->ug_name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -156,7 +132,9 @@
                     <div class="form-group form-group-sm col-sm-6">
                         <label for="prj_status_id" class="control-label">Project Status</label>
                         <select class="form-control input-sm" id="prj_status_id" name="prj_status_id">
-                            <!-- NO Option yet -->
+                            @foreach ($sel_statuses as $sel_status)
+                            <option value="{{ $sel_status->prj_status_id }}">{{ $sel_status->prj_status_name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -166,7 +144,9 @@
                     </div>
                     <div class="container-fluid">
                         <select class="form-control input-sm" id="sector_id" name="sector_id">
-                        <!-- NO Option yet -->
+                            @foreach ($sel_sectors as $sel_sector)
+                            <option value="{{ $sel_sector->sector_id }}">{{ $sel_sector->sector_name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -186,21 +166,32 @@
                     <div class="col-sm-4">
                         <label for="province_id" class="control-label">Province</label>
                         <select class="form-control input-sm province_select" id="province_id" name="province_id" required="required">
-                            <!-- NO Option yet -->
+                            <option selected="false">Province</option>
+                            @foreach ($sel_provinces as $sel_province)
+                            <option value="{{ $sel_province->province_id }}">{{ $sel_province->province_name }}</option>
+                            @endforeach
                         </select>
                     </div>
 
                     <div class="col-sm-4">
                         <label for="city_id" class="control-label">Municipality/City</label>
                         <select class="form-control input-sm city_select" id="city_id" name="city_id" required="required">
-                            <!-- NO Option yet -->
+                            <option selected="false">Municipalities/Cities</option>
+
+                            {{-- @foreach ($sel_cities as $sel_city)
+                            <option value="{{ $sel_city->city_id }}">{{ $sel_city->city_name }}</option>
+                            @endforeach --}}
                         </select>
                     </div>
 
                     <div class="col-sm-4">
                         <label for="barangay_id" class="control-label">Barangay</label>
                         <select class="form-control input-sm barangay_select" id="barangay_id" name="barangay_id" required="required">
-                            <!-- NO Option yet -->
+                            <option selected="false">Barangays</option>
+                            {{-- <option value="" placeholder="Please select barangay"></option>
+                            @foreach ($sel_barangays as $sel_barangay)
+                            <option value="{{ $sel_barangay->barangay_id }}">{{ $sel_barangay->barangay_name }}</option>
+                            @endforeach --}}
                         </select>
                     </div>
                 </div>
@@ -648,12 +639,12 @@
 
                 <div class="form-group">
                     <label for="prj_longitude" class="control-label">Longitude</label>
-                    <input class="form-control input-sm" placeholder="Longitude" min="0" step="any" name="prj_longitude" id="longitude" type="number" value="">
+                    <input class="form-control input-sm" placeholder="Longitude" min="0" step="any" name="prj_longitude" id="lon" type="text" value="">
                 </div>
 
                 <div class="form-group">
                     <label for="prj_latitude" class="control-label">Latitude</label>
-                    <input class="form-control input-sm" placeholder="Latitude" min="0" step="any" name="prj_latitude" id="latitude" type="number" value="">
+                    <input class="form-control input-sm" placeholder="Latitude" min="0" step="any" name="prj_latitude" id="lat" type="text" value="">
                 </div>
 
                 <div class="form-group">
@@ -674,8 +665,90 @@
 </div>
 </form>
 
+<script type="text/javascript">
+    //Project type form option
+$(document).ready(function() {
+    $(".chosen-select").chosen();
+    $('#project-type-rtgg').hide();
+    $(".project-type-select").on('change', function() {
+            $(this).find("option:selected").each(function(){
+            var optionValue = $(this).attr("value");
+        if(optionValue == 6){
+            $('#project-type-rtgg').hide();
+        }
+        if(optionValue == 8){
+            $('#project-type-rtgg').show();
+        }
+        if(optionValue == 9){
+            $('#project-type-rtgg').show();
+        }
+        if(optionValue == 12){
+            $('#project-type-rtgg').hide();
+        }
+        if(optionValue == 13){
+            $('#project-type-rtgg').show();
+        }
+        if(optionValue == 14){
+            $('#project-type-rtgg').show();
+        }
+        });
+    });
+
+    //ADDRESS SELECT OPTION
+    $(".province_select").on('change', function() {
+        $(this).find("option:selected").each(function(){
+            var provinceID = $(this).attr("value");
+            if(provinceID)
+            {
+                $.ajax({
+                    url:'./getCities/' + provinceID,
+                    type: "GET",
+                    dataType: "JSON",
+                    success:function(data)
+                    {
+                        $(".city_select").empty(); //remove last selected itmes
+                        $.each(data, function(key, value){
+                            $(".city_select").append('<option value="'+ key+'">'+ value +'</option>');
+                        })
+                    }
+                })
+            }
+            else
+            {
+                $(".city_select").empty();
+                $(".barangay_select").empty();
+            }
+        });
+    });
+    $(".city_select").on('change', function() {
+        $(this).find("option:selected").each(function(){
+            var citiesID = $(this).attr("value");
+            if(citiesID)
+            {
+                $.ajax({
+                    url:'./getBarangays/' + citiesID,
+                    type: "GET",
+                    dataType: "JSON",
+                    success:function(data)
+                    {
+                        $(".barangay_select").empty(); //remove last selected itmes
+                        $.each(data, function(key, value){
+                            $(".barangay_select").append('<option value="'+ key+'">'+ value +'</option>');
+                        })
+                    }
+                })
+            }
+            else
+            {
+                $(".barangay_select").empty();
+            }
+        });
+    });
 
 
+    
+        
 
-
+});
+</script>
 @endsection()
