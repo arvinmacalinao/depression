@@ -104,6 +104,9 @@ class PsiProjectsController extends Controller
                             ->Orderby('province_name', 'asc')
                             ->get();
 
+        $proj_lead = DB::table('psi_agencies')
+                            ->select('agency_name')
+                            ->get();
         // $sel_cities = DB::table('psi_cities')
         // ->select('city_id', 'city_name')
         // ->Orderby('city_name', 'asc')
@@ -114,7 +117,7 @@ class PsiProjectsController extends Controller
         // ->Orderby('barangay_name', 'asc')
         // ->get();
                
-        return view('./projects/addproject', compact('sel_types', 'sel_collaborators', 'sel_benefeciaries', 'sel_usergroups', 'sel_statuses', 'sel_sectors', 'sel_provinces'));
+        return view('./projects/addproject', compact('sel_types', 'sel_collaborators', 'sel_benefeciaries', 'sel_usergroups', 'sel_statuses', 'sel_sectors', 'sel_provinces', 'proj_lead'));
     }
 
     public function getCities($id)

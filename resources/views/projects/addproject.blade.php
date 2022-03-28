@@ -59,7 +59,7 @@
                 <div class="row-proj" id="project-type-rtgg">
                     <div class="col-sm-6">
                         <label for="prj_lead" class="control-label">Coordinator/Leader *</label>
-                        <input class="form-control input-sm" placeholder="Coordinator/Leader" maxlength="255" required="required" name="prj_lead" id="prj_lead" type="text" value="">
+                        <input class="form-control input-sm" placeholder="Coordinator/Leader" maxlength="255" required="required" name="prj_lead" id="prj_lead" type="text" value="{{ $proj_lead }}">
                     </div>
                     <div class="col-sm-6">
                         <label for="prj_agency" class="control-label">Agency *</label>

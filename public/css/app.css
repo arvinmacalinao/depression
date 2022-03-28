@@ -1965,12 +1965,13 @@ pre code {
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.6;
-  color: #495057;
+  color: #363434;
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ced4da;
   border-radius: 0;
   box-shadow: #000;
+  border-color: rgb(160, 157, 157);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
