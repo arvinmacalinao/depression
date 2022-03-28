@@ -11,3 +11,8 @@ class Chart extends Model
     //Prmary Key
     public $primaryKey = 'prj_id';
 }
+
+class ViewRepaymentsData extends Model
+{
+    
+}

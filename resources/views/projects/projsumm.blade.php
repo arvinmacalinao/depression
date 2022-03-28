@@ -88,9 +88,115 @@
         </div>
     </div>
 
+    <br>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header bg-warning mb-3 text-white text-center"><h5><b>Total Number of Projects</b></h5></div>
+                <div class="card-body">
+                    <h3 class="card-title text-center"><b>
+                    @foreach($total_number_projects as $total_number_project)
+                        {{  number_format($total_number_project->total_proj)  }}
+                    @endforeach
+                    </b></h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header bg-success mb-3 text-white text-center"><h5><b>Number of Repayment Status Entries</b></h5></div>
+                <div class="card-body">
+                    <h3 class="card-title text-center"><b>
+                        @foreach($total_number_repayments as $total_number_repayment)
+                            {{  number_format($total_number_repayment->total_rep)  }}
+                        @endforeach
+                    </b></h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header bg-primary mb-3 text-white text-center"><h5><b>Number of Status Report Entries</b></h5></div>
+                <div class="card-body">
+                    <h3 class="card-title text-center"><b>
+                        @foreach($total_number_reportings as $total_number_reporting)
+                            {{  number_format($total_number_reporting->total_number)  }}
+                        @endforeach
+                    </b></h3>
+                </div>
+            </div>
+        </div>
+    </div> 
+    
+    <br>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header bg-warning mb-3 text-white text-center"><h5><b>Repayment Total Amount Due</b></h5></div>
+                <div class="card-body">
+                    <h3 class="card-title text-center">PHP <b>
+                        @foreach($total_number_amount_dues as $total_number_amount_due)
+                            {{  number_format($total_number_amount_due->total_amount,2)  }}
+                        @endforeach
+
+                        <div id="rep_amount" style="display: none;">
+                            @foreach($total_number_amount_dues as $total_number_amount_due)
+                                {{  $total_number_amount_due->total_amount  }}
+                            @endforeach
+                        </div>
+                    </b></h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header bg-success mb-3 text-white text-center"><h5><b>Repayment Total Amount Refunded</b></h5></div>
+                <div class="card-body">
+                    <h3 class="card-title text-center">PHP <b> 
+                        @foreach($total_number_amount_paids as $total_number_amount_paid)
+                            {{  number_format($total_number_amount_paid->total_paid,2)  }}
+                        @endforeach
+
+                        <div id="rep_paid" style="display: none;">
+                            @foreach($total_number_amount_paids as $total_number_amount_paid)
+                                {{  $total_number_amount_paid->total_paid  }}
+                            @endforeach                            
+                        </div>
+                    </b></h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header bg-primary mb-3 text-white text-center"><h5><b>Repayment Refund Rate</b></h5></div>
+                <div class="card-body">
+                    <h3 class="card-title text-center"><b id="percent_yeah">999</b></h3>
+                </div>
+            </div>
+        </div>
+    </div> 
 </div>
 
+
+
 <script>
+
+$( document ).ready(function() {
+    $t_rep_paid = $("#rep_paid").text();
+    $t_rep_amount = $("#rep_amount").text();
+
+    $ref_rate = ($t_rep_paid / $t_rep_amount) * 100;
+
+    $total_percent = Math.round($ref_rate)
+
+    document.getElementById('percent_yeah').innerText= $total_percent + '%';
+});
+
+
 
 //Per Year Approved
 const ch_yrappov = document.getElementById('year-approved-graph');
@@ -208,17 +314,17 @@ const ch_v_ch_projtype = new Chart(ch_projtype, {
 const ch_repayment = document.getElementById('repayment-graph');
 
 var data = {
-    labels: ["Chocolate", "Vanilla", "Strawberry"],
+    labels: {!!json_encode($chart_repayments_total_due->labels)!!},
     datasets: [
         {
-            label: "Blue",
-            backgroundColor: 'rgb(255, 99, 71)',
-            data: [3,7,4]
+            label: "Total Amount Due",
+            backgroundColor: 'rgb(60, 60, 60)',
+            data: {!! json_encode($chart_repayments_total_due->dataset)!!}
         },
         {
-            label: "Red",
-            backgroundColor: "rgb(60, 60, 60)",
-            data: [4,3,5]
+            label: "Total Amount Refunded",
+            backgroundColor: 'rgb(255, 99, 71)',
+            data: {!! json_encode($chart_repayments_total_refunded->dataset)!!}
         }
     ]
 };
@@ -328,7 +434,7 @@ const ch_v_ch_fora_peryear = new Chart(ch_fora_peryear, {
     data: {
         labels: {!!json_encode($chart_fora_peryear->labels)!!},
         datasets: [{
-            label: 'Number of projects',
+            label: 'Number of fora',
             data: {!! json_encode($chart_fora_peryear->dataset)!!},
             backgroundColor: [
                 'rgb(255, 99, 71)',
@@ -347,6 +453,32 @@ const ch_v_ch_fora_peryear = new Chart(ch_fora_peryear, {
         }
     }
 });
-    
+
+//Per Fora type
+const ch_fora_pertype = document.getElementById('fora_pertype-graph');
+const ch_v_ch_fora_pertype = new Chart(ch_fora_pertype, {
+    type: 'bar',
+    data: {
+        labels: {!!json_encode($chart_fora_pertype->labels)!!},
+        datasets: [{
+            label: 'Number of fora',
+            data: {!! json_encode($chart_fora_pertype->dataset)!!},
+            backgroundColor: [
+                'rgb(255, 99, 71)',
+            ],
+            borderColor: [
+                'rgb(60, 60, 60)'
+            ],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
 </script>
 @endsection
