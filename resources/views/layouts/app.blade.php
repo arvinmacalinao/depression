@@ -26,6 +26,7 @@
 
         {{-- Map JS --}}
         <script src="{{ asset('js/map.js') }}"></script>
+        <script src="{{ asset('js/map_2.js') }}"></script>
         <script src="http://maps.google.com/maps/api/js?key=AIzaSyCMDx-ejfVStxIBhfqtBuLj98OV79kqbdY"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
@@ -48,11 +49,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js" integrity="sha512-rMGGF4wg1R73ehtnxXBt5mbUfN9JUJwbk21KMlnLZDJh7BkPmeovBuddZCENJddHYYMkCh9hPFnPmS9sspki8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
         {{-- Date Picker --}}
-      
-
-    
-
-        
 
       </head>
 
@@ -63,7 +59,7 @@
 
     <body>
     <!--Navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark">
+    <nav class="navbar navbar-expand-md navbar">
           <a class="navbar-brand" href="./" style="margin-right: 0%">
             <img src="{{URL::asset('/images/brand_white.png')}}" width="25" height="25" alt="">
           </a>
@@ -78,7 +74,7 @@
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="./projects"><i class="fa fa-list"></i> Projects</span></a>
+              <a class="nav-link" href="/projects"><i class="fa fa-list"></i> Projects</span></a>
             </li>
 
             <li class="nav-item">
@@ -139,25 +135,25 @@
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Equipment Suppliers</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Consultancies</a>
-                  <a class="dropdown-item" href="#">CSF Ratings</a>
-                  <a class="dropdown-item" href="#">DRR-CCAM</a>
-                  <a class="dropdown-item" href="#">Fora/Training/Seminars</a>
-                  <a class="dropdown-item" href="#">Innovatiove Hubs</a>
-                  <a class="dropdown-item" href="#">International Collaborations</a>
-                  <a class="dropdown-item" href="#">ISO Accreditation</a>
-                  <a class="dropdown-item" href="#">Library Monitoring</a>
-                  <a class="dropdown-item" href="#">Packaging & Labeling</a>
-                  <a class="dropdown-item" href="#">R & D Agenda</a>
-                  <a class="dropdown-item" href="#">R & D Projects</a>
-                  <a class="dropdown-item" href="#">Regional Communications Plan</a>
-                  <a class="dropdown-item" href="#">S & T Fairs & Promotional Activities</a>
-                  <a class="dropdown-item" href="#">S & T Information and Referal</a>
-                  <a class="dropdown-item" href="#">Scholarship Monitoring</a>
-                  <a class="dropdown-item" href="#">SUC Assistance</a>
-                  <a class="dropdown-item" href="#">Testing & Calibration</a>
-                  <a class="dropdown-item" href="#">Technology Promotion</a>
-                  <a class="dropdown-item" href="#">Technology Adaption</a>
+                    <a class="dropdown-item" href="#">Consultancies</a>
+                    <a class="dropdown-item" href="#">CSF Ratings</a>
+                    <a class="dropdown-item" href="#">DRR-CCAM</a>
+                    <a class="dropdown-item" href="#">Fora/Training/Seminars</a>
+                    <a class="dropdown-item" href="#">Innovatiove Hubs</a>
+                    <a class="dropdown-item" href="#">International Collaborations</a>
+                    <a class="dropdown-item" href="#">ISO Accreditation</a>
+                    <a class="dropdown-item" href="#">Library Monitoring</a>
+                    <a class="dropdown-item" href="#">Packaging & Labeling</a>
+                    <a class="dropdown-item" href="#">R & D Agenda</a>
+                    <a class="dropdown-item" href="#">R & D Projects</a>
+                    <a class="dropdown-item" href="#">Regional Communications Plan</a>
+                    <a class="dropdown-item" href="#">S & T Fairs & Promotional Activities</a>
+                    <a class="dropdown-item" href="#">S & T Information and Referal</a>
+                    <a class="dropdown-item" href="#">Scholarship Monitoring</a>
+                    <a class="dropdown-item" href="#">SUC Assistance</a>
+                    <a class="dropdown-item" href="#">Testing & Calibration</a>
+                    <a class="dropdown-item" href="#">Technology Promotion</a>
+                    <a class="dropdown-item" href="#">Technology Adaption</a>
                 </div>
               </li>
 
@@ -175,29 +171,29 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Collaborating Agencies</a>
-                  <a class="dropdown-item" href="#">Collaborating Agency Categories</a>
-                  <a class="dropdown-item" href="#">Colsultancy Categories</a>
-                  <a class="dropdown-item" href="#">Document Categories</a>
-                  <a class="dropdown-item" href="#">Equipment Names</a>
-                  <a class="dropdown-item" href="#">Location Listings</a>
-                  <a class="dropdown-item" href="#">Organization Categories</a>
-                  <a class="dropdown-item" href="#">Product Units</a>
-                  <a class="dropdown-item" href="#">Project Categories</a>
-                  <a class="dropdown-item" href="#">S&T Activity Categories</a>
-                  <a class="dropdown-item" href="#">Sectors</a>
-                  <a class="dropdown-item" href="#">Technology</a>
+                    <a class="dropdown-item" href="#">Collaborating Agencies</a>
+                    <a class="dropdown-item" href="#">Collaborating Agency Categories</a>
+                    <a class="dropdown-item" href="#">Colsultancy Categories</a>
+                    <a class="dropdown-item" href="#">Document Categories</a>
+                    <a class="dropdown-item" href="#">Equipment Names</a>
+                    <a class="dropdown-item" href="#">Location Listings</a>
+                    <a class="dropdown-item" href="#">Organization Categories</a>
+                    <a class="dropdown-item" href="#">Product Units</a>
+                    <a class="dropdown-item" href="#">Project Categories</a>
+                    <a class="dropdown-item" href="#">S&T Activity Categories</a>
+                    <a class="dropdown-item" href="#">Sectors</a>
+                    <a class="dropdown-item" href="#">Technology</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Course Categories</a>
-                  <a class="dropdown-item" href="#">Courses</a>
-                  <a class="dropdown-item" href="#">Scholarship Programs</a>
-                  <a class="dropdown-item" href="#">Schools</a>
+                    <a class="dropdown-item" href="#">Course Categories</a>
+                    <a class="dropdown-item" href="#">Courses</a>
+                    <a class="dropdown-item" href="#">Scholarship Programs</a>
+                    <a class="dropdown-item" href="#">Schools</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Users</a>
-                  <a class="dropdown-item" href="#">User Groups</a>
-                  <a class="dropdown-item" href="#">User Logs</a>
+                    <a class="dropdown-item" href="#">Users</a>
+                    <a class="dropdown-item" href="#">User Groups</a>
+                    <a class="dropdown-item" href="#">User Logs</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Agency Profile</a>
+                    <a class="dropdown-item" href="#">Agency Profile</a>
                 </div>
               </li>
 
@@ -219,11 +215,6 @@
                   <a class="dropdown-item" href="#"><i class="fa fa-power-off"></i>Logout</a>
                 </div>
               </li>
-
-            
-
-            
-
           </ul>
           
   </nav>
@@ -231,16 +222,14 @@
     </body>
     
      <script src="{{ asset('js/charts.js') }}"></script>
-    <footer class="page-footer" id="footer" style="font-family: 'Roboto Condensed', sans-serif;">
-     <div class="bg-light py-2">
+    <footer class="footer">
          <div class="text-center">
               <a href="https://impression.dostcalabarzon.ph/privacy_policy.php" class="btn btn-danger mb-2" title="Privacy Policy">Privacy Policy</a>
               <a href="https://www.privacy.gov.ph/data-privacy-act/" class="btn btn-danger mb-2" title="Republic Act 10173 - Data Privacy Act of 2012">Republic Act 10173 - Data Privacy Act of 2012</a>
               <br>
                <p>Information & Monitoring of Projects, Services and S&T Interventions</p> 
                <p>Powered by DOST CALABARZON - MIS Unit</p>
-         </div>
-     </div>
+          </div>
     </footer>
      <script
          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMDx-ejfVStxIBhfqtBuLj98OV79kqbdY&callback=initMap&libraries=&v=weekly"

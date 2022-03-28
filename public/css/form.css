@@ -45,25 +45,6 @@
     border-radius: 1rem;
 }
 
-html, body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    display: table;
-}
-
-.page-footer{
-    background-color: grey;
-    display: table-row;
-    height: 0;
-}
-table {
-    counter-reset: tableCount;     
-}
-.counterCell:before {              
-    content: counter(tableCount); 
-    counter-increment: tableCount; 
-}
 .thead-proj{
     background-color: rgb(197, 197, 197);
 
@@ -71,12 +52,19 @@ table {
 
 .navbar{
     background-color: #2ab1f0;
-
-
 }
 .nav-item {
     font-size:medium;
 }
+
+.nav-link {
+    color: white;
+    }
+
+.nav-link:hover {
+    color: #18FFFF;
+}
+
 
 .form-row-search {
     display: flex;
@@ -106,9 +94,7 @@ table {
 }
 
 .page-item{
-    display: inline-block;
-       
-
+    display: inline-block;   
 }
 
 td {

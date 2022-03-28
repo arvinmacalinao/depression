@@ -28,7 +28,3 @@ Route::get('project-list', 'PsiProjectsController@projectList');
 Route::get('/getCities/{id}', 'PsiProjectsController@getCities')->name('getCities');
 Route::get('/getBarangays/{id}', 'PsiProjectsController@getBarangays')->name('getBarangays');
 
-Route::get('/projects', function () {
-    return view('./projects/projects');
-});
-
