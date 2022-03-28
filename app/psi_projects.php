@@ -4,10 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PsiProjectTypes extends Model
+class psi_projects extends Model
 {
-    protected $fillable = [
-
-    ];
     
 }
