@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use DB;
+use App\Markers;
 use Illuminate\Http\Request;
 
 class MapDataController extends Controller
 {
-    public function gmaps(){
-        $locations = DB::table('map_markers')->get();
-        return view('home.home',compact('locations'));
+    public function index(){
+        $markers = Markers::all();
+        return view('home.home', compact('markers'));
     }
 }

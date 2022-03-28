@@ -1,8 +1,17 @@
+$( document ).ready(function() {
+    
+    document.getElementById("mpFilter").style.display = "none";
+
+    $(".close").on('click', function(event){
+        document.getElementById("mpFilter").style.display = "none";
+    });
+});
 // Initialize and add the map
 function initMap() {
   const myLatlng = { lat: 14.171, lng: 121.223 };
   const myOptions = { 
       zoom: 16,
+
       center: myLatlng,
     }
   map = new google.maps.Map(document.getElementById("map"), myOptions);
@@ -37,3 +46,13 @@ function initMap() {
 }   
 
 window.onload = function () { initMap() }
+
+      center: uluru,
+    });
+    // The marker, positioned at Uluru
+    const marker = new google.maps.Marker({
+      position: uluru,
+      map: map,
+    });
+  }
+
