@@ -4,10 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Markers extends Model
+class Chart extends Model
 {
     //Table Name
     protected $table = "psi_projects";
     //Prmary Key
     public $primaryKey = 'prj_id';
+}
+
+class ViewRepaymentsData extends Model
+{
+    
 }

@@ -14,6 +14,10 @@ use App\Http\Controllers\MapDataController;
 */
 
 Route::get('/', 'MapDataController@index');
+Route::get('/summary', 'ChartController@index');
+
+// Route::get('/project-summary-regional', 'MapDataController@index');
+Route::get('map-filter', 'MapFilterController@sort');
 
 // Projects
 Route::get('/projects', 'PsiProjectsController@index');
