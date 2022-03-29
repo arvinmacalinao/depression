@@ -100,3 +100,10 @@
 td {
     white-space: nowrap;
 }
+
+
+.form-control .chosen-select{
+    background-color: red;
+
+}
+

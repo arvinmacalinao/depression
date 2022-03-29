@@ -1,15 +1,23 @@
 @extends('./layouts.app')
 
 @section('content')
-<form>
-<div class="container-fluid">
+<form method="post" action="{{ route('project.store') }}">
+@csrf
+    <div class="container-fluid">
     <div class="card">
-        <h3 class="card-header">Add Project</h3>
+        <div class="card-header">
+            <h3>Add Project</h3>
+            <div class="pull-right">
+                <a href="/projects" class="btn btn-primary">Back</a>
+            </div>
+        </div>
+        
+        
             <div class="card-body">
                 <div class="row-proj">
                     <div class="col-sm-3">
                         <label>Project Code *</label>
-                        <input class="form-control input-sm" placeholder="Project Code" maxlength="255" name="prj_code" id="prj_code" type="text" required="required">
+                        <input class="form-control input-sm" placeholder="Project Code" maxlength="255" name="prj_code" id="prj_code" type="text">
                     </div>
                     <div class="col-sm-3">
                         <label for="prj_type_id">Project Type</label>
@@ -21,62 +29,75 @@
                     </div>
                     <div class="col-sm-2">
                         <label>Year Approved *</label>
-                        <input class="form-control input-sm" placeholder="Year Approved" maxLength="4" min="1958" max="2022" required="required" type="number" value="2022">
+                        <input class="form-control input-sm" placeholder="Year Approved" name="prj_year_approved" id="prj_year_approved" maxLength="4" min="1958" max="2022" type="number" value="2022">
                     </div>
-                    <div class="col-sm-2 mt-3">
-                        <div >
-                            <input type="checkbox"/> Startup Assistance
+                    <div class="form-group col-sm-2">
+                        <label class="control-label"></label>
+                        <div class="checkbox">
+                        <label for="prj_startup_assistance" class="control-label">
+                            <input type="hidden" name="prj_startup_assistance" id="prj_startup_assistance" value="0">
+                            <input type="checkbox" name="prj_startup_assistance" id="prj_startup_assistance" value="1"> <strong>Startup Assistance</strong>
+                        </label>
                         </div>
                     </div>
-                    <div class="col-sm-2 mt-3">
-                        <div >
-                        <input type="checkbox"/> DRRM Related
+    
+                    <div class="form-group col-sm-2">
+                        <label class="control-label"></label>
+                        <div class="checkbox">
+                        <label for="prj_drrm" class="control-label">
+                            <input type="hidden" name="prj_drrm" id="prj_drrm" value="0">
+                            <input type="checkbox" name="prj_drrm" id="prj_drrm" value="1"> <strong>DRRM Related</strong>
+                        </label>
                         </div>
                     </div>
                 </div>
                 <div class="row-proj">
                     <div class="container-fluid">
                         <label class="control-label">Project Title *</label>
-                        <input class="form-control" placeholder="Project Title" type="text" maxLength="255" required="required">
+                        <input class="form-control" placeholder="Project Title" type="text" maxLength="255" id="prj_title" name="prj_title">
                     </div>
                 </div>
-                <div class="row-proj" id="project-type-rtgg">
+                <div class="row-proj project-type-rtgg">
                     <div class="container-fluid">
                         <label class="control-label">Program Title</label>
-                        <input class="form-control" placeholder="Program Title" type="text" maxLength="255" required="required">
+                        <input class="form-control" placeholder="Program Title" type="text" maxLength="255" id="prj_program" name="prj_program">
                     </div>
                 </div>
                 <div class="row-proj">
                     <div class="col-sm-6">
                         <label class="control-label">Project Duration From *</label>
-                        <input class="form-control input-sm datepicker" placeholder="Project Duration From" maxLength="10" required="required" name="prj_duration_from" id="prj_duration_from" type="text" value="">
+                        <input class="form-control input-sm" data-date-format="yyyy/mm/dd" placeholder="Project Duration From" maxLength="10" name="prj_duration_from" id="prj_duration_from" type="text">
                     </div>
                     <div class="col-sm-6">
                         <label class="control-label">Project Duration To *</label>
-                        <input class="form-control input-sm datepicker" placeholder="Project Duration To" maxLength="10"  required="required" name="prj_duration_to" id="prj_duration_to" type="text" value="">
+                        <input class="form-control input-sm" data-date-format="yyyy/mm/dd" placeholder="Project Duration To" maxLength="10"  name="prj_duration_to" id="prj_duration_to" type="text">
                     </div>
                 </div>
-                <div class="row-proj" id="project-type-rtgg">
+                <div class="row-proj project-type-rtgg">
                     <div class="col-sm-6">
                         <label for="prj_lead" class="control-label">Coordinator/Leader *</label>
-                        <input class="form-control input-sm" placeholder="Coordinator/Leader" maxlength="255" required="required" name="prj_lead" id="prj_lead" type="text" value="{{ $proj_lead }}">
+                        <input class="form-control input-sm" placeholder="Coordinator/Leader" maxlength="255" name="prj_lead" id="prj_lead" type="text" value="{{ $proj_lead }}">
                     </div>
                     <div class="col-sm-6">
                         <label for="prj_agency" class="control-label">Agency *</label>
-                        <input class="form-control input-sm" placeholder="Agency" maxlength="255" required="required" name="prj_agency" id="prj_agency" type="text" value="">
+                        <input class="form-control input-sm" placeholder="Agency" maxlength="255" name="prj_agency" id="prj_agency" type="text" value="{{ $proj_lead }}">
                     </div>
                 </div>
-                <div class="row-proj" id="project-type-rtgg">
+                <div class="row-proj project-type-rtgg">
                     <div class="col-sm-6">
                         <label for="prj_coordinator" class="control-label">Signing Coordinator/Leader</label>
                         <select class="form-control input-sm" id="prj_coordinator" name="prj_coordinator">
-                            <!-- NO Option yet -->
+                            @foreach ($sel_coordinators as $sel_coordinator)
+                            <option value="{{ $sel_coordinator->u_name }}">{{ $sel_coordinator->u_name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-sm-6">
                         <label for="prj_head" class="control-label">Agency Head or Authorized Representative</label>
                         <select class="form-control input-sm" id="prj_head" name="prj_head">
-                            <!-- NO Option yet -->
+                            @foreach ($sel_heads as $sel_head)
+                            <option value="{{ $sel_head->u_name }}">{{ $sel_head->u_name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -87,6 +108,7 @@
                         <select class="form-control input-sm chosen-select" id="coop_id" name="coop_id[]" multiple="multiple" placeholder="Select some option">
                             @foreach ($sel_benefeciaries as $sel_benefeciary)
                             <option value="{{ $sel_benefeciary->coop_id }}">{{ $sel_benefeciary->coop_name }}</option>
+                            
                             @endforeach 
                         </select>
                     </div>
@@ -115,19 +137,19 @@
                 <div class="row-proj">
                     <div class="form-group col-sm-6">
                         <label for="prj_objective" class="control-label">Objective *</label>
-                        <textarea class="form-control input-sm" placeholder="Objective" required="required" name="prj_objective" id="prj_objective" cols="50" rows="4"></textarea>
+                        <textarea class="form-control input-sm" placeholder="Objective" name="prj_objective" id="prj_objective" cols="50" rows="4"></textarea>
                     </div>
 
                     <div class="form-group col-sm-6">
                         <label for="prj_expected_output" class="control-label">Expected Output *</label>
-                        <textarea class="form-control input-sm" placeholder="Expected Output" required="required" name="prj_expected_output" id="prj_expected_output" cols="50" rows="4"></textarea>
+                        <textarea class="form-control input-sm" placeholder="Expected Output" name="prj_expected_output" id="prj_expected_output" cols="50" rows="4"></textarea>
                     </div>
                 </div>
 
                 <div class="row-proj">
                     <div class="form-group form-group-sm col-sm-6">
                         <label for="prj_fund_release_date" class="control-label">Date Funds Released To The Beneficiary</label>
-                        <input class="form-control input-sm date-picker" placeholder="Date Tagged" maxlength="10" name="prj_fund_release_date" id="prj_fund_release_date" type="text" value="">
+                        <input class="form-control input-sm date-picker" placeholder="Date Tagged" maxlength="10" name="prj_fund_release_date" id="prj_fund_release_date" type="text">
                     </div>
                     <div class="form-group form-group-sm col-sm-6">
                         <label for="prj_status_id" class="control-label">Project Status</label>
@@ -159,13 +181,13 @@
 
                 <div class="form-group">
                     <label for="prj_address" class="control-label">Street Address *</label>
-                    <textarea class="form-control input-sm" placeholder="Street Address" required="required" name="prj_address" id="prj_address" cols="50" rows="3"></textarea>
+                    <textarea class="form-control input-sm" placeholder="Street Address" name="prj_address" id="prj_address" cols="50" rows="3"></textarea>
                 </div>
                 
                 <div class="row-proj">
                     <div class="col-sm-4">
                         <label for="province_id" class="control-label">Province</label>
-                        <select class="form-control input-sm province_select" id="province_id" name="province_id" required="required">
+                        <select class="form-control input-sm province_select" id="province_id" name="province_id">
                             <option selected="false">Province</option>
                             @foreach ($sel_provinces as $sel_province)
                             <option value="{{ $sel_province->province_id }}">{{ $sel_province->province_name }}</option>
@@ -175,23 +197,15 @@
 
                     <div class="col-sm-4">
                         <label for="city_id" class="control-label">Municipality/City</label>
-                        <select class="form-control input-sm city_select" id="city_id" name="city_id" required="required">
+                        <select class="form-control input-sm city_select" id="city_id" name="city_id">
                             <option selected="false">Municipalities/Cities</option>
-
-                            {{-- @foreach ($sel_cities as $sel_city)
-                            <option value="{{ $sel_city->city_id }}">{{ $sel_city->city_name }}</option>
-                            @endforeach --}}
                         </select>
                     </div>
 
                     <div class="col-sm-4">
                         <label for="barangay_id" class="control-label">Barangay</label>
-                        <select class="form-control input-sm barangay_select" id="barangay_id" name="barangay_id" required="required">
+                        <select class="form-control input-sm barangay_select" id="barangay_id" name="barangay_id">
                             <option selected="false">Barangays</option>
-                            {{-- <option value="" placeholder="Please select barangay"></option>
-                            @foreach ($sel_barangays as $sel_barangay)
-                            <option value="{{ $sel_barangay->barangay_id }}">{{ $sel_barangay->barangay_name }}</option>
-                            @endforeach --}}
                         </select>
                     </div>
                 </div>
@@ -204,13 +218,13 @@
                 
                 <div class="form-group">
                 <label for="prj_cost_setup" class="control-label">Project Cost</label>
-                <input class="form-control input-sm" placeholder="Project Cost" min="0" step="any" name="prj_cost_setup" id="prj_cost_setup" type="number" value="">
+                <input class="form-control input-sm" placeholder="Project Cost" min="0" step="any" name="prj_cost_setup" id="prj_cost_setup" type="number">
                 </div>
 
 
                 <div class="form-group">
                     <label for="prj_cost_benefactor" class="control-label">Beneficiaries&rsquo; Counterpart Project Cost</label>
-                    <input class="form-control input-sm" placeholder="Beneficiaries&rsquo; Counterpart Project Cost" min="0" step="any" name="prj_cost_benefactor" id="prj_cost_benefactor" type="number" value="">
+                    <input class="form-control input-sm" placeholder="Beneficiaries&rsquo; Counterpart Project Cost" min="0" step="any" name="prj_cost_benefactor" id="prj_cost_benefactor" type="number">
                 </div>
 
                 <div class="form-group">
@@ -220,7 +234,7 @@
 
                 <div class="form-group">
                     <label for="prj_cost_other" class="control-label">Other Project Cost</label>
-                    <input class="form-control input-sm" placeholder="Other Project Cost" min="0" step="any" name="prj_cost_other" id="prj_cost_other" type="number" value="">
+                    <input class="form-control input-sm" placeholder="Other Project Cost" min="0" step="any" name="prj_cost_other" id="prj_cost_other" type="number">
                 </div>
 
                 <div class="row-proj">
@@ -235,7 +249,7 @@
                     <div class="col-sm-10">
                         <div class="form-group">
                             <label for="prj_cost_local" class="control-label">Local Funding Amount</label>
-                            <input class="form-control input-sm" placeholder="0" required="required" min="0" step="any" name="prj_cost_local" id="prj_cost_local" type="number" value="">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prj_cost_local" id="prj_cost_local" type="number">
                         </div>
                     </div>
                 </div>
@@ -253,7 +267,7 @@
                     <div class="col-sm-10">
                         <div class="form-group">
                             <label for="prj_cost_external" class="control-label">External Funding Amount</label>
-                            <input class="form-control input-sm" placeholder="0" required="required" min="0" step="any" name="prj_cost_external" id="prj_cost_external" type="number" value="">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prj_cost_external" id="prj_cost_external" type="number">
                         </div>
                     </div>
                 </div>
@@ -270,7 +284,7 @@
                     <div class="col-sm-10">
                         <div class="form-group">
                             <label for="prj_cost_nga" class="control-label">NGA Cofunding Amount</label>
-                            <input class="form-control input-sm" placeholder="0" required="required" min="0" step="any" name="prj_cost_nga" id="prj_cost_nga" type="number" value="">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prj_cost_nga" id="prj_cost_nga" type="number">
                         </div>
                     </div>
                 </div>
@@ -287,7 +301,7 @@
                     <div class="col-sm-10">
                         <div class="form-group">
                             <label for="prj_cost_lgu" class="control-label">LGU Cofunding Amount</label>
-                            <input class="form-control input-sm" placeholder="0" required="required" min="0" step="any" name="prj_cost_lgu" id="prj_cost_lgu" type="number" value="">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prj_cost_lgu" id="prj_cost_lgu" type="number">
                         </div>
                     </div>
                 </div>
@@ -302,22 +316,22 @@
                     <h5>Total Assets</h5>
                     <div class="form-group">
                         <label for="prj_pis_total_assets_land" class="control-label">Land</label>
-                        <input class="form-control input-sm" placeholder="Land" min="0" step="any" name="prj_pis_total_assets_land" id="prj_pis_total_assets_land" type="number" value="">
+                        <input class="form-control input-sm" placeholder="Land" min="0" step="any" name="prj_pis_total_assets_land" id="prj_pis_total_assets_land" type="number">
                     </div>
 
                     <div class="form-group">
                         <label for="prj_pis_total_assets_building" class="control-label">Building</label>
-                        <input class="form-control input-sm" placeholder="Building" min="0" step="any" name="prj_pis_total_assets_building" id="prj_pis_total_assets_building" type="number" value="">
+                        <input class="form-control input-sm" placeholder="Building" min="0" step="any" name="prj_pis_total_assets_building" id="prj_pis_total_assets_building" type="number">
                     </div>
 
                     <div class="form-group">
                         <label for="prj_pis_total_assets_equipment" class="control-label">Equipment</label>
-                        <input class="form-control input-sm" placeholder="Equipment" min="0" step="any" name="prj_pis_total_assets_equipment" id="prj_pis_total_assets_equipment" type="number" value="">
+                        <input class="form-control input-sm" placeholder="Equipment" min="0" step="any" name="prj_pis_total_assets_equipment" id="prj_pis_total_assets_equipment" type="number">
                     </div>
 
                     <div class="form-group">
                         <label for="prj_pis_total_assets_working_capital" class="control-label">Working Capital</label>
-                        <input class="form-control input-sm" placeholder="Working Capital" min="0" step="any" name="prj_pis_total_assets_working_capital" id="prj_pis_total_assets_working_capital" type="number" value="">
+                        <input class="form-control input-sm" placeholder="Working Capital" min="0" step="any" name="prj_pis_total_assets_working_capital" id="prj_pis_total_assets_working_capital" type="number">
                     </div>
                 </div>
                 <h1> </h1>
@@ -329,25 +343,25 @@
                         <div class="col-md-3 col-sm-3">
                             <div class="form-group">
                                 <label for="prj_pis_dir_ch_regular_male" class="control-label">Male</label>
-                                <input class="form-control input-sm" placeholder="Male" min="0" step="any" name="prj_pis_dir_ch_regular_male" id="prj_pis_dir_ch_regular_male" type="number" value="">
+                                <input class="form-control input-sm" placeholder="Male" min="0" step="any" name="prj_pis_dir_ch_regular_male" id="prj_pis_dir_ch_regular_male" type="number">
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-3">
                             <div class="form-group">
                                 <label for="prj_pis_dir_ch_regular_female" class="control-label">Female</label>
-                                <input class="form-control input-sm" placeholder="Female" min="0" step="any" name="prj_pis_dir_ch_regular_female" id="prj_pis_dir_ch_regular_female" type="number" value="">
+                                <input class="form-control input-sm" placeholder="Female" min="0" step="any" name="prj_pis_dir_ch_regular_female" id="prj_pis_dir_ch_regular_female" type="number">
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-3">
                             <div class="form-group">
                                 <label for="prj_pis_dir_ch_regular_pwd" class="control-label">PWD</label>
-                                <input class="form-control input-sm" placeholder="PWD" min="0" step="any" name="prj_pis_dir_ch_regular_pwd" id="prj_pis_dir_ch_regular_pwd" type="number" value="">
+                                <input class="form-control input-sm" placeholder="PWD" min="0" step="any" name="prj_pis_dir_ch_regular_pwd" id="prj_pis_dir_ch_regular_pwd" type="number">
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-3">
                             <div class="form-group">
                                 <label for="prj_pis_dir_ch_regular_senior" class="control-label">Senior</label>
-                                <input class="form-control input-sm" placeholder="Senior" min="0" step="any" name="prj_pis_dir_ch_regular_senior" id="prj_pis_dir_ch_regular_senior" type="number" value="">
+                                <input class="form-control input-sm" placeholder="Senior" min="0" step="any" name="prj_pis_dir_ch_regular_senior" id="prj_pis_dir_ch_regular_senior" type="number">
                             </div>
                         </div>
                     </div>
@@ -357,25 +371,25 @@
                         <div class="col-md-3 col-sm-3">
                             <div class="form-group">
                                 <label for="prj_pis_dir_ch_part_time_male" class="control-label">Male</label>
-                                <input class="form-control input-sm" placeholder="Male" min="0" step="any" name="prj_pis_dir_ch_part_time_male" id="prj_pis_dir_ch_part_time_male" type="number" value="">
+                                <input class="form-control input-sm" placeholder="Male" min="0" step="any" name="prj_pis_dir_ch_part_time_male" id="prj_pis_dir_ch_part_time_male" type="number">
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-3">
                             <div class="form-group">
                                 <label for="prj_pis_dir_ch_part_time_female" class="control-label">Female</label>
-                                <input class="form-control input-sm" placeholder="Female" min="0" step="any" name="prj_pis_dir_ch_part_time_female" id="prj_pis_dir_ch_part_time_female" type="number" value="">
+                                <input class="form-control input-sm" placeholder="Female" min="0" step="any" name="prj_pis_dir_ch_part_time_female" id="prj_pis_dir_ch_part_time_female" type="number">
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-3">
                             <div class="form-group">
                                 <label for="prj_pis_dir_ch_part_time_pwd" class="control-label">PWD</label>
-                                <input class="form-control input-sm" placeholder="PWD" min="0" step="any" name="prj_pis_dir_ch_part_time_pwd" id="prj_pis_dir_ch_part_time_pwd" type="number" value="">
+                                <input class="form-control input-sm" placeholder="PWD" min="0" step="any" name="prj_pis_dir_ch_part_time_pwd" id="prj_pis_dir_ch_part_time_pwd" type="number">
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-3">
                             <div class="form-group">
                                 <label for="prj_pis_dir_ch_part_time_senior" class="control-label">Senior</label>
-                                <input class="form-control input-sm" placeholder="Senior" min="0" step="any" name="prj_pis_dir_ch_part_time_senior" id="prj_pis_dir_ch_part_time_senior" type="number" value="">
+                                <input class="form-control input-sm" placeholder="Senior" min="0" step="any" name="prj_pis_dir_ch_part_time_senior" id="prj_pis_dir_ch_part_time_senior" type="number">
                             </div>
                         </div>
                     </div>
@@ -385,25 +399,25 @@
                         <div class="col-md-3 col-sm-3">
                             <div class="form-group">
                                 <label for="prj_pis_dir_sh_regular_male" class="control-label">Male</label>
-                                <input class="form-control input-sm" placeholder="Male" min="0" step="any" name="prj_pis_dir_sh_regular_male" id="prj_pis_dir_sh_regular_male" type="number" value="">
+                                <input class="form-control input-sm" placeholder="Male" min="0" step="any" name="prj_pis_dir_sh_regular_male" id="prj_pis_dir_sh_regular_male" type="number">
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-3">
                             <div class="form-group">
                                 <label for="prj_pis_dir_sh_regular_female" class="control-label">Female</label>
-                                <input class="form-control input-sm" placeholder="Female" min="0" step="any" name="prj_pis_dir_sh_regular_female" id="prj_pis_dir_sh_regular_female" type="number" value="">
+                                <input class="form-control input-sm" placeholder="Female" min="0" step="any" name="prj_pis_dir_sh_regular_female" id="prj_pis_dir_sh_regular_female" type="number">
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-3">
                             <div class="form-group">
                                 <label for="prj_pis_dir_sh_regular_pwd" class="control-label">PWD</label>
-                                <input class="form-control input-sm" placeholder="PWD" min="0" step="any" name="prj_pis_dir_sh_regular_pwd" id="prj_pis_dir_sh_regular_pwd" type="number" value="">
+                                <input class="form-control input-sm" placeholder="PWD" min="0" step="any" name="prj_pis_dir_sh_regular_pwd" id="prj_pis_dir_sh_regular_pwd" type="number">
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-3">
                             <div class="form-group">
                                 <label for="prj_pis_dir_sh_regular_senior" class="control-label">Senior</label>
-                                <input class="form-control input-sm" placeholder="Senior" min="0" step="any" name="prj_pis_dir_sh_regular_senior" id="prj_pis_dir_sh_regular_senior" type="number" value="">
+                                <input class="form-control input-sm" placeholder="Senior" min="0" step="any" name="prj_pis_dir_sh_regular_senior" id="prj_pis_dir_sh_regular_senior" type="number">
                             </div>
                         </div>
                     </div>
@@ -413,25 +427,25 @@
                         <div class="col-md-3 col-sm-3">
                             <div class="form-group">
                                 <label for="prj_pis_dir_sh_part_time_male" class="control-label">Male</label>
-                                <input class="form-control input-sm" placeholder="Male" min="0" step="any" name="prj_pis_dir_sh_part_time_male" id="prj_pis_dir_sh_part_time_male" type="number" value="">
+                                <input class="form-control input-sm" placeholder="Male" min="0" step="any" name="prj_pis_dir_sh_part_time_male" id="prj_pis_dir_sh_part_time_male" type="number">
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-3">
                             <div class="form-group">
                                 <label for="prj_pis_dir_sh_part_time_female" class="control-label">Female</label>
-                                <input class="form-control input-sm" placeholder="Female" min="0" step="any" name="prj_pis_dir_sh_part_time_female" id="prj_pis_dir_sh_part_time_female" type="number" value="">
+                                <input class="form-control input-sm" placeholder="Female" min="0" step="any" name="prj_pis_dir_sh_part_time_female" id="prj_pis_dir_sh_part_time_female" type="number">
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-3">
                             <div class="form-group">
                                 <label for="prj_pis_dir_sh_part_time_pwd" class="control-label">PWD</label>
-                                <input class="form-control input-sm" placeholder="PWD" min="0" step="any" name="prj_pis_dir_sh_part_time_pwd" id="prj_pis_dir_sh_part_time_pwd" type="number" value="">
+                                <input class="form-control input-sm" placeholder="PWD" min="0" step="any" name="prj_pis_dir_sh_part_time_pwd" id="prj_pis_dir_sh_part_time_pwd" type="number">
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-3">
                             <div class="form-group">
                                 <label for="prj_pis_dir_sh_part_time_senior" class="control-label">Senior</label>
-                                <input class="form-control input-sm" placeholder="Senior" min="0" step="any" name="prj_pis_dir_sh_part_time_senior" id="prj_pis_dir_sh_part_time_senior" type="number" value="">
+                                <input class="form-control input-sm" placeholder="Senior" min="0" step="any" name="prj_pis_dir_sh_part_time_senior" id="prj_pis_dir_sh_part_time_senior" type="number">
                             </div>
                         </div>
                     </div>    
@@ -445,25 +459,25 @@
                     <div class="col-md-3 col-sm-3">
                         <div class="form-group">
                             <label for="prj_pis_indir_forward_male" class="control-label">Male</label>
-                            <input class="form-control input-sm" placeholder="Male" min="0" step="any" name="prj_pis_indir_forward_male" id="prj_pis_indir_forward_male" type="number" value="">
+                            <input class="form-control input-sm" placeholder="Male" min="0" step="any" name="prj_pis_indir_forward_male" id="prj_pis_indir_forward_male" type="number">
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-3">
                         <div class="form-group">
                             <label for="prj_pis_indir_forward_female" class="control-label">Female</label>
-                            <input class="form-control input-sm" placeholder="Female" min="0" step="any" name="prj_pis_indir_forward_female" id="prj_pis_indir_forward_female" type="number" value="">
+                            <input class="form-control input-sm" placeholder="Female" min="0" step="any" name="prj_pis_indir_forward_female" id="prj_pis_indir_forward_female" type="number">
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-3">
                         <div class="form-group">
                             <label for="prj_pis_indir_forward_pwd" class="control-label">PWD</label>
-                            <input class="form-control input-sm" placeholder="PWD" min="0" step="any" name="prj_pis_indir_forward_pwd" id="prj_pis_indir_forward_pwd" type="number" value="">
+                            <input class="form-control input-sm" placeholder="PWD" min="0" step="any" name="prj_pis_indir_forward_pwd" id="prj_pis_indir_forward_pwd" type="number">
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-3">
                         <div class="form-group">
                             <label for="prj_pis_indir_forward_senior" class="control-label">Senior</label>
-                            <input class="form-control input-sm" placeholder="Senior" min="0" step="any" name="prj_pis_indir_forward_senior" id="prj_pis_indir_forward_senior" type="number" value="">
+                            <input class="form-control input-sm" placeholder="Senior" min="0" step="any" name="prj_pis_indir_forward_senior" id="prj_pis_indir_forward_senior" type="number">
                         </div>
                     </div>
                 </div>
@@ -473,25 +487,25 @@
                     <div class="col-md-3 col-sm-3">
                         <div class="form-group">
                             <label for="prj_pis_indir_backward_male" class="control-label">Male</label>
-                            <input class="form-control input-sm" placeholder="Male" min="0" step="any" name="prj_pis_indir_backward_male" id="prj_pis_indir_backward_male" type="number" value="">
+                            <input class="form-control input-sm" placeholder="Male" min="0" step="any" name="prj_pis_indir_backward_male" id="prj_pis_indir_backward_male" type="number">
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-3">
                         <div class="form-group">
                             <label for="prj_pis_indir_backward_female" class="control-label">Female</label>
-                            <input class="form-control input-sm" placeholder="Female" min="0" step="any" name="prj_pis_indir_backward_female" id="prj_pis_indir_backward_female" type="number" value="">
+                            <input class="form-control input-sm" placeholder="Female" min="0" step="any" name="prj_pis_indir_backward_female" id="prj_pis_indir_backward_female" type="number">
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-3">
                         <div class="form-group">
                             <label for="prj_pis_indir_backward_pwd" class="control-label">PWD</label>
-                            <input class="form-control input-sm" placeholder="PWD" min="0" step="any" name="prj_pis_indir_backward_pwd" id="prj_pis_indir_backward_pwd" type="number" value="">
+                            <input class="form-control input-sm" placeholder="PWD" min="0" step="any" name="prj_pis_indir_backward_pwd" id="prj_pis_indir_backward_pwd" type="number">
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-3">
                         <div class="form-group">
                             <label for="prj_pis_indir_backward_senior" class="control-label">Senior</label>
-                            <input class="form-control input-sm" placeholder="Senior" min="0" step="any" name="prj_pis_indir_backward_senior" id="prj_pis_indir_backward_senior" type="number" value="">
+                            <input class="form-control input-sm" placeholder="Senior" min="0" step="any" name="prj_pis_indir_backward_senior" id="prj_pis_indir_backward_senior" type="number">
                         </div>
                     </div>
                 </div>
@@ -500,12 +514,12 @@
                     <h4>Total Volume of Production</h4>
                     <div class="form-group">
                         <label for="prj_pis_volume_production_local" class="control-label">Local</label>
-                        <input class="form-control input-sm" placeholder="Local" min="0" step="any" name="prj_pis_volume_production_local" id="prj_pis_volume_production_local" type="number" value="">
+                        <input class="form-control input-sm" placeholder="Local" min="0" step="any" name="prj_pis_volume_production_local" id="prj_pis_volume_production_local" type="number">
                     </div>
 
                     <div class="form-group">
                         <label for="prj_pis_volume_production_export" class="control-label">Export</label>
-                        <input class="form-control input-sm" placeholder="Export" min="0" step="any" name="prj_pis_volume_production_export" id="prj_pis_volume_production_export" type="number" value="">
+                        <input class="form-control input-sm" placeholder="Export" min="0" step="any" name="prj_pis_volume_production_export" id="prj_pis_volume_production_export" type="number">
                     </div>
                 </div>            
 
@@ -513,12 +527,12 @@
                     <h4>Total Gross Sales</h4>
                     <div class="form-group">
                         <label for="prj_pis_gross_sales_local" class="control-label">Local</label>
-                        <input class="form-control input-sm" placeholder="Local" min="0" step="any" name="prj_pis_gross_sales_local" id="prj_pis_gross_sales_local" type="number" value="">
+                        <input class="form-control input-sm" placeholder="Local" min="0" step="any" name="prj_pis_gross_sales_local" id="prj_pis_gross_sales_local" type="number">
                     </div>
 
                     <div class="form-group">
                         <label for="prj_pis_gross_sales_export" class="control-label">Export</label>
-                        <input class="form-control input-sm" placeholder="Export" min="0" step="any" name="prj_pis_gross_sales_export" id="prj_pis_gross_sales_export" type="number" value="">
+                        <input class="form-control input-sm" placeholder="Export" min="0" step="any" name="prj_pis_gross_sales_export" id="prj_pis_gross_sales_export" type="number">
                     </div>
                 </div>            
 
@@ -639,17 +653,17 @@
 
                 <div class="form-group">
                     <label for="prj_longitude" class="control-label">Longitude</label>
-                    <input class="form-control input-sm" placeholder="Longitude" min="0" step="any" name="prj_longitude" id="lon" type="text" value="">
+                    <input class="form-control input-sm" placeholder="Longitude" min="0" step="any" name="prj_longitude" id="lon" type="text">
                 </div>
 
                 <div class="form-group">
                     <label for="prj_latitude" class="control-label">Latitude</label>
-                    <input class="form-control input-sm" placeholder="Latitude" min="0" step="any" name="prj_latitude" id="lat" type="text" value="">
+                    <input class="form-control input-sm" placeholder="Latitude" min="0" step="any" name="prj_latitude" id="lat" type="text">
                 </div>
 
                 <div class="form-group">
                     <label for="prj_elevation" class="control-label">Elevation</label>
-                    <input class="form-control input-sm" placeholder="Elevation" min="0" step="any" name="prj_elevation" id="elevation" type="number" value="">
+                    <input class="form-control input-sm" placeholder="Elevation" min="0" step="any" name="prj_elevation" id="elevation" type="number">
                 </div>
 
                 <div class="card-form">
@@ -659,37 +673,45 @@
                         </label>
                     </div>
                 </div>
-                
-           </div>    
+                <div> </div>
+                <input class="btn btn-primary btn-block" type="submit" name="store" id="store" value="SAVE">
+           </div>
+               
     </div>
+    
 </div>
+
 </form>
 
 <script type="text/javascript">
     //Project type form option
 $(document).ready(function() {
+    $('#prj_duration_from').datepicker("setDate", new Date());
+    $('#prj_duration_to').datepicker("setDate", new Date());
+    $('#prj_fund_release_date').datepicker("setDate", new Date());
+    
     $(".chosen-select").chosen();
-    $('#project-type-rtgg').hide();
+    $(".project-type-rtgg").hide();
     $(".project-type-select").on('change', function() {
             $(this).find("option:selected").each(function(){
             var optionValue = $(this).attr("value");
         if(optionValue == 6){
-            $('#project-type-rtgg').hide();
+            $(".project-type-rtgg").hide();
         }
         if(optionValue == 8){
-            $('#project-type-rtgg').show();
+            $(".project-type-rtgg").show();
         }
         if(optionValue == 9){
-            $('#project-type-rtgg').show();
+            $(".project-type-rtgg").show();
         }
         if(optionValue == 12){
-            $('#project-type-rtgg').hide();
+            $(".project-type-rtgg").hide();
         }
         if(optionValue == 13){
-            $('#project-type-rtgg').show();
+            $(".project-type-rtgg").show();
         }
         if(optionValue == 14){
-            $('#project-type-rtgg').show();
+            $(".project-type-rtgg").show();
         }
         });
     });
@@ -700,6 +722,7 @@ $(document).ready(function() {
             var provinceID = $(this).attr("value");
             if(provinceID)
             {
+                console.log(provinceID);
                 $.ajax({
                     url:'./getCities/' + provinceID,
                     type: "GET",

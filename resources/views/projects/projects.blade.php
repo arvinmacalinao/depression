@@ -229,7 +229,7 @@
         deferRender: true,
         sDom: 'ltipr',
         ajax: {
-            url:"{{ url('project-list') }}",
+            url:'{{ route('projlist') }}',
                 }, 
         columnDefs: [ {
             searchable: false,
@@ -241,7 +241,7 @@
         
         columns: [  
                     { data: 'row', name:'row'},
-                    { data:'prj_id' , name:'prj_id' },
+                    { data:'prj_code' , name:'prj_code' },
                     { data:'prj_title' , name:'prj_title' },
                     { data:'prj_type_name' , name:'prj_type_name'},
                     { data:'prj_year_approved' , name:'prj_year_approved' },

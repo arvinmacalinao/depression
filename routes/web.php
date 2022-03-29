@@ -20,9 +20,10 @@ Route::get('/summary', 'ChartController@index');
 Route::get('map-filter', 'MapFilterController@sort');
 
 // Projects
-Route::get('/projects', 'PsiProjectsController@index');
-Route::get('/addproject', 'PsiProjectsController@addproject')->name('/addproject');
-Route::get('project-list', 'PsiProjectsController@projectList');
+Route::get('/projects', 'PsiProjectsController@index')->name('projects');
+Route::get('/addproject', 'PsiProjectsController@addproject')->name('addproject');
+Route::get('project-list', 'PsiProjectsController@projectList')->name('projlist');
+Route::post('projects/store', 'PsiProjectsController@store')->name('project.store');
 
 
 Route::get('/getCities/{id}', 'PsiProjectsController@getCities')->name('getCities');
