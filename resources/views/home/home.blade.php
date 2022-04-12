@@ -477,7 +477,7 @@ function setIcons(){ // Setting and Placing Icons
                     window.document.getElementById("b_prj_status_name").innerText = "Completed";
                 }      
                 
-                $("a").attr("href", "https://hazardhunter.georisk.gov.ph/index.php?" + "lat=" + {{$icon->prj_latitude}} + "&lng=" + {{$icon->prj_longitude}});
+                $("#hazardlink").attr("href", "https://hazardhunter.georisk.gov.ph/index.php?" + "lat=" + {{$icon->prj_latitude}} + "&lng=" + {{$icon->prj_longitude}});
 
                 $('#mf_modal').modal('show');
             });

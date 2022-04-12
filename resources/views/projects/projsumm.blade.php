@@ -92,7 +92,7 @@
     <div class="row">
         <div class="col-sm-4">
             <div class="card">
-                <div class="card-header bg-warning mb-3 text-white text-center"><h5><b>Total Number of Projects</b></h5></div>
+                <div class="card-header bg-warning mb-3 text-dark text-center"><h5><b>Total Number of Projects</b></h5></div>
                 <div class="card-body">
                     <h3 class="card-title text-center"><b>
                     @foreach($total_number_projects as $total_number_project)
@@ -134,7 +134,7 @@
     <div class="row">
         <div class="col-sm-4">
             <div class="card">
-                <div class="card-header bg-warning mb-3 text-white text-center"><h5><b>Repayment Total Amount Due</b></h5></div>
+                <div class="card-header bg-warning mb-3 text-dark text-center"><h5><b>Repayment Total Amount Due</b></h5></div>
                 <div class="card-body">
                     <h3 class="card-title text-center">PHP <b>
                         @foreach($total_number_amount_dues as $total_number_amount_due)
