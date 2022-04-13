@@ -24,6 +24,8 @@ Route::get('/projects', 'PsiProjectsController@index')->name('projects');
 Route::get('/addproject', 'PsiProjectsController@addproject')->name('addproject');
 Route::get('project-list', 'PsiProjectsController@projectList')->name('projlist');
 Route::post('projects/store', 'PsiProjectsController@store')->name('project.store');
+Route::get('/projects/gallery', 'PsiProjectsController@projectGallery')->name('gallery');
+Route::get('/projectview/{id}', 'PsiProjectsController@viewproject')->name('project.view');
 
 
 Route::get('/getCities/{id}', 'PsiProjectsController@getCities')->name('getCities');

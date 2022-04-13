@@ -35,7 +35,6 @@
                         <label class="control-label"></label>
                         <div class="checkbox">
                         <label for="prj_startup_assistance" class="control-label">
-                            <input type="hidden" name="prj_startup_assistance" id="prj_startup_assistance" value="0">
                             <input type="checkbox" name="prj_startup_assistance" id="prj_startup_assistance" value="1"> <strong>Startup Assistance</strong>
                         </label>
                         </div>
@@ -45,7 +44,6 @@
                         <label class="control-label"></label>
                         <div class="checkbox">
                         <label for="prj_drrm" class="control-label">
-                            <input type="hidden" name="prj_drrm" id="prj_drrm" value="0">
                             <input type="checkbox" name="prj_drrm" id="prj_drrm" value="1"> <strong>DRRM Related</strong>
                         </label>
                         </div>
@@ -66,11 +64,11 @@
                 <div class="row-proj">
                     <div class="col-sm-6">
                         <label class="control-label">Project Duration From *</label>
-                        <input class="form-control input-sm" data-date-format="yyyy/mm/dd" placeholder="Project Duration From" maxLength="10" name="prj_duration_from" id="prj_duration_from" type="text">
+                        <input class="form-control input-sm" placeholder="Project Duration From" maxLength="10" name="prj_duration_from" id="prj_duration_from" type="text">
                     </div>
                     <div class="col-sm-6">
                         <label class="control-label">Project Duration To *</label>
-                        <input class="form-control input-sm" data-date-format="yyyy/mm/dd" placeholder="Project Duration To" maxLength="10"  name="prj_duration_to" id="prj_duration_to" type="text">
+                        <input class="form-control input-sm" placeholder="Project Duration To" maxLength="10"  name="prj_duration_to" id="prj_duration_to" type="text">
                     </div>
                 </div>
                 <div class="row-proj project-type-rtgg">
@@ -686,9 +684,24 @@
 <script type="text/javascript">
     //Project type form option
 $(document).ready(function() {
-    $('#prj_duration_from').datepicker("setDate", new Date());
-    $('#prj_duration_to').datepicker("setDate", new Date());
-    $('#prj_fund_release_date').datepicker("setDate", new Date());
+    $('#prj_duration_from').datepicker({
+        autoclose: true,
+        format: "yyyy-mm-dd",
+        todayBtn: true,
+        todayHighlight: true
+    }).datepicker("setDate", new Date());
+    $('#prj_duration_to').datepicker({
+        autoclose: true,
+        format: "yyyy-mm-dd",
+        todayBtn: true,
+        todayHighlight: true
+    }).datepicker("setDate", new Date());
+    $('#prj_fund_release_date').datepicker({
+        autoclose: true,
+        format: "yyyy-mm-dd",
+        todayBtn: true,
+        todayHighlight: true
+    }).datepicker("setDate", new Date());
     
     $(".chosen-select").chosen();
     $(".project-type-rtgg").hide();

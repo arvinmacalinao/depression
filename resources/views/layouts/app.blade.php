@@ -100,10 +100,10 @@
                 Projects
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">All Projects</a>
+                  <a class="dropdown-item" href="/projects">All Projects</a>
                   <a class="dropdown-item" href="#">Status Reports</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Project Gallery</a>
+                  <a class="dropdown-item" href="/projects/gallery">Project Gallery</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Project Data Quality Monitoring</a>
                   <a class="dropdown-item" href="#">Project Document Files Monitoring</a>
