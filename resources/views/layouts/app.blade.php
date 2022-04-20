@@ -113,7 +113,7 @@
                   <a class="dropdown-item" href="#">All Projects</a>
                   <a class="dropdown-item" href="/statreport">Status Reports</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Project Gallery</a>
+                  <a class="dropdown-item" href="/project-collage">Project Gallery</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Project Data Quality Monitoring</a>
                   <a class="dropdown-item" href="#">Project Document Files Monitoring</a>

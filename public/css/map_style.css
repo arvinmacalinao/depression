@@ -95,3 +95,42 @@ div.map-filter {
       transition: all 0.5s;
   }
 
+  .collage-image {
+    display:inline-block;
+    width:320px;
+    height:180px;
+    margin-right:6px;
+    background-color:#e0e0e0;
+    background-size:cover;
+    border:1px solid #ccc
+  }
+
+  .collage-images {
+    padding-left:4px;
+  }
+
+  .collapsible {
+    background-color: #2AB1F0;
+    color: white;
+    cursor: pointer;
+    border: none;
+    text-align: left;
+    outline: none;
+  }
+  
+  .active, .collapsible:hover {
+    background-color: #3490DC;
+  }
+  
+  .content {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #F7F7F7;
+  }
+
+  .tago {
+    display: none;
+  }
+

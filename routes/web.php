@@ -17,10 +17,12 @@ Route::get('/', 'MapDataController@index');
 Route::get('/summary', 'ChartController@index');
 Route::get('/statreport', 'StatusReportController@index');
 Route::get('/project-monitoring', 'StatusReportController@index');
+Route::get('/project-collage', 'ProjectGalleryController@index');
 
 // Route::get('/project-summary-regional', 'MapDataController@index');
 Route::get('map-filter', 'MapFilterController@sort');
 Route::get('get-by-year', 'StatusReportFilter@status_sort');
+Route::get('get-by-imgid', 'ProjectGalleryController@getImg');
 
 // Projects
 Route::get('/projects', 'PsiProjectsController@index');

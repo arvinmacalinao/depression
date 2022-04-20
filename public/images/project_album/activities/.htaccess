@@ -1,0 +1,11 @@
+Options -Indexes
+
+AddType video/ogg .ogv
+AddType video/mp4 .mp4
+AddType video/webm .webm
+
+<IfModule mod_headers.c>
+
+Header always set Content-Security-Policy "default-src * data: 'unsafe-inline'; script-src * data: 'unsafe-inline'; style-src * data: 'unsafe-inline'; img-src * data: 'unsafe-inline'; media-src * data: 'unsafe-inline'; frame-src * data: 'unsafe-inline'; font-src * data: 'unsafe-inline'; connect-src * data: 'unsafe-inline'; form-action * data: 'unsafe-inline'"
+
+</IfModule>
