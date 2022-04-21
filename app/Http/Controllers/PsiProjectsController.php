@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\PsiProject;
+use Datatables;
 use App\Models\City;
 use App\Models\Barangay;
+use App\Models\PsiProject;
+use App\Models\ProjectBeneficiary;
+use App\Models\ProjectCollaborator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Datatables;
+
 
 
 
@@ -19,15 +22,35 @@ class PsiProjectsController extends Controller
      */
     public function index(Request $request)
     {   
+        //filter
         $project_type = $request->get('type');
         $project_status = $request->get('qstatus');
+        $project_year_approved = $request->get('qyear');
+        $project_province = $request->get('qprovince');
+        $project_district = $request->get('qdistrict');
+        $project_sector = $request->get('qsector');
+        $project_usergroup = $request->get('qusergroup');
+        $project_search = $request->get('search');
+        
+        $psi_projects = PsiProject::ProjectType($project_type)->ProjectStatus($project_status)
+        ->ProjectYearApproved($project_year_approved)->ProjectProvince($project_province)->ProjectDistrict($project_district)
+        ->ProjectSector($project_sector)->ProjectUsergroup($project_usergroup)->ProjectSearch($project_search);
 
+        $sum_prj_cost_setup = $psi_projects->sum('prj_cost_setup');
+        $sum_rep_total_due = $psi_projects->sum('rep_total_due');
+        $sum_rep_total_paid = $psi_projects->sum('rep_total_paid');
+        $sum_rep_refund_rate = $psi_projects->sum('rep_refund_rate');
+        
 
+        $psi_projects = $psi_projects->paginate(20);
 
+        
 
-        // $project_type = 16; //
-        $psi_projects = PsiProject::ProjectType($project_type)->ProjectStatus($project_status)->paginate(20);        
-
+        
+        
+        
+        // $get_coop_ids = ProjectBeneficiary::whereIn('prj_id', $psi_projects->prj_id[0])->get();
+        //dd($get_coop_ids);
 
         $sel_project_types = DB::table('psi_project_types')
                             ->select('prj_type_id','prj_type_name')
@@ -54,20 +77,22 @@ class PsiProjectsController extends Controller
                             ->select('ug_id', 'ug_name')
                             ->get();
         // dd($sel_project_provinces);
-        return view('./projects/projects', compact('psi_projects', 'sel_project_types', 'sel_project_statuses', 'sel_project_years', 'sel_project_provinces', 'sel_project_districts', 'sel_project_sectors', 'sel_project_implementors'));
+        return view('./projects/projects', compact('psi_projects', 'sel_project_types', 'sel_project_statuses', 'sel_project_years', 'sel_project_provinces', 'sel_project_districts', 'sel_project_sectors', 'sel_project_implementors', 'project_search', 'sum_prj_cost_setup', 'sum_rep_total_due', 'sum_rep_total_due', 'sum_rep_total_paid', 'sum_rep_refund_rate'))->with('i', ($request->input('page', 1) - 1) * 20);
         
     }
 
-    public function projectList()
-    {           
+    
+    //DATATABLES
+    // public function projectList()
+    // {           
         
-        $psi_projects = DB::table('psi_projects')->select('*');
-        return datatables()->of($psi_projects)
-        //->setRowData([ 'data-prj_cost_setup' => 'Php {{ $prj_cost_setup }}' ])
-        // ->setRowClass('{{ $prj_id % 2 == 0 ? "alert-success" : "alert-warning" }}')
-        ->addColumn('row', 'row')
-        ->make(true);
-    }
+    //     $psi_projects = DB::table('psi_projects')->select('*');
+    //     return datatables()->of($psi_projects)
+    //     //->setRowData([ 'data-prj_cost_setup' => 'Php {{ $prj_cost_setup }}' ])
+    //     // ->setRowClass('{{ $prj_id % 2 == 0 ? "alert-success" : "alert-warning" }}')
+    //     ->addColumn('row', 'row')
+    //     ->make(true);
+    // }
 
 
     /**
@@ -321,7 +346,6 @@ class PsiProjectsController extends Controller
 
         $projects->city_id = $request->city_id;
         $city = City::find($request->city_id);
-        
         // $get_city_name = DB::table('psi_cities')->where('city_id', $request->city_id)->value('city_name');
         $projects->city_name = $city->city_name;
         
@@ -419,7 +443,7 @@ class PsiProjectsController extends Controller
         $projects->prj_elevation = $request->prj_elevation;
 
         $projects->save();
-        $last_id = $projects->id;
+        $last_id = $projects->prj_id;
         
 
 
@@ -436,7 +460,8 @@ class PsiProjectsController extends Controller
                 $coop_ids[] = $coop_id;
 
             }
-            DB::table('psi_project_beneficiaries')->insert($coop_ids);
+            ProjectBeneficiary::insert($coop_ids);
+            //DB::table('psi_project_beneficiaries')->insert($coop_ids);
         }
         //
         //save col-colab to database
@@ -451,7 +476,8 @@ class PsiProjectsController extends Controller
                 ];
             $col_ids[] = $col_id;
             }
-            DB::table('psi_project_collaborators')->insert($col_ids);
+            ProjectCollaborator::insert($col_ids);
+            //DB::table('psi_project_collaborators')->insert($col_ids);
         }
         //
 
