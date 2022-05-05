@@ -56,7 +56,7 @@
 
     <body>
     <!--Navbar -->
-    <nav class="navbar navbar-expand-md navbar">
+    <nav class="navbar navbar-expand-lg navbar">
           <a class="navbar-brand" href="/" style="margin-right: 0%">
             <img src="{{URL::asset('/images/brand_white.png')}}" width="25" height="25" alt="">
           </a>
@@ -97,7 +97,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-signal"></i>
                 BSC
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="#">Customer Perspective</a>
                   <a class="dropdown-item" href="#">Financial Perspective</a>
                   <a class="dropdown-item" href="#">Internal Process Perspective</a>
@@ -109,7 +109,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-industry"></i>
                 Projects
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="#">All Projects</a>
                   <a class="dropdown-item" href="/statreport">Status Reports</a>
                   <div class="dropdown-divider"></div>
@@ -128,7 +128,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-wrench"></i>
                 Others
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="#">Possible Problematic SETUP Projects March 2022</a>
                   <a class="dropdown-item" href="#">User Activity 2022</a>
                   <div class="dropdown-divider"></div>
@@ -160,16 +160,16 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-address-card"></i>
                 Contacts
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="#">Cooperators</a>
                   <a class="dropdown-item" href="#">Service Providers</a>
                 </div>
               </li>
             
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"><i class="fa fa-cog"></i>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#">Collaborating Agencies</a>
                     <a class="dropdown-item" href="#">Collaborating Agency Categories</a>
                     <a class="dropdown-item" href="#">Colsultancy Categories</a>
@@ -189,7 +189,7 @@
                     <a class="dropdown-item" href="#">Schools</a>
                   <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Users</a>
-                    <a class="dropdown-item" href="#">User Groups</a>
+                    <a class="dropdown-item" href="/usergroups">User Groups</a>
                     <a class="dropdown-item" href="#">User Logs</a>
                   <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Agency Profile</a>
@@ -199,7 +199,7 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell"></i>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="#">Project Data Quality Monitoring</a>
                   <a class="dropdown-item" href="#">Project Document Files Monitoring</a>
                   <a class="dropdown-item" href="#">Project Liquidation Monitoring</a>
@@ -209,7 +209,7 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle"></i>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="#"><i class="fa fa-user"></i>Profile</a>
                   <a class="dropdown-item" href="#"><i class="fa fa-power-off"></i>Logout</a>
                 </div>

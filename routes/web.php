@@ -17,12 +17,17 @@ Route::get('/', 'MapDataController@index');
 Route::get('/summary', 'ChartController@index');
 Route::get('/statreport', 'StatusReportController@index');
 Route::get('/project-monitoring', 'StatusReportController@index');
-Route::get('/project-collage', 'ProjectGalleryController@index');
+Route::get('/project-collage', 'ProjectGalleryController@index')->name('Hehe');
+Route::resource('usergroups', 'UserGroupsController');
+Route::get('usergroups/create', 'UserGroupsController@create');
+Route::post('store','UserGroupsController@store');
 
 // Route::get('/project-summary-regional', 'MapDataController@index');
 Route::get('map-filter', 'MapFilterController@sort');
 Route::get('get-by-year', 'StatusReportFilter@status_sort');
 Route::get('get-by-imgid', 'ProjectGalleryController@getImg');
+Route::get('usergroups/create/get-by-selid', 'UserGroupsController@getChkData');
+
 
 // Projects
 Route::get('/projects', 'PsiProjectsController@index');

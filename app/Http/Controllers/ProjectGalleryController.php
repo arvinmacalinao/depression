@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Album;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ProjectGalleryController extends Controller
 {
-    public function index () {
+    public function index (Request $request) {
 
-        
+        $album_search = $request->get('album_name');
 
-        $proj_details = DB::table('psi_project_albums')
+        $proj_details = Album::AlbumSearch($album_search)
             ->select("psi_project_albums.*", "psi_projects.prj_title")
             ->leftJoin('psi_projects', 'psi_project_albums.prj_id', '=', 'psi_projects.prj_id')
             ->orderBy('date_encoded', 'DESC')

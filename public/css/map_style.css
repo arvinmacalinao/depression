@@ -134,3 +134,9 @@ div.map-filter {
     display: none;
   }
 
+  @media screen and (min-width: 1024px) {
+    .navbar-end .navbar-dropdown:last-child {
+        left: -35px;
+    }
+  }
+

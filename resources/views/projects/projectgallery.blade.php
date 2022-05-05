@@ -11,13 +11,16 @@
 
             <div class="row">
                 <div class="col-sm-2">
+                    <form action="{{route('Hehe')}}" method="get">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Album name..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <input type="text" class="form-control" placeholder="Search.." aria-label="Recipient's username" aria-describedby="basic-addon2" id="album_name" name="album_name">
                         <div class="input-group-append">
-                            <button class="btn btn-primary btn-sm" type="button">Search</button>
+                            <button class="btn btn-primary btn-sm" type="submit">Search</button>
                         </div>
                     </div>
+                    </form>
                 </div>
+                
             </div>   
             
             <!-- Start of Images -->
@@ -28,7 +31,7 @@
                     <b><h5>{{$proj_detail->album_name}}</h5></b> 
                     {{$proj_detail->prj_title}}
                     </span>
-                    <i class="fa fa-angle-down fa-lg pull-right mt-1 ikon_class" style="font-size:50px; vertical-align: middle; aria-hidden=true"></i>
+                    <i class="fa fa-angle-down fa-lg pull-right mt-1 ikon_class" style="font-size:50px; vertical-align: middle; aria-hidden=true" id="img_condi_{{$proj_detail->album_id}}"></i>
                 </button>
 
                 <div class="content mt-2" id="img_{{$proj_detail->album_id}}">
@@ -70,42 +73,42 @@
     }
 
 
-function delChat(el) {
-    img_album_id = el.getAttribute('value')
-    if (opened == "false") {
-        // console.log(img_album_id);
+    function delChat(el) {
+        img_album_id = el.getAttribute('value')
+        if($('#img_condi_' + img_album_id).hasClass('fa fa-angle-down')){
 
-        $.ajax({
-        url: "get-by-imgid",
-        type: "GET",
-        data:{ 
-            img_album_id: img_album_id
-        },
-        beforeSend: function () { // Before we send the request, remove the .hidden class from the spinner and default to inline-block.
-            $('#loader').removeClass('hidden')
-        },
-        success:function(response){
-            var data = response
-            jQuery.each(data,function(index, value){
-                img_link = "../images/project_album/";
-                a = $('<a />');
-                a.attr('href',img_link + value.photo_file);
-                a.attr('target',"_blank");
-                a.attr('title',value.photo_filename);
-                a.attr('id',"img_succumb_" + img_album_id);
-                a.attr('class',"collage-image");
-                a.attr('style',"background-image: url(" + img_link + value.photo_file + ")");
-                $('#img_' + img_album_id).append(a);
-                opened = "false";
-            });
-        },
-        complete: function () { // Set our complete callback, adding the .hidden class and hiding the spinner.
-                $('#loader').addClass('hidden');
-                $('#img_dummy_' + img_album_id).addClass('tago');
-        },
-    });      
+            $.ajax({
+            url: "get-by-imgid",
+            type: "GET",
+            data:{ 
+                img_album_id: img_album_id
+            },
+            beforeSend: function () { // Before we send the request, remove the .hidden class from the spinner and default to inline-block.
+                $('#loader').removeClass('hidden')
+            },
+            success:function(response){
+                var data = response
+                jQuery.each(data,function(index, value){
+                    img_link = "../images/project_album/";
+                    a = $('<a />');
+                    a.attr('href',img_link + value.photo_file);
+                    a.attr('target',"_blank");
+                    a.attr('title',value.photo_filename);
+                    a.attr('id',"img_succumb_" + img_album_id);
+                    a.attr('class',"collage-image");
+                    a.attr('style',"background-image: url(" + img_link + value.photo_file + ")");
+                    $('#img_' + img_album_id).append(a);
+                    opened = "false";
+                });
+            },
+            complete: function () { // Set our complete callback, adding the .hidden class and hiding the spinner.
+                    $('#loader').addClass('hidden');
+                    $('#img_dummy_' + img_album_id).addClass('tago');
+            },
+        });
+        
+        }
     }
-}
 
 </script>
 @endsection
