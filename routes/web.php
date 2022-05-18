@@ -19,8 +19,12 @@ Route::get('/statreport', 'StatusReportController@index');
 Route::get('/project-monitoring', 'StatusReportController@index');
 Route::get('/project-collage', 'ProjectGalleryController@index')->name('Hehe');
 Route::resource('usergroups', 'UserGroupsController');
+Route::resource('collabcategories', 'CollabCategoriesController');
 Route::get('usergroups/create', 'UserGroupsController@create');
 Route::post('store','UserGroupsController@store');
+Route::get('usergroup/refactor', 'UserGroupsController@refactor_index');
+
+// Route::post('ugUpdate','UserGroupsController@update');
 
 // Route::get('/project-summary-regional', 'MapDataController@index');
 Route::get('map-filter', 'MapFilterController@sort');

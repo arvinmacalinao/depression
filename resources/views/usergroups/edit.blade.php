@@ -1,4 +1,4 @@
-@extends('./layouts.app')
+@extends('./layouts.app', ['title' => 'Edit'])
 
 @section('content')
 <div class="container-fluid mt-3">
@@ -14,8 +14,9 @@
         </div>
     @endif  
     
-<form action = "/store" method = "post">
+<form action = "{{route('usergroups.update', $show->ug_id)}}" method = "post">
     @csrf
+    @method('PATCH')
     <div class="card">
         <div class="card-header">
             <div class="d-flex justify-content-between">
@@ -160,25 +161,18 @@
                                 <label>
                                     {{  $c_userright->ur_name  }}
                                 </label>
+                                <input name="ur_id[]" value="{{  $c_userright->ur_id }}" type="hidden">
                             </div>
                         </td>   
                         
                         <td class="text-left">
                             <div class="checkbox">
                                 <label>
-                                @if($c_userright->ur_id =='72' || $c_userright->ur_id =='73' || $c_userright->ur_id =='74' || $c_userright->ur_id =='75') 
-                                    @if($show->usergrouprights->ugr_view == "1")
-                                        <input type="checkbox" class="chk1" name="ur{{  $c_userright->ur_id  }}_view" id="ur{{  $c_userright->ur_id  }}_view" value="1" checked> Approval 1
+                                    @if($c_userright->ur_id =='72' || $c_userright->ur_id =='73' || $c_userright->ur_id =='74' || $c_userright->ur_id =='75') 
+                                        <input type="checkbox" class="chk1" name="ur{{  $c_userright->ur_id  }}_view" id="ur{{  $c_userright->ur_id  }}_view" value="1"> Approval 1
                                     @else
-                                        <input type="checkbox" class="chk1" name="ur{{  $c_userright->ur_id  }}_view" id="ur{{  $c_userright->ur_id  }}_view" value="0"> Approval 1
+                                        <input type="checkbox" class="chk1" name="ur{{  $c_userright->ur_id  }}_view" id="ur{{  $c_userright->ur_id  }}_view" value="1"> View
                                     @endif
-                                @else
-                                    @if($show->usergrouprights->ugr_view == "1")
-                                        <input type="checkbox" class="chk1" name="ur{{  $c_userright->ur_id  }}_view" id="ur{{  $c_userright->ur_id  }}_view" value="1" checked> View
-                                    @else
-                                        <input type="checkbox" class="chk1" name="ur{{  $c_userright->ur_id  }}_view" id="ur{{  $c_userright->ur_id  }}_view" value="0"> View
-                                    @endif
-                                @endif
                                 </label>
                             </div>
                         </td>
@@ -239,5 +233,31 @@
     $("#province_id option[value='" + {{ $show->province_id }} + "']").attr("selected","selected");
     $("#ug_parent_id option[value='" + {{ $show->ug_parent_id }} + "']").attr("selected","selected");
     $("#ug_unit_head option[value='" + {{ $show->ug_unit_head }} + "']").attr("selected","selected");
+
+    @foreach($ug_Rights as $ug_Right)
+        if({{ $ug_Right->ugr_view }} == '1'){
+            $("#ur" + {{ $ug_Right->ur_id }} + "_view").attr("checked", "checked");
+        }else{
+            $("#ur" + {{ $ug_Right->ur_id }} + "_view").attr("checked", "false");
+        }
+
+        if({{ $ug_Right->ugr_add }} == '1'){
+            $("#ur" + {{ $ug_Right->ur_id }} + "_add").attr("checked", "checked");
+        }else{
+            $("#ur" + {{ $ug_Right->ur_id }} + "_add").attr("checked", "false");
+        }
+
+        if({{ $ug_Right->ugr_edit }} == '1'){
+            $("#ur" + {{ $ug_Right->ur_id }} + "_edit").attr("checked", "checked");
+        }else{
+            $("#ur" + {{ $ug_Right->ur_id }} + "_edit").attr("checked", "false");
+        }
+
+        if({{ $ug_Right->ugr_delete }} == '1'){
+            $("#ur" + {{ $ug_Right->ur_id }} + "_delete").attr("checked", "checked");
+        }else{
+            $("#ur" + {{ $ug_Right->ur_id }} + "_delete").attr("checked", "false");
+        }
+    @endforeach
 </script>
 @endsection

@@ -14,8 +14,4 @@ class UserGroupRights extends Model
     protected $table = 'psi_usergroup_rights';
     protected $primaryKey = 'ugr_id';
     protected $fillable = ['ur_id', 'ug_id'];
-    
-    public function ugroup(){
-        return $this->hasMany(UGroup::class);
-    }
 }

@@ -1,4 +1,4 @@
-@extends('./layouts.app')
+@extends('./layouts.app', ['title' => 'Project Gallery'])
 
 @section('content')
 <div class="container-fluid mt-3">

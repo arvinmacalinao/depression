@@ -57,7 +57,6 @@ class UserGroupsController extends Controller
 			'ug_display_name' => 'required|string|min:3|max:255',
 			'region_id' => 'required|string||max:255',
             'province_id' => 'required|string|max:255',
-            'ug_parent_id' => 'required|string|max:255',
             'ug_unit_head' => 'required|string|max:255',
             'copy_rights' => 'required|string|max:255'
 		];
@@ -65,7 +64,6 @@ class UserGroupsController extends Controller
         $messages = [
             'ug_name.required' => 'Group Name field is required.',
             'ug_display_name.required' => 'Short Display Name field is required.',
-            'ug_parent_id.required' => 'Parent field is required.',
             'ug_unit_head.required' => 'Unit Head field is required.',
         ];
 
@@ -98,6 +96,19 @@ class UserGroupsController extends Controller
 
                 $lastId = $usergroup_data->id;
                 
+                // $usgright_data = new UserGroupRights;
+
+                // $urid=$request->get('ur_id');
+
+                // foreach($urid as $urid){
+
+                //     UserGroupRights::create([
+                //         $usgright_data->ug_id = $lastId,
+                //         $usgright_data->ur_id = $urid,
+                //     ]);
+                // }
+                
+
                 $urid=$request->get('ur_id');
 
                 foreach($urid as $urids){
@@ -137,15 +148,18 @@ class UserGroupsController extends Controller
                 
 			}
 			catch(Exception $e){
-				return redirect('usergroups/create')->with('failed',"operation failed");
+				return redirect('usergroups/create')->with('failed',"Operation Failed");
 			}           
         }
     }
 
     public function edit($id){
 
-            $show = UGroup::with('usergrouprights')->find($id);
-            
+            $show = UGroup::findOrFail($id);
+
+            $ug_Rights = UserGroupRights::select('ur_id', 'ugr_view', 'ugr_add', 'ugr_edit', 'ugr_delete')
+                ->where('ug_id', '=', $id)
+                ->get();  
             $sel_regions = UGRegion::select('region_text', 'region_id')
                 ->orderBy('region_text', 'ASC')
                 ->get();
@@ -158,9 +172,8 @@ class UserGroupsController extends Controller
                 ->get();
             $ug_users = Users::orderBy('u_name', 'ASC')
                 ->get(); 
-            // $ug_rights = UserGroupRights::select()
             
-            return view('usergroups.edit', compact('show', 'sel_regions', 'sel_provinces', 'd_usergroups', 'ug_users', 'c_userrights'));
+            return view('usergroups.edit', compact('show', 'sel_regions', 'sel_provinces', 'd_usergroups', 'ug_users', 'c_userrights', 'ug_Rights'));
     }
 
     public function getChkData(){
@@ -171,6 +184,51 @@ class UserGroupsController extends Controller
             ->get();
 
             return $chkDatas;
+    }
+
+    public function update(Request $request, $id){
+        $validatedData = $request->validate([
+			'ug_name' => 'required|string|min:3|max:255',
+			'ug_display_name' => 'required|string|min:3|max:255',
+			'region_id' => 'required|string||max:255',
+            'province_id' => 'required|string|max:255',
+            'ug_unit_head' => 'required|string|max:255',
+        ]);
+
+        $urid=$request->get('ur_id');
+        // dd($urid);
+
+        UGroup::where("ug_id", "=", $id)->update($validatedData);
+
+
+        return redirect('usergroups/'.$id.'/edit')->with('status',"Updated Successfully");       
+    }
+
+    public function show($id){
+
+    }
+
+    public function destroy($id){
+            $show = UGroup::findOrFail($id);
+            $show->delete();
+
+            return redirect('usergroups/')->with('status', 'Usergroup Deleted');
+    }
+
+    public function refactor_index(){
+
+        $d_usergroups = UGroup::orderBy('ug_name', 'ASC')
+        ->get();
+
+        $g_tables = DB::select("select * from INFORMATION_SCHEMA.COLUMNS 
+        where COLUMN_NAME = 'ug_id'  
+        order by TABLE_NAME");
+
+        // $d_tables = DB::select("DESCRIBE" .$g_tables. "");
+
+        // dd($g_tables);
+
+        return view('usergroups.refactor', compact('d_usergroups', 'g_tables'));
     }
 
 }

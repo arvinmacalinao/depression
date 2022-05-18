@@ -1,4 +1,4 @@
-@extends('./layouts.app')
+@extends('./layouts.app', ['title' => 'Usergroup'])
 
 @section('content')
 <div class="container-fluid mt-3">
@@ -9,7 +9,7 @@
                 <div></div>
                 <div id="buttonz">
                     <a href="{{ URL::to('usergroups/create') }}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus" aria-hidden="true"></i>  Add Group</a>
-                    <a href="" type="button" class="btn btn-danger btn-sm"><i class="fa fa-retweet" aria-hidden="true"></i>  Implementor Refactoring</a>
+                    <a href="{{ URL::to('usergroup/refactor') }}" type="button" class="btn btn-danger btn-sm"><i class="fa fa-retweet" aria-hidden="true"></i>  Implementor Refactoring</a>
                 </div>
 
             </div>       
@@ -85,8 +85,15 @@
                     @foreach($d_usergroups as $d_usergroup)    
                     <tr>
                         <td>
-                            <a class="btn btn-primary btn-xs" href="{{ route('usergroups.edit', $d_usergroup->ug_id)}}"><span class="fa fa-pencil"></span></a>
-                            <a class="btn btn-primary btn-xs" href="{{ URL::to('sharks/' . $d_usergroup->ug_id . '/delete') }}"><span class="fa fa-close"></span></a>
+                        <div class="d-flex justify-content-start">
+                            <a class="btn btn-primary btn-xs" href="{{ route('usergroups.edit', $d_usergroup->ug_id)}}"><span class="fa fa-pencil"></span></a>&nbsp;
+                            <form action="{{ route('usergroups.destroy', $d_usergroup->ug_id)}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-primary btn-xs show_confirm" type="submit"><span class="fa fa-close"></span></button>
+                            </form>
+                        </div>
+
                         </td>
                         <td>1</td>
                         <td>{{  $d_usergroup->ug_name  }}</td>
@@ -122,5 +129,30 @@
     } ).draw();
 
     $("#sr_region").val($("#sr_region option:eq(8)").val());
+
+    // @if(session('status'))
+    //     console.log({{ session('status') }});
+    // @elseif(session('failed'))
+    //     console.log({{ session('failed') }});
+    // @endif 
+
+    $('.show_confirm').click(function(event) {
+          var form =  $(this).closest("form");
+          var name = $(this).data("name");
+          event.preventDefault();
+          swal({
+              title: `Are you sure you want to delete this record?`,
+              text: "If you delete this, it will be gone forever.",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              form.submit();
+            }
+          });
+      });
+
 </script>
 @endsection

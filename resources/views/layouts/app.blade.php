@@ -13,7 +13,11 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>
-        <title>Depression</title>
+        <title>
+          @isset($title)
+              Impression - {{ $title }}
+          @endisset
+        </title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
         <link href='https://fonts.googleapis.com/css?family=Roboto:500,900,100,300,700,400' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -171,7 +175,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#">Collaborating Agencies</a>
-                    <a class="dropdown-item" href="#">Collaborating Agency Categories</a>
+                    <a class="dropdown-item" href="/collabcategories">Collaborating Agency Categories</a>
                     <a class="dropdown-item" href="#">Colsultancy Categories</a>
                     <a class="dropdown-item" href="#">Document Categories</a>
                     <a class="dropdown-item" href="#">Equipment Names</a>
@@ -219,8 +223,6 @@
   </nav>
         @yield('content')
     </body>
-    
-     <script src="{{ asset('js/charts.js') }}"></script>
     <footer class="footer">
          <div class="text-center">
               <a href="https://impression.dostcalabarzon.ph/privacy_policy.php" class="btn btn-danger mb-2" title="Privacy Policy">Privacy Policy</a>
@@ -234,4 +236,5 @@
          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMDx-ejfVStxIBhfqtBuLj98OV79kqbdY&callback=initMap&libraries=&v=weekly"
          async
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
 </html>

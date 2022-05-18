@@ -1,4 +1,4 @@
-@extends('./layouts.app')
+@extends('./layouts.app', ['title' => 'Summary'])
 
 @section('content')
 <div class="container-fluid">

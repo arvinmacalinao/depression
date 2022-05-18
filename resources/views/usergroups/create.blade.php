@@ -1,4 +1,4 @@
-@extends('./layouts.app')
+@extends('./layouts.app', ['title' => 'Add'])
 
 @section('content')
 <div id="loader" class="lds-dual-ring hidden overlay"></div>
@@ -73,7 +73,7 @@
             <div class="form-group form-group-sm">
                 <label for="ug_parent_id" class="control-label"><b>Parent</b></label>
                 <select class="form-control input-sm @error('ug_parent_id') is-invalid @enderror" id="ug_parent_id" name="ug_parent_id">
-                    <option value="">None</option>
+                    <option value="0">None</option>
                     @foreach($d_usergroups as $d_usergroup)
                         <option value="{{ $d_usergroup->ug_id }}">{{ $d_usergroup->ug_name }}</option>
                     @endforeach 

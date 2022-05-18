@@ -1,4 +1,4 @@
-@extends('./layouts.app')
+@extends('./layouts.app', ['title' => 'Status Report'])
 
 @section('content')
 <div id="loader" class="lds-dual-ring hidden overlay"></div>
