@@ -7,12 +7,14 @@
             <h3>Projects</h3>
             <div class="pull-right">
             <a id="print-list-btn" name="print-list-btn" class="btn btn-success btn-sm" href="" title="Print List"><span class="fa fa-print"></span> Print</a>
-            <a id="download-list-btn" name="download-list-btn" class="btn btn-success btn-sm" href="" title="Download List"><span class="fa fa-floppy-o"></span> Download</a>
-            <a class="btn btn-primary btn-sm" href="./addproject" title="Add Projects"><span class="fa fa-plus"></span> Add Projects</a>
+            
+            <a id="download-list-btn" id="" name="download-list-btn" class="btn btn-success btn-sm" title="Download List"><span class="fa fa-floppy-o"></span> Download</a>
+            
+            <a class="btn btn-primary btn-sm" href="{{ route('New Project') }}" title="Add Projects"><span class="fa fa-plus"></span> Add Projects</a>
             </div>
         </div>
         <div class="card-body">
-            <form action="{{ route('projects') }}" method="GET" autocomplete="off">
+            <form action="{{ route('Projects') }}" method="GET" autocomplete="off">
                 <div class="form-row">
                     <div class="col-auto">
                         <div class="input-group mb-2">
@@ -131,10 +133,13 @@
                 </div>
             </div>
         </div>
+        <div class="alert alert-warning" role="alert">
+            <p class="mt-2">Please don't enclose the project title with single or double quotes.<br>Please update the project duration dates.</p>
+        </div>
         <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
-                        <table class="table table-hover pb-0 mb-0">
+                        <table id="mydatatable" style="width: 100%" class="table table-bordered table-hover pb-0 mb-0">
                             <thead>
                             <tr>
                                 <th></th>
@@ -161,9 +166,9 @@
                             @foreach($psi_projects as $psi_project)
                             <tr>
                                 <td>
-                                    <a href="{{ route('project.view', $psi_project->prj_id) }}" class="project-btn mr-1" title="View"><i class="fa fa-folder-open-o"></i></a>
-                                    <a href="" class="project-btn mr-1" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
-                                    <a href="" class="project-btn mr-1" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                    <a href="{{ route('View Project', $psi_project->prj_id) }}" class="project-btn mr-1" title="View"><i class="fa fa-folder-open-o"></i></a>
+                                    <a href="{{ route('Edit Project', $psi_project->prj_id) }}" class="project-btn mr-1" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
+                                    <a href="{{ route('Delete Project', $psi_project->prj_id) }}" class="project-btn mr-1" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a>
                                 </td>
                                 {{-- <td>{{ $loop->iteration }}</td> --}}
                                 <td>{{ ++$i }}</td>
@@ -235,7 +240,16 @@
     </div>
     </div>
 <script>
-  $(document).ready( function () {
+var t =  $('#mydatatable').DataTable({
+        deferRender:    true,
+        searching:      false,
+        paging:         false,
+        orderable:      false,
+        targets:        0,
+        
+        
+    });
+    $(document).ready( function () {
     $t_rep_paid = $("#rep_paid").text();
     $t_rep_amount = $("#rep_amount").text();
 
@@ -244,80 +258,22 @@
     $total_percent = Math.round($ref_rate)
 
     document.getElementById('percent_yeah').innerText= $total_percent + '%';
-    // $.ajaxSetup({
-    //   headers: {
-    //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //   }
-    // });
+
+     
+    $('.type-select').on('change', function(){
+    var selectedValue=$('.type-select').val();  
+    table.column(98).search( selectedValue ).draw(); 
     
-
-    // var table = $('#project_datatable').DataTable({
-        
-    //     processing: true,
-    //     pageLength: 25,
-    //     pagingType: 'first_last_numbers',
-    //     autoWidth: true, 
-    //     serverSide: true,
-    //     deferRender: true,
-    //     sDom: 'ltipr',
-    //     ajax: {
-    //         url:'{{ route('projlist') }}',
-    //             }, 
-    //     columnDefs: [ {
-    //         searchable: false,
-    //         orderable: false,
-    //         targets: 0
-    //     } ],
-    //     order: [1, 'asc'],
-        
-        
-    //     columns: [  
-    //                 { data: 'row', name:'row'},
-    //                 { data:'prj_code' , name:'prj_code' },
-    //                 { data:'prj_title' , name:'prj_title' },
-    //                 { data:'prj_type_name' , name:'prj_type_name'},
-    //                 { data:'prj_year_approved' , name:'prj_year_approved' },
-    //                 { data:'coop_names' , name:'coop_names' },
-    //                 { data:'collaborator_names' , name:'collaborator_names' },
-    //                 { data:'sector_name' , name:'sector_name' },
-    //                 { data:'region_code' , name:'region_code' },
-    //                 { data:'province_name' , name:'province_name' },
-    //                 { data:'city_name' , name:'city_name' },
-    //                 { data:'district_name' , name:'district_name' },
-    //                 { data:'prj_status_name' , name:'prj_status_name' },
-    //                 { data:'prj_cost_setup', render: $.fn.dataTable.render.number(",", ".", 2), name:'prj_cost_setup' },
-    //                 { data:'rep_total_due' , render: $.fn.dataTable.render.number(",", ".", 2), name:'rep_total_due' },
-    //                 { data:'rep_total_paid' , render: $.fn.dataTable.render.number(",", ".", 2), name:'rep_total_paid' },
-    //                 // { data:'rep_refund_rate' , name:'rep_refund_rate' },
-    //                 { data:'ug_name' , name:'ug_name' }
-    //              ],
-                 
-    //     });    
-    //     //sum
-    //     // var costsum = table.column( 13 ).data().sum();
-    //     // console.log(costsum);
-
-    //     // Text input search
-    //     $('.table-search').on( 'keyup', function () {
-    //     table.search( this.value ).draw();
-    //     });
-
-        
-        
-        $('.type-select').on('change', function(){
-        var selectedValue=$('.type-select').val();  
-        table.column(98).search( selectedValue ).draw(); 
-        
-        console.log(selectedValue);
-        });
+    console.log(selectedValue);
+    });
 
         // Row 1 Counter cell
-        table.on( 'draw.dt', function () {
-            var PageInfo = $('#project_datatable').DataTable().page.info();
+    table.on( 'draw.dt', function () {
+            var PageInfo = $('#mydatatable').DataTable().page.info();
             table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
             cell.innerHTML = i + 1 + PageInfo.start;
             });
-        }).draw();
+    }).draw();
 });
 </script>
 

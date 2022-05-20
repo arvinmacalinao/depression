@@ -113,12 +113,16 @@ td {
 }
 
 .project-btn{
-        background-color: #2ab1f0; /* Blue background */
-        border: none; /* Remove borders */
-        color: white; /* White text */
-        padding: 4px 4px; /* Some padding */
-        font-size: 16px; /* Set a font size */
-        cursor: pointer; /* Mouse pointer on hover */
+    background-color: #03A9F4; /* Blue background */
+    border: solid; 
+    border-width: 1px;
+    color: white; /* White text */
+    padding: 4px 5px; /* Some padding */
+    font-size: 12px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+    border-color: #0094d8;
+    text-align: center;
+    padding-top:5px;
 }
       
       /* Darker background on mouse-over */
@@ -129,11 +133,15 @@ td {
 
 .projectdetails-btn{
     background-color: #03A9F4; /* Blue background */
-    border: none; /* Remove borders */
+    border: solid; 
+    border-width: 1px;
     color: white; /* White text */
-    padding: 4px 4px; /* Some padding */
-    font-size: 16px; /* Set a font size */
+    padding: 7px 8px; /* Some padding */
+    font-size: 12px; /* Set a font size */
     cursor: pointer; /* Mouse pointer on hover */
+    border-color: #0094d8;
+    text-align: center;
+    padding-top:5px;
 }
   
   /* Darker background on mouse-over */
@@ -178,3 +186,15 @@ textarea.form-control-viewproj {
     outline: none;
 }
 
+.project_nav .btn{
+    margin-bottom: 4px;
+  
+  }
+.ul-assistance-12{
+  list-style-type: none; 
+  margin-left:-12px;
+}
+.ul-assistance-40{
+    list-style-type: none; 
+    margin-left:-40px;
+  }

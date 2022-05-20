@@ -7,7 +7,7 @@ use App\Models\City;
 
 class PsiProject extends Model
 {
-    
+
     protected $table = 'psi_projects';
     const CREATED_AT = 'date_encoded';
     const UPDATED_AT = 'last_updated';
@@ -43,6 +43,7 @@ class PsiProject extends Model
     }
     public function scopeProjectProvince($query, $project_province) 
     {
+        
         if($project_province) {
             $query->where('province_id', $project_province);
         }
@@ -99,6 +100,7 @@ class PsiProject extends Model
     
     
     
+    
     public function type()
     {
         return $this->belongsTo('App\Models\ProjectType', 'prj_type_id', 'prj_type_id');
@@ -143,5 +145,9 @@ class PsiProject extends Model
     public function ProjectCollaborator()
     {
         return $this->hasMany('App\Models\ProjectCollaborator', 'prj_id', 'prj_id');
+    }
+    public function PIS()
+    {
+        return $this->hasMany('App\Models\PIS', 'prj_id', 'prj_id');
     }
 }

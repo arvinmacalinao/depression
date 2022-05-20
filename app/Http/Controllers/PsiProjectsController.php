@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 use Datatables;
 use App\Models\City;
 use App\Models\Barangay;
+use App\Models\Province;
 use App\Models\PsiProject;
-use App\Models\ProjectBeneficiary;
-use App\Models\ProjectCollaborator;
+use App\Models\ProjectType;
 use Illuminate\Http\Request;
+use App\Exports\ProjectExport;
+use App\Models\ProjectBeneficiary;
 use Illuminate\Support\Facades\DB;
+use App\Models\ProjectCollaborator;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Input;
 
 
 
@@ -22,7 +27,7 @@ class PsiProjectsController extends Controller
      */
     public function index(Request $request)
     {   
-        //filter
+        //filter and search
         $project_type = $request->get('type');
         $project_status = $request->get('qstatus');
         $project_year_approved = $request->get('qyear');
@@ -41,9 +46,8 @@ class PsiProjectsController extends Controller
         $sum_rep_total_paid = $psi_projects->sum('rep_total_paid');
         $sum_rep_refund_rate = $psi_projects->sum('rep_refund_rate');
         
-
         $psi_projects = $psi_projects->paginate(20);
-
+      
         
 
         
@@ -77,34 +81,42 @@ class PsiProjectsController extends Controller
                             ->select('ug_id', 'ug_name')
                             ->get();
         // dd($sel_project_provinces);
-        return view('./projects/projects', compact('psi_projects', 'sel_project_types', 'sel_project_statuses', 'sel_project_years', 'sel_project_provinces', 'sel_project_districts', 'sel_project_sectors', 'sel_project_implementors', 'project_search', 'sum_prj_cost_setup', 'sum_rep_total_due', 'sum_rep_total_due', 'sum_rep_total_paid', 'sum_rep_refund_rate'))->with('i', ($request->input('page', 1) - 1) * 20);
+
+        
+        return view('./projects/index', compact('psi_projects', 'sel_project_types', 'sel_project_statuses', 'sel_project_years', 'sel_project_provinces', 'sel_project_districts', 'sel_project_sectors', 'sel_project_implementors', 'project_search', 'sum_prj_cost_setup', 'sum_rep_total_due', 'sum_rep_total_due', 'sum_rep_total_paid', 'sum_rep_refund_rate', 'project_type'))->with('i', ($request->input('page', 1) - 1) * 20);
         
     }
 
-    
-    //DATATABLES
-    // public function projectList()
-    // {           
+    public function import_to_excel(Request $request)
+    {
+        $project_type = $request->get('type');
+        $project_status = $request->get('qstatus');
+        $project_year_approved = $request->get('qyear');
+        $project_province = $request->get('qprovince');
+        $project_district = $request->get('qdistrict');
+        $project_sector = $request->get('qsector');
+        $project_usergroup = $request->get('qusergroup');
+        $project_search = $request->get('search');
         
-    //     $psi_projects = DB::table('psi_projects')->select('*');
-    //     return datatables()->of($psi_projects)
-    //     //->setRowData([ 'data-prj_cost_setup' => 'Php {{ $prj_cost_setup }}' ])
-    //     // ->setRowClass('{{ $prj_id % 2 == 0 ? "alert-success" : "alert-warning" }}')
-    //     ->addColumn('row', 'row')
-    //     ->make(true);
-    // }
-
-
+        $psi_projects = PsiProject::ProjectType($project_type)->ProjectStatus($project_status)
+        ->ProjectYearApproved($project_year_approved)->ProjectProvince($project_province)->ProjectDistrict($project_district)
+        ->ProjectSector($project_sector)->ProjectUsergroup($project_usergroup)->ProjectSearch($project_search)->get();
+        
+        
+        
+        return Excel::download(new ProjectExport($psi_projects), 'sample.xlsx');
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function addproject()
+    public function new()
     {
-        $sel_types = DB::table('psi_project_types')
-        ->select('prj_type_id', 'prj_type_name')
-        ->get();
+        $project = new PsiProject;
+
+        $sel_types = ProjectType::get();
 
         $sel_benefeciaries = DB::table('psi_cooperators')
         ->select('coop_id', 'coop_name')
@@ -136,6 +148,10 @@ class PsiProjectsController extends Controller
                             ->Orderby('province_name', 'asc')
                             ->get();
 
+        $sel_cities = City::get();
+        
+        $sel_barangays = Barangay::get();
+
         $proj_lead = DB::table('psi_agencies')
                             ->where('agency_id', 1)
                             ->value('agency_name');
@@ -150,7 +166,9 @@ class PsiProjectsController extends Controller
                             ->where('u_head', 1)
                             ->get();
                
-        return view('./projects/addproject', compact('sel_types', 'sel_collaborators', 'sel_benefeciaries', 'sel_usergroups', 'sel_statuses', 'sel_sectors', 'sel_provinces', 'proj_lead', 'sel_coordinators', 'sel_heads'));    }
+        return view('./projects/form', compact('project', 'sel_types', 'sel_collaborators', 'sel_benefeciaries', 'sel_usergroups', 'sel_statuses', 'sel_sectors', 'sel_provinces', 'proj_lead', 'sel_coordinators', 'sel_heads', 'sel_cities', 'sel_barangays'));    
+    
+    }
 
     public function getCities($id)
     {
@@ -158,8 +176,8 @@ class PsiProjectsController extends Controller
         $cities = City::where('province_id', $id)->pluck("city_name","city_id");
         return json_encode($cities);
         
+        
     }
-
     public function getBarangays($id)
     {
 
@@ -441,8 +459,10 @@ class PsiProjectsController extends Controller
         $projects->prj_longitude = $request->prj_longitude;
         $projects->prj_latitude = $request->prj_latitude;
         $projects->prj_elevation = $request->prj_elevation;
-
+        
         $projects->save();
+
+
         $last_id = $projects->prj_id;
         
 
@@ -517,8 +537,7 @@ class PsiProjectsController extends Controller
 
 
 
-        return redirect()->route('projects')
-        ->with('success', 'Project created successfully');
+        return redirect()->route('Projects');
     }
 
     /**
@@ -527,20 +546,18 @@ class PsiProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function viewproject($id)
+    public function view($id)
     {
-        $project_views = DB::table('psi_projects')->where('prj_id', $id)->get();
-        $get_prj_id = PsiProject::find($id);
-        $prj_title = DB::table('psi_project_types')->where('prj_type_id', $get_prj_id->prj_type_id)->value("prj_type_name");    
-        $get_benefeciaries = DB::table('vwpsi_project_beneficiaries')->where('prj_id', $id)->get();
-        $get_sector_name = DB::table('psi_sectors')->where('sector_id', $get_prj_id->sector_id)->value("sector_name");
-        $get_status_name = DB::table('psi_project_status')->where('prj_status_id', $get_prj_id->prj_status_id)->value("prj_status_name");
-        $get_ug_name = DB::table('psi_usergroups')->where('ug_id', $get_prj_id->ug_id)->value("ug_name");
-        
+        $project = PsiProject::FindOrFail($id);
+    
+        return view('/projects/view', compact('project'));
+    }
 
-
-
-        return view('/projects/projectview', compact('project_views', 'prj_title', 'get_benefeciaries','get_sector_name', 'get_status_name', 'get_ug_name'));
+    public function detailsheader($id)
+    {
+        $project = PsiProject::FindOrFail($id);
+    
+        return view('/projects/details/details', compact('project'));
     }
 
 
@@ -563,7 +580,59 @@ class PsiProjectsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $project = PsiProject::FindOrFail($id);
+
+        $sel_types = ProjectType::get();
+
+        $sel_benefeciaries = DB::table('psi_cooperators')
+        ->select('coop_id', 'coop_name')
+        ->Orderby('coop_name', 'asc')
+        ->get();
+
+        $sel_collaborators = DB::table('psi_collaborators')
+        ->select('col_id', 'col_name')
+        ->Orderby('col_name', 'asc')
+        ->get();
+
+        $sel_usergroups = DB::table('psi_usergroups')
+        ->select('ug_id', 'ug_name')
+        ->Orderby('ug_name', 'asc')
+        ->get();
+
+        $sel_statuses = DB::table('psi_project_status')
+                            ->select('prj_status_id', 'prj_status_name')
+                            ->Orderby('prj_status_name', 'asc')
+                            ->get();
+        
+        $sel_sectors = DB::table('psi_sectors')
+        ->select('sector_id', 'sector_name')
+        ->Orderby('sector_name', 'asc')
+        ->get();
+
+        $sel_provinces = DB::table('psi_provinces')
+                            ->select('province_id', 'province_name')
+                            ->Orderby('province_name', 'asc')
+                            ->get();
+
+        $sel_cities = City::get();
+
+        $sel_barangays = Barangay::get();
+
+        $proj_lead = DB::table('psi_agencies')
+                            ->where('agency_id', 1)
+                            ->value('agency_name');
+        
+        $sel_coordinators = DB::table('vwpsi_users')
+                            ->select('u_name')
+                            ->where('u_coordinator', 1)
+                            ->get();
+
+        $sel_heads = DB::table('vwpsi_users')
+                            ->select('u_name')
+                            ->where('u_head', 1)
+                            ->get();
+
+        return view('/projects/form', compact('project', 'sel_types', 'sel_collaborators', 'sel_benefeciaries', 'sel_usergroups', 'sel_statuses', 'sel_sectors', 'sel_provinces', 'proj_lead', 'sel_coordinators', 'sel_heads', 'sel_cities', 'sel_barangays'));
     }
 
     /**
@@ -585,8 +654,12 @@ class PsiProjectsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy($id)
-    {
-        
-    }
+    public function delete($id)
+	{
+		$alert 					= 'alert-warning';
+		$message				= 'Project successfully deleted.';
+		$project = PsiProject::find($id);
+		$project->delete();
+		return redirect()->back()->with('message', $message)->with('alert', $alert);
+	}
 }
