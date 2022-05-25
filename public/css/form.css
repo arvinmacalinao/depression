@@ -122,6 +122,7 @@ td {
     cursor: pointer; /* Mouse pointer on hover */
     border-color: #0094d8;
     text-align: center;
+    border-radius: 0px;
     padding-top:5px;
 }
       
@@ -141,6 +142,7 @@ td {
     cursor: pointer; /* Mouse pointer on hover */
     border-color: #0094d8;
     text-align: center;
+    border-radius: 0px;
     padding-top:5px;
 }
   
@@ -198,3 +200,39 @@ textarea.form-control-viewproj {
     list-style-type: none; 
     margin-left:-40px;
   }
+
+.search-btn{
+    background-color: #03A9F4; /* Blue background */
+    border: solid; 
+    border-width: 1px;
+    color: white; /* White text */
+    padding: 10px 15px; /* Some padding */
+    font-size: 12px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+    border-color: #0094d8;
+    text-align: center;
+    border-radius: 0;
+}
+.search-btn:hover {
+    background-color: #1e7aa5;
+    color: white;
+}
+
+.save-btn{
+    background-color: #03A9F4; /* Blue background */
+    width: 100%;
+    border: solid; 
+    border-width: 1px;
+    color: white; /* White text */
+    padding: 7px 8px; /* Some padding */
+    font-size: 14px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+    border-color: #0094d8;
+    text-align: center;
+    border-radius: 0px;
+    padding-top:5px;
+}
+.save-btn:hover {
+    background-color: #1e7aa5;
+    color: white;
+}

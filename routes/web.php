@@ -34,12 +34,25 @@ Route::get('project/delete/{id}', 'PsiProjectsController@delete')->name('Delete 
 
 //Project Details
 
-//-PIS
+//PIS
 Route::get('project/{id}/PIS/', 'ProjectPISController@index')->name('PIS');
 Route::get('project/{id}/PIS/add', 'ProjectPISController@new')->name('New PIS');
 Route::post('projects/{id}/PIS/store/{pis_id}', 'ProjectPISController@store')->name('PIS Save');
 Route::get('project/{id}/PIS/delete/{pis_id}', 'ProjectPISController@delete')->name('Delete PIS');
 Route::get('project/{id}/PIS/edit/{pis_id}', 'ProjectPISController@edit')->name('Edit PIS');
+
+//Products
+Route::get('project/{id}/Product/', 'ProjectProductController@index')->name('Product');
+Route::get('project/{id}/Product/add', 'ProjectProductController@new')->name('New Product');
+Route::post('projects/{id}/Product/store/{prod_id}', 'ProjectProductController@store')->name('Product Save');
+Route::get('project/{id}/Product/delete/{prod_id}', 'ProjectProductController@delete')->name('Delete Product');
+Route::get('project/{id}/Product/edit/{prod_id}', 'ProjectProductController@edit')->name('Edit Product');
+
+//Monitoring
+//Monitoring2
+
+//Equipment
+Route::get('project/{id}/Equipment/', 'ProjectEquipmentController@index')->name('Equipment');
 
 Route::get('/getCities/{id}', 'PsiProjectsController@getCities')->name('getCities');
 Route::get('/getBarangays/{id}', 'PsiProjectsController@getBarangays')->name('getBarangays');

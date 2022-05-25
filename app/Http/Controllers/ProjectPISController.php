@@ -13,10 +13,14 @@ class ProjectPISController extends Controller
     {
         $project = PsiProject::FindorFail($id);
 
+        //filter
+        $pis_year = $request->get('qyear');
+        $pis_sem = $request->get('qsem');
+    
         $sel_pis_years = PIS::Groupby('prjpis_year')->Orderby('prjpis_year', 'desc')->get();
         $sel_pis_semesters = PIS::Groupby('sem_id')->get();
 
-        $pis = PIS::get();
+        $pis = PIS::where('prj_id', $id)->PISyear($pis_year)->PISsem($pis_sem)->get();
 
         return view('./projects/details/PIS/index', compact('project', 'sel_pis_years', 'sel_pis_semesters', 'pis', 'id'));
     }
@@ -42,8 +46,9 @@ class ProjectPISController extends Controller
 
         } else {
             $alert 					= 'alert-info';
-			$message				= 'New PIS record successfully updated.';
-            $pis = PIS::update($request->all());
+			$message				= 'PIS record successfully updated.';
+            $pis = PIS::find($pis_id);
+            $pis->update($request->all());
         }
 
         return redirect()->route('PIS', $id)->with('message', $message)->with('alert', $alert);

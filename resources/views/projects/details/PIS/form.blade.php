@@ -26,7 +26,7 @@
                             <label for="sem_id" class="control-label">Semester</label>
                             <select class="form-control input-sm" id="sem_id" name="sem_id">
                                 @foreach ($sel_pis_semesters as $sem)
-                                <option value="{{ $sem->sem_id }}" {{ old('sem_id', $project->prj_type_id) == $type->prj_type_id ? 'selected' : '' }}>{{ $sem->semester->sem_name }}</option>
+                                <option value="{{ $sem->sem_id }}" {{ old('sem_id', $pis->sem_id) == $sem->sem_id ? 'selected' : '' }}>{{ $sem->semester->sem_name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -39,19 +39,19 @@
                     <div class="row mb-2 mt-2">
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_land" class="control-label">Land</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_total_assets_land" id="prjpis_total_assets_land" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_total_assets_land" id="prjpis_total_assets_land" type="number" value="{{ old('prjpis_total_assets_land', $pis->prjpis_total_assets_land) }}">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_building" class="control-label">Building</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_total_assets_building" id="prjpis_total_assets_building" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_total_assets_building" id="prjpis_total_assets_building" type="number" value="{{ old('prjpis_total_assets_building', $pis->prjpis_total_assets_building) }}">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_equipment" class="control-label">Equipment</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_total_assets_equipment" id="prjpis_total_assets_equipment" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_total_assets_equipment" id="prjpis_total_assets_equipment" type="number" value="{{ old('prjpis_total_assets_equipment', $pis->prjpis_total_assets_equipment) }}">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_working_capital" class="control-label">Working Capital</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_total_assets_working_capital" id="prjpis_total_assets_working_capital" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_total_assets_working_capital" id="prjpis_total_assets_working_capital" type="number" value="{{ old('prjpis_total_assets_working_capital', $pis->prjpis_total_assets_working_capital) }}">
                         </div>
                     </div>
                 </div>
@@ -63,76 +63,76 @@
                     <div class="row mb-2 mt-2">
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_land" class="control-label">Male</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_ch_regular_male" id="prjpis_dir_ch_regular_male" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_ch_regular_male" id="prjpis_dir_ch_regular_male" type="number" value="{{ old('prjpis_dir_ch_regular_male', $pis->prjpis_dir_ch_regular_male) }}">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_building" class="control-label">Female</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_ch_regular_female" id="prjpis_dir_ch_regular_female" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_ch_regular_female" id="prjpis_dir_ch_regular_female" type="number" value="{{ old('prjpis_dir_ch_regular_female', $pis->prjpis_dir_ch_regular_female) }}">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_equipment" class="control-label">PWD</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_ch_regular_pwd" id="prjpis_dir_ch_regular_pwd" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_ch_regular_pwd" id="prjpis_dir_ch_regular_pwd" type="number" value="{{ old('prjpis_dir_ch_regular_pwd', $pis->prjpis_dir_ch_regular_pwd) }}">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_working_capital" class="control-label">Senior</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_ch_regular_senior" id="prjpis_dir_ch_regular_senior" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_ch_regular_senior" id="prjpis_dir_ch_regular_senior" type="number" value="{{ old('prjpis_dir_ch_regular_senior', $pis->prjpis_dir_ch_regular_senior) }}">
                         </div>
                     </div>
                     <h5>Company Hire (Part-Time)</h5>
                     <div class="row mb-2 mt-2">
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_land" class="control-label">Male</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_ch_part_time_male" id="prjpis_dir_ch_part_time_male" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_ch_part_time_male" id="prjpis_dir_ch_part_time_male" type="number" value="{{ old('prjpis_dir_ch_part_time_male', $pis->prjpis_dir_ch_part_time_male) }}">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_building" class="control-label">Female</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_ch_part_time_female" id="prjpis_dir_ch_part_time_female" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_ch_part_time_female" id="prjpis_dir_ch_part_time_female" type="number" value="{{ old('prjpis_dir_ch_part_time_female', $pis->prjpis_dir_ch_part_time_female) }}">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_equipment" class="control-label">PWD</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_ch_part_time_pwd" id="prjpis_dir_ch_part_time_pwd" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_ch_part_time_pwd" id="prjpis_dir_ch_part_time_pwd" type="number" value="{{ old('prjpis_dir_ch_part_time_pwd', $pis->prjpis_dir_ch_part_time_pwd) }}">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_working_capital" class="control-label">Senior</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_ch_part_time_senior" id="prjpis_dir_ch_part_time_senior" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_ch_part_time_senior" id="prjpis_dir_ch_part_time_senior" type="number" value="{{ old('prjpis_dir_ch_part_time_senior', $pis->prjpis_dir_ch_part_time_senior) }}">
                         </div>
                     </div>
                     <h5>Sub-Contractor Hire (Regular)</h5>
                     <div class="row mb-2 mt-2">
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_land" class="control-label">Male</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_sh_regular_male" id="prjpis_dir_sh_regular_male" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_sh_regular_male" id="prjpis_dir_sh_regular_male" type="number" value="{{ old('prjpis_dir_sh_regular_male', $pis->prjpis_dir_sh_regular_male) }}">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_building" class="control-label">Female</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_sh_regular_female" id="prjpis_dir_sh_regular_female" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_sh_regular_female" id="prjpis_dir_sh_regular_female" type="number" value="{{ old('prjpis_dir_sh_regular_female', $pis->prjpis_dir_sh_regular_female) }}">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_equipment" class="control-label">PWD</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_sh_regular_pwd" id="prjpis_dir_sh_regular_pwd" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_sh_regular_pwd" id="prjpis_dir_sh_regular_pwd" type="number" value="{{ old('prjpis_dir_sh_regular_pwd', $pis->prjpis_dir_sh_regular_pwd) }}">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_working_capital" class="control-label">Senior</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_sh_regular_senior" id="prjpis_dir_sh_regular_senior" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_sh_regular_senior" id="prjpis_dir_sh_regular_senior" type="number" value="{{ old('prjpis_dir_sh_regular_senior', $pis->prjpis_dir_sh_regular_senior) }}">
                         </div>
                     </div>
                     <h5>Sub-Contractor Hire (Part-Time)</h5>
                     <div class="row mb-2 mt-2">
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_land" class="control-label">Male</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_sh_part_time_male" id="prjpis_dir_sh_part_time_male" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_sh_part_time_male" id="prjpis_dir_sh_part_time_male" type="number" value="{{ old('prjpis_dir_sh_part_time_male', $pis->prjpis_dir_sh_part_time_male) }}">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_building" class="control-label">Female</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_sh_part_time_female" id="prjpis_dir_sh_part_time_female" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_sh_part_time_female" id="prjpis_dir_sh_part_time_female" type="number" value="{{ old('prjpis_dir_sh_part_time_female', $pis->prjpis_dir_sh_part_time_female) }}">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_equipment" class="control-label">PWD</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_sh_part_time_pwd" id="prjpis_dir_sh_part_time_pwd" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_sh_part_time_pwd" id="prjpis_dir_sh_part_time_pwd" type="number" value="{{ old('prjpis_dir_sh_part_time_pwd', $pis->prjpis_dir_sh_part_time_pwd) }}">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_working_capital" class="control-label">Senior</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_sh_part_time_senior" id="prjpis_dir_sh_part_time_senior" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_dir_sh_part_time_senior" id="prjpis_dir_sh_part_time_senior" type="number" value="{{ old('prjpis_dir_sh_part_time_senior', $pis->prjpis_dir_sh_part_time_senior) }}">
                         </div>
                     </div>
                     
@@ -145,38 +145,38 @@
                     <div class="row mb-2 mt-2">
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_land" class="control-label">Male</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_indir_forward_male" id="prjpis_indir_forward_male" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_indir_forward_male" id="prjpis_indir_forward_male" type="number" value="{{ old('prjpis_indir_forward_male', $pis->prjpis_indir_forward_male) }}">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_building" class="control-label">Female</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_indir_forward_female" id="prjpis_indir_forward_female" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_indir_forward_female" id="prjpis_indir_forward_female" type="number" value="{{ old('prjpis_indir_forward_female', $pis->prjpis_indir_forward_female) }}">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_equipment" class="control-label">PWD</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_indir_forward_pwd" id="prjpis_indir_forward_pwd" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_indir_forward_pwd" id="prjpis_indir_forward_pwd" type="number" value="{{ old('prjpis_indir_forward_pwd', $pis->prjpis_indir_forward_pwd) }}">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_working_capital" class="control-label">Senior</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_indir_forward_senior" id="prjpis_indir_forward_senior" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_indir_forward_senior" id="prjpis_indir_forward_senior" type="number" value="{{ old('prjpis_indir_forward_senior', $pis->prjpis_indir_forward_senior) }}">
                         </div>
                     </div>
                     <h5>Backward</h5>
                     <div class="row mb-2 mt-2">
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_land" class="control-label">Male</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_indir_backward_male" id="prjpis_indir_backward_male" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_indir_backward_male" id="prjpis_indir_backward_male" type="number" value="{{ old('prjpis_indir_backward_male', $pis->prjpis_indir_backward_male) }}">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_building" class="control-label">Female</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_indir_backward_female" id="prjpis_indir_backward_female" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_indir_backward_female" id="prjpis_indir_backward_female" type="number" value="{{ old('prjpis_indir_backward_female', $pis->prjpis_indir_backward_female) }}">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_equipment" class="control-label">PWD</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_indir_backward_pwd" id="prjpis_indir_backward_pwd" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_indir_backward_pwd" id="prjpis_indir_backward_pwd" type="number" value="{{ old('prjpis_indir_backward_pwd', $pis->prjpis_indir_backward_pwd) }}">
                         </div>
                         <div class="form-group col-sm-3">
                             <label for="prjpis_total_assets_working_capital" class="control-label">Senior</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_indir_backward_senior" id="prjpis_indir_backward_senior" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_indir_backward_senior" id="prjpis_indir_backward_senior" type="number" value="{{ old('prjpis_indir_backward_senior', $pis->prjpis_indir_backward_senior) }}">
                         </div>
                     </div>
                 </div>
@@ -187,11 +187,11 @@
                     <div class="row mb-2 mt-2">
                         <div class="form-group col-sm-6">
                             <label for="prjpis_year" class="control-label">Local</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_volume_production_local" id="prjpis_volume_production_local" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_volume_production_local" id="prjpis_volume_production_local" type="number" value="{{ old('prjpis_volume_production_local', $pis->prjpis_volume_production_local) }}">
                         </div>
                         <div class="form-group col-sm-6">
                             <label for="prjpis_year" class="control-label">Export</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_volume_production_export" id="prjpis_volume_production_export" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_volume_production_export" id="prjpis_volume_production_export" type="number" value="{{ old('prjpis_volume_production_export', $pis->prjpis_volume_production_export) }}">
                         </div>
                     </div>
                 </div>
@@ -202,11 +202,11 @@
                     <div class="row mb-2 mt-2">
                         <div class="form-group col-sm-6">
                             <label for="prjpis_year" class="control-label">Local</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_gross_sales_local" id="prjpis_gross_sales_local" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_gross_sales_local" id="prjpis_gross_sales_local" type="number" value="{{ old('prjpis_gross_sales_local', $pis->prjpis_gross_sales_local) }}">
                         </div>
                         <div class="form-group col-sm-6">
                             <label for="prjpis_year" class="control-label">Export</label>
-                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_gross_sales_export" id="prjpis_gross_sales_export" type="number" value="0">
+                            <input class="form-control input-sm" placeholder="0" min="0" step="any" name="prjpis_gross_sales_export" id="prjpis_gross_sales_export" type="number" value="{{ old('prjpis_gross_sales_export', $pis->prjpis_gross_sales_export) }}">
                         </div>
                     </div>
                 </div>
@@ -216,7 +216,7 @@
                 <h5>Countries of Destination</h5>
                     <div class="row mb-2 mt-2">
                         <div class="form-group col-sm-12">
-                            <textarea class="form-control input-sm" placeholder="Countries of Destination" name="prjpis_countries_of_destination" id="prjpis_countries_of_destination" cols="50" rows="4"></textarea>
+                            <textarea class="form-control input-sm" placeholder="Countries of Destination" name="prjpis_countries_of_destination" id="prjpis_countries_of_destination" cols="50" rows="4">{{ old('prjpis_countries_of_destination', $pis->prjpis_countries_of_destination) }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -232,63 +232,63 @@
                             <ul class="ul-assistance-12">
                                 <li>
                                     <div class="form-group">
-                                        <input type="checkbox" name="prjpis_assistance_process" id="prjpis_assistance_process" value="1" > 
+                                        <input type="checkbox" name="prjpis_assistance_process" id="prjpis_assistance_process" value="1"{{ old('prjpis_assistance_process', $pis->prjpis_assistance_process) == '1' ? 'checked' : ''}}> 
                                         A. 1.1 Process
-                                        <textarea class="form-control input-sm" placeholder="Process" name="prjpis_assistance_process_text" id="prjpis_assistance_process_text" cols="50" rows="3"></textarea>
+                                        <textarea class="form-control input-sm" placeholder="Process" name="prjpis_assistance_process_text" id="prjpis_assistance_process_text" cols="50" rows="3">{{ old('prjpis_assistance_process_text', $pis->prjpis_assistance_process_text) }}</textarea>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="form-group">
-                                        <input type="checkbox" name="prjpis_assistance_equipment" id="prjpis_assistance_equipment" value="1" >
+                                        <input type="checkbox" name="prjpis_assistance_equipment" id="prjpis_assistance_equipment" value="1" {{ old('prjpis_assistance_equipment', $pis->prjpis_assistance_equipment) == '1' ? 'checked' : ''}}>
                                         A. 1.2 Equipment
                                     </div>
                                 </li>
                                 <li>
                                     <div class="form-group">
-                                        <input type="checkbox" name="prjpis_assistance_quality_control" id="prjpis_assistance_quality_control" value="1" > 
+                                        <input type="checkbox" name="prjpis_assistance_quality_control" id="prjpis_assistance_quality_control" value="1" {{ old('prjpis_assistance_quality_control', $pis->prjpis_assistance_quality_control) == '1' ? 'checked' : ''}}> 
                                         A. 1.2 Quality Control / Laboratory Testing / Analysis
-                                        <textarea class="form-control input-sm" placeholder="Quality Control / Laboratory Testing / Analysis" name="prjpis_assistance_quality_control_text" id="prjpis_assistance_consultancy_text" cols="50" rows="3"></textarea>
+                                        <textarea class="form-control input-sm" placeholder="Quality Control / Laboratory Testing / Analysis" name="prjpis_assistance_quality_control_text" id="prjpis_assistance_consultancy_text" cols="50" rows="3">{{ old('prjpis_assistance_consultancy_text', $pis->prjpis_assistance_consultancy_text) }}</textarea>
                                     </div>
                                 </li>
                             </ul>
                         </li>
                         <li>
                             <div class="form-group">
-                                <input type="checkbox" name="prjpis_assistance_packaging_labeling" id="prjpis_assistance_packaging_labeling" value="1" > 
+                                <input type="checkbox" name="prjpis_assistance_packaging_labeling" id="prjpis_assistance_packaging_labeling" value="1" {{ old('prjpis_assistance_packaging_labeling', $pis->prjpis_assistance_packaging_labeling) == '1' ? 'checked' : ''}}> 
                                 A. 2 Packaging / Labeling
                             </div>
                         </li>
                         <li>
                             <div class="form-group">
-                                <input type="checkbox" name="prjpis_assistance_post_harvest" id="prjpis_assistance_post_harvest" value="1" > 
+                                <input type="checkbox" name="prjpis_assistance_post_harvest" id="prjpis_assistance_post_harvest" value="1" {{ old('prjpis_assistance_post_harvest', $pis->prjpis_assistance_post_harvest) == '1' ? 'checked' : ''}}> 
                                 A. 3 Post-Harvest
-                                <textarea class="form-control input-sm" placeholder="Post-Harvest" name="prjpis_assistance_post_harvest_text" id="prjpis_assistance_post_harvest_text" cols="50" rows="3"></textarea>
+                                <textarea class="form-control input-sm" placeholder="Post-Harvest" name="prjpis_assistance_post_harvest_text" id="prjpis_assistance_post_harvest_text" cols="50" rows="3">{{ old('prjpis_assistance_post_harvest_text', $pis->prjpis_assistance_post_harvest_text) }}</textarea>
                             </div>
                         </li>
                         <li>
                             <div class="form-group">
-                                <input type="checkbox" name="prjpis_assistance_marketing" id="prjpis_assistance_marketing" value="1" > 
+                                <input type="checkbox" name="prjpis_assistance_marketing" id="prjpis_assistance_marketing" value="1" {{ old('prjpis_assistance_marketing', $pis->prjpis_assistance_marketing) == '1' ? 'checked' : ''}}> 
                                 A. 4 Marketing Assistance
-                                <textarea class="form-control input-sm" placeholder="Marketing Assistance" name="prjpis_assistance_marketing_text" id="prjpis_assistance_marketing_text" cols="50" rows="3"></textarea>
+                                <textarea class="form-control input-sm" placeholder="Marketing Assistance" name="prjpis_assistance_marketing_text" id="prjpis_assistance_marketing_text" cols="50" rows="3">{{ old('prjpis_assistance_marketing_text', $pis->prjpis_assistance_marketing_text) }}</textarea>
                             </div>
                         </li>
                         <li>
                             <div class="form-group">
-                                <input type="checkbox" name="prjpis_assistance_training" id="prjpis_assistance_training" value="1" > 
+                                <input type="checkbox" name="prjpis_assistance_training" id="prjpis_assistance_training" value="1" {{ old('prjpis_assistance_training', $pis->prjpis_assistance_training) == '1' ? 'checked' : ''}}> 
                                 A. 5 Human Resource Training
                             </div>
                         </li>
                         <li>
                             <div class="form-group">
-                                <input type="checkbox" name="prjpis_assistance_consultancy" id="prjpis_assistance_consultancy" value="1" > 
+                                <input type="checkbox" name="prjpis_assistance_consultancy" id="prjpis_assistance_consultancy" value="1" {{ old('prjpis_assistance_consultancy', $pis->prjpis_assistance_consultancy) == '1' ? 'checked' : ''}}> 
                                 A. 6 Consultancy Service
                             </div>
                         </li>
                         <li>
                             <div class="form-group">
-                                <input type="checkbox" name="prjpis_assistance_others" id="prjpis_assistance_others" value="1" > 
+                                <input type="checkbox" name="prjpis_assistance_others" id="prjpis_assistance_others" value="1" {{ old('prjpis_assistance_others', $pis->prjpis_assistance_others) == '1' ? 'checked' : ''}}> 
                                 A. 7 Others (FPD Permit, LGU Registration, Bar Coding)
-                                <textarea class="form-control input-sm" placeholder="Others" name="prjpis_assistance_others_text" id="prjpis_assistance_others_text" cols="50" rows="3"></textarea>
+                                <textarea class="form-control input-sm" placeholder="Others" name="prjpis_assistance_others_text" id="prjpis_assistance_others_text" cols="50" rows="3">{{ old('prjpis_assistance_others_text', $pis->prjpis_assistance_others_text) }}</textarea>
                             </div>
                         </li>
                     </ul>
@@ -299,7 +299,7 @@
                 <h5>Remarks</h5>
                     <div class="row mb-2 mt-2">
                         <div class="form-group col-sm-12">
-                            <textarea class="form-control input-sm" placeholder="Remarks" name="prjpis_remarks" id="prjpis_remarks" cols="50" rows="4"></textarea>
+                            <textarea class="form-control input-sm" placeholder="Remarks" name="prjpis_remarks" id="prjpis_remarks" cols="50" rows="4">{{ old('prjpis_remarks', $pis->prjpis_remarks) }}</textarea>
                         </div>
                     </div>
                 </div>

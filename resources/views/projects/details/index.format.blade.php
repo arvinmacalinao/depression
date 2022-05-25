@@ -6,47 +6,41 @@
     <div class="alert alert-success mt-2" role="alert">
     <button type="button" class="close" data-dismiss="alert">×</button>
     <strong>{{ Session::get('message') }}</strong>
-  </div>
-@endif
+    </div>
+    @endif
 @include('projects.details.details')
 <div class="card">
     <div class="card-header">                  
-        <h3>Project PIS
+        <h3>Project Products
             <div class="pull-right">
-                <a href="{{ route('New PIS', $project->prj_id) }}" class="projectdetails-btn pr"><span class="fa fa-plus"></span> Add Record</a>
+                <a href="" class="projectdetails-btn pr"><span class="fa fa-plus"></span> Add Products</a>
+                {{-- {{ route('New Product', $project->prj_id) }} --}}
             </div>
         </h3>
     </div>
     <div class="card-body">
-        <form action="{{ route('PIS', $project->prj_id) }}" method="GET" autocomplete="off">
+        <form action="" method="GET" autocomplete="off">
             <div class="form-row">
                 <div class="col-sm-auto mb-2">
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend">
-                          <span class="input-group-text" id="inputGroup-sizing-sm">Year</span>
+                          <span class="input-group-text" id="inputGroup-sizing-sm">Unit</span>
                         </div>
-                        <select class="form-control input-sm qyear" id="qyear" name="qyear">
+                        <select class="form-control input-sm" id="qunit" name="qunit">
                             <option value="">ALL</option>
-                            @foreach ($sel_pis_years as $sel_pis_year)
+                            {{-- @foreach ($sel_pis_years as $sel_pis_year)
                             <option value="{{ $sel_pis_year->prjpis_year }}">{{ $sel_pis_year->prjpis_year }}</option>
-                            @endforeach
+                            @endforeach --}}
                         </select>
                       </div>
                 </div>
                 <div class="col-sm-auto mb-2">
                     <div class="input-group input-group-sm">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="inputGroup-sizing-sm">Semesters</span>
-                        </div>
-                        <select class="form-control input-sm" id="qsem" name="qsem">
-                            <option value="">ALL</option>
-                            @foreach ($sel_pis_semesters as $sel_pis_semester)
-                            <option value="{{ $sel_pis_semester->sem_id }}">{{ $sel_pis_semester->semester->sem_name }}</option>
-                            @endforeach
-                        </select>
-                      </div>
+                        <input class="form-control input-sm" placeholder="Products..." type="text" maxlength="255" name="q" id="q" value="">
+                        <input class="projectdetails-btn btn-sm" type="submit" name="search" id="search" value="Search">
+                    </div>
+                    {{-- {{ old('search', $project_search) }} --}}
                 </div>
-                <input class="projectdetails-btn pr" style="height: 28px" type="submit" name="search" id="search" value="Search">
             </div>
         </form>
     </div>
@@ -55,8 +49,7 @@
             <thead>
                 <tr>
                     <th width="6%">&nbsp;</th>
-                    <th width="4%">#</th>
-                    <th >Year</th>
+                    <th >Product</th>
                     <th >Semester</th>
                     <th >Volume of Production Local</th>
                     <th >Volume of Production Export</th>
@@ -68,13 +61,13 @@
                 </tr>
             </thead> 
             <tbody>
-                @foreach ($pis as $get_pis)
+                {{-- @foreach ($project->PIS as $get_pis)
                                 <tr>
                                     <td>
                                         <a href="{{ route('Edit PIS', ['id' => $project->prj_id, 'pis_id' => $get_pis->prjpis_id]) }}" class="project-btn mr-1" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
                                         <a href="{{ route('Delete PIS', ['id' => $project->prj_id, 'pis_id' => $get_pis->prjpis_id]) }}" class="project-btn mr-1" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a>
                                     </td>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td></td>
                                     <td>{{ $get_pis->prjpis_year }}</td>
                                     <td>{{ $get_pis->semester->sem_name }}</td>
                                     <td class="text-right">Php {{ number_format($get_pis->prjpis_volume_production_local,2) }}</td>
@@ -85,7 +78,7 @@
                                     <td>{{ date('m/d/Y h:i:s a',strtotime($get_pis->date_encoded))  }} <br> by {{ $get_pis->encoder }}</td>
                                     <td>{{ date('m/d/Y h:i:s a',strtotime($get_pis->last_updated))  }} <br> by {{ $get_pis->updater }}</td>
                                 </tr>
-                @endforeach
+                @endforeach --}}
             </tbody>
 
         </table>
@@ -98,7 +91,7 @@
         paging:         false,
         orderable:      false,
         targets:        0,
-        order: [[ 1, 'asc' ]]
+        order: [[ 1, 'desc' ]]
     }); 
 </script>
 @endsection

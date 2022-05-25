@@ -93,8 +93,7 @@ class PsiProject extends Model
                 })
             ->orWhereHas('usergroup', function($usergroup) use($project_search) {
                 $usergroup->where('ug_name', 'like', "%$project_search%");
-                })
-            ;
+            });
         });
      }
     
@@ -146,8 +145,12 @@ class PsiProject extends Model
     {
         return $this->hasMany('App\Models\ProjectCollaborator', 'prj_id', 'prj_id');
     }
-    public function PIS()
+    public function ProjectPIS()
     {
         return $this->hasMany('App\Models\PIS', 'prj_id', 'prj_id');
+    }
+    public function ProjectProduct()
+    {
+        return $this->hasMany('App\Models\Product', 'prj_id', 'prj_id');
     }
 }

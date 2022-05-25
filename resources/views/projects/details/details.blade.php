@@ -15,6 +15,14 @@
         <div class="project_nav">
             <a class="projectdetails-btn pr" href="{{ route('View Project', $project->prj_id) }}">Project Details</a>
             <a class="projectdetails-btn pr" href="{{ route('PIS', $project->prj_id) }}">PIS</a>
+            <a class="projectdetails-btn pr" href="{{ route('Product', $project->prj_id) }}">Products</a>
+            @if ($project->prj_type_id == 6 || $project->prj_type_id == 12)
+            <a class="projectdetails-btn pr" href="">Monitoring</a>
+            @endif
+            @if($project->prj_type_id == 8 || $project->prj_type_id == 9)
+            <a class="projectdetails-btn pr" href="">Monitoring</a>
+            @endif
+            <a class="projectdetails-btn pr" href="{{ route('Equipment', $project->prj_id) }}">Equipment</a>
         </div>
     </div>
 </div>
