@@ -21,9 +21,19 @@ class ProjectEquipmentController extends Controller
     
         $equipments = Equipment::where('prj_id', $id)->get();
 
-        
-
         //->EqBrand($eq_brand)->EqSearch($eq_search)
         return view('./projects/details/Equipment/index', compact('project', 'equipments', 'sel_brands', 'eq_search'));
+    }
+
+    public function new($id)
+    {
+        {   
+            $project = PsiProject::FindorFail($id);
+            $eq_id = 0;
+            
+    
+            $equipment = new Product;
+            return view('./projects/details/Products/form', compact('project', 'equipment', 'id', 'eq_id'));    
+        } 
     }
 }
