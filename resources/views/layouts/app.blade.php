@@ -15,7 +15,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>
         <title>
           @isset($title)
-              Impression - {{ $title }}
+               {{ $title }} - Impression
           @endisset
         </title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
@@ -174,15 +174,15 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"><i class="fa fa-cog"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Collaborating Agencies</a>
+                    <a class="dropdown-item" href="/collabagency">Collaborating Agencies</a>
                     <a class="dropdown-item" href="/collabcategories">Collaborating Agency Categories</a>
-                    <a class="dropdown-item" href="#">Colsultancy Categories</a>
-                    <a class="dropdown-item" href="#">Document Categories</a>
-                    <a class="dropdown-item" href="#">Equipment Names</a>
+                    <a class="dropdown-item" href="/consultcategory">Colsultancy Categories</a>
+                    <a class="dropdown-item" href="/documentcategory">Document Categories</a>
+                    <a class="dropdown-item" href="/equipmentnames">Equipment Names</a>
                     <a class="dropdown-item" href="#">Location Listings</a>
-                    <a class="dropdown-item" href="#">Organization Categories</a>
-                    <a class="dropdown-item" href="#">Product Units</a>
-                    <a class="dropdown-item" href="#">Project Categories</a>
+                    <a class="dropdown-item" href="/organizationcategories">Organization Categories</a>
+                    <a class="dropdown-item" href="/productunits">Product Units</a>
+                    <a class="dropdown-item" href="/projectcatergories">Project Categories</a>
                     <a class="dropdown-item" href="#">S&T Activity Categories</a>
                     <a class="dropdown-item" href="#">Sectors</a>
                     <a class="dropdown-item" href="#">Technology</a>

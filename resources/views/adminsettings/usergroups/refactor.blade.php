@@ -8,6 +8,8 @@
              <h3>Implementor Refactoring</h3> 
         </div>
 
+        <div class="card-body">
+        
         <div class="alert alert-warning" role="alert">
             <h4>Read me 3X !!!</h4>
             <p>This tool is used to replace the implementors of all records of selected tables with the chosen replacement usergroups. <br>
@@ -17,7 +19,6 @@
             Please make sure to backup the database before refactoring.</p>
         </div>
 
-        <div class="card-body">
             <table class="table table-bordered table-striped table-condensed table-hover">
                 <thead>
                     <th class="text-center">Original Implementor</th>
@@ -80,14 +81,54 @@
             </table>
 
         <div class="alert alert-danger" role="danger">
-            <h4>Read me 3X !!!</h4>
-            <p>This tool is used to replace the implementors of all records of selected tables with the chosen replacement usergroups. <br>
-            This too was created to aid in removing usergroups. <br>
-            Usergroups prefixed with "Laboratory-" are now depreciated and should be replaced/removed. <br>
-            Please add replacement "PSTC-" or "RO-" usergroups beforehand. <br>
-            Please make sure to backup the database before refactoring.</p>
+            <h4>Please confirm that you have done the following :</h4>
+        
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    The user is simply inhuman.
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    A back-up of the database has been made.
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    The user has no idea what the heck is going on.
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    The selected Tables are correct and have been reviewed....multiple times.
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    The selected Usergroups are correct and have been reviewed....multiple times.
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    The user is incapable of reading english.
+                </label>
+            </div>
+
         </div>        
         <input class="btn btn-primary btn-block" type="submit" name="save" id="save" value="Refactor">   
+
+
 
         </div>
     </div>

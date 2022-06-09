@@ -1,14 +1,27 @@
-@extends('./layouts.app', ['title' => 'Collaborating Agency Categories'])
+@extends('./layouts.app', ['title' => 'Product Units'])
 
 @section('content')
 <div class="container-fluid mt-3">
+    
+    @if (session('status'))
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{ session('status') }}
+        </div>
+        @elseif(session('failed'))
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{ session('failed') }}
+        </div>
+    @endif  
+
     <div class="card">
     <div class="card-header">
         <div class="d-flex justify-content-between">
-            <h2>Collaborating Agency Categories</h2>
+            <h2>Product Units</h2>
             <div></div>
                 <div id="buttonz">
-                    <a href="{{ URL::to('collabcategories/create') }}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus" aria-hidden="true"></i>  Add Category</a>
+                    <a href="{{ URL::to('productunits/create') }}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus" aria-hidden="true"></i>  Add Category</a>
                 </div>
 
         </div>  
@@ -16,12 +29,16 @@
     <div class="card-body">
         <div class="row mb-5">
             <div class="col-sm-3">
+
+            <form action="{{ route('productunits.index') }}" method="GET">
                 <div class="input-group input-group-sm">
-                <input type="text" class="form-control" placeholder="Category ..." aria-label="Category ..." aria-describedby="basic-addon2">
+                    <input type="text" class="form-control" name="unit_search" id="unit_search" placeholder="Category ..." aria-label="Category ..." aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">Search</button>
+                        <button class="btn btn-primary" type="submit">Search</button>
                     </div>
                 </div>
+            </form>
+
             </div>
         </div>
 
@@ -30,17 +47,17 @@
                     <tr>
                         <th width="6%">&nbsp;</th>
                         <th width="4%">#</th>
-                        <th >Category</th>
+                        <th >Unit</th>
                     </tr>
                 </thead> 
 
                 <tbody>
-                    @foreach($sel_collabs as $sel_collab) 
+                    @foreach($sel_prods as $sel_prod) 
                         <tr>
                             <td>
                             <div class="d-flex justify-content-start">
-                                <a class="btn btn-primary btn-xs" href="{{ route('collabcategories.edit', $sel_collab->ot_id)}}"><span class="fa fa-pencil"></span></a>&nbsp;
-                                <form action="{{ route('collabcategories.destroy', $sel_collab->ot_id)}}" method="post">
+                                <a class="btn btn-primary btn-xs" href="{{ route('productunits.edit', $sel_prod->unit_id)}}"><span class="fa fa-pencil"></span></a>&nbsp;
+                                <form action="{{ route('productunits.destroy', $sel_prod->unit_id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-primary btn-xs show_confirm" type="submit"><span class="fa fa-close"></span></button>
@@ -48,7 +65,7 @@
                             </div>
                             </td>
                             <td>1</td>
-                            <td>{{  $sel_collab->ot_name  }}</td>
+                            <td>{!!  $sel_prod->unit_name  !!}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -63,6 +80,7 @@
         deferRender:    true,
         searching:      false,
         paging:         true,
+        pageLength:     20,
         orderable:      false,
         targets:        0,
         order: [[ 1, 'desc' ]]

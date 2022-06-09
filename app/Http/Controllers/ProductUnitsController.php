@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProductUnit;
 use Illuminate\Http\Request;
-use App\Models\CollabCategories;
 use Illuminate\Support\Facades\Validator;
 
-class CollabCategoriesController extends Controller
+class ProductUnitsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,13 +15,13 @@ class CollabCategoriesController extends Controller
      */
     public function index(Request $request)
     {
-        $cat_search = $request->input('cat_search');
+        $unit_search = $request->input('unit_search');
 
-        $sel_collabs = CollabCategories::CategorySearch($cat_search)
-        ->orderBy('ot_name', 'ASC')
+        $sel_prods = ProductUnit::ProductUnitSearch($unit_search)
+        ->orderBy('unit_name', 'ASC')
         ->get();
 
-        return view('adminsettings/collabcat.index', compact('sel_collabs',));
+        return view('adminsettings/produnit.index', compact('sel_prods',));
     }
 
     /**
@@ -31,7 +31,7 @@ class CollabCategoriesController extends Controller
      */
     public function create()
     {
-        return view('adminsettings/collabcat.create');
+        return view('adminsettings/produnit.create');
     }
 
     /**
@@ -43,29 +43,29 @@ class CollabCategoriesController extends Controller
     public function store(Request $request)
     {
         $rules = [
-			'ot_name' => 'required|string|min:3|max:255',
+			'unit_name' => 'required|string|min:3|max:255',
 		];
 
         $messages = [
-            'ot_name.required' => 'Category Name field is required.',
+            'unit_name.required' => 'Unit Name field is required.',
         ];
 
         $validator = Validator::make($request->all(),$rules, $messages);
 
         if ($validator->fails()) {
-			return redirect('collabcategories/create')
+			return redirect('productunits/create')
 			->withInput()
 			->withErrors($validator);
 		}else{
             $data = $request->input();
 			try{
-				$category_name = new CollabCategories;
-                $category_name->ot_name = $data['ot_name'];
-				$category_name->save();
-				return redirect('collabcategories')->with('status',"Saved Successfully");
+				$punit_name = new ProductUnit;
+                $punit_name->unit_name = $data['unit_name'];
+				$punit_name->save();
+				return redirect('productunits')->with('status',"Saved Successfully");
 			}
 			catch(Exception $e){
-				return redirect('collabcategories')->with('failed',"Operation Failed");
+				return redirect('productunits')->with('failed',"Operation Failed");
 			}           
         }
     }
@@ -89,9 +89,9 @@ class CollabCategoriesController extends Controller
      */
     public function edit($id)
     {
-        $show_collab = CollabCategories::findOrFail($id);
+        $show_prod = ProductUnit::findOrFail($id);
 
-        return view('adminsettings/collabcat.edit', compact('show_collab'));
+        return view('adminsettings/produnit.edit', compact('show_prod'));
     }
 
     /**
@@ -104,13 +104,13 @@ class CollabCategoriesController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-			'ot_name' => 'required|string|min:3|max:255',
+			'unit_name' => 'required|string|min:3|max:255',
         ]);
 
-        CollabCategories::where("ot_id", "=", $id)->update($validatedData);
+        ProductUnit::where("unit_id", "=", $id)->update($validatedData);
 
 
-        return redirect('collabcategories')->with('status',"Category Updated Successfully");    
+        return redirect('productunits')->with('status',"Unit Updated Successfully"); 
     }
 
     /**
@@ -121,9 +121,9 @@ class CollabCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $show = CollabCategories::findOrFail($id);
+        $show = ProductUnit::findOrFail($id);
         $show->delete();
 
-        return redirect('collabcategories/')->with('status', 'Category Deleted');
+        return redirect('productunits/')->with('status', 'Unit Deleted');
     }
 }

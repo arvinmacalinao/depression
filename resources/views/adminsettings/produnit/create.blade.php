@@ -1,4 +1,4 @@
-@extends('./layouts.app', ['title' => 'Collaborating Agency Categories'])
+@extends('./layouts.app', ['title' => 'Product Units'])
 
 @section('content')
 <div class="container-fluid mt-3">
@@ -14,24 +14,24 @@
         </div>
     @endif  
 
-    <form action="{{route('collabcategories.store')}}" method="post">
+    <form action="{{route('productunits.store')}}" method="post">
     @csrf
     <div class="card">
         <div class="card-header">
             <div class="d-flex justify-content-between">
-                    <h2>Collaborating Agency Categories (Add)</h2>
+                    <h2>Product Units (Add)</h2>
                     <div></div>
                         <div id="buttonz">
-                            <a href="{{ URL::to('collabcategories') }}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>  Back</a>
+                            <a href="{{ URL::to('productunits') }}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>  Back</a>
                         </div>
                 </div>  
         </div>
         <div class="card-body">
             <form>
             <div class="form-group">
-                <label for="ot_name">Category Name *</label>
-                <input type="text" class="form-control" name="ot_name" id="ot_name" aria-describedby="ot_name">
-                @error('ug_name')
+                <label for="unit_name">Unit Name *</label>
+                <input type="text" class="form-control" name="unit_name" id="unit_name" aria-describedby="unit_name">
+                @error('unit_name')
                     <div class="alert alert-danger p-1">{{ $message }}</div>
                 @enderror
             </div>

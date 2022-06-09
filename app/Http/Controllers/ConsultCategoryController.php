@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\CollabCategories;
+use App\Models\ConsultCategories;
 use Illuminate\Support\Facades\Validator;
 
-class CollabCategoriesController extends Controller
+class ConsultCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,13 +15,13 @@ class CollabCategoriesController extends Controller
      */
     public function index(Request $request)
     {
-        $cat_search = $request->input('cat_search');
+        $consult_search = $request->input('consult_search');
 
-        $sel_collabs = CollabCategories::CategorySearch($cat_search)
-        ->orderBy('ot_name', 'ASC')
+        $sel_consults = ConsultCategories::ConsultSearch($consult_search)
+        ->orderBy('con_type_name', 'ASC')
         ->get();
 
-        return view('adminsettings/collabcat.index', compact('sel_collabs',));
+        return view('adminsettings/consultcat.index', compact('sel_consults',));
     }
 
     /**
@@ -31,7 +31,7 @@ class CollabCategoriesController extends Controller
      */
     public function create()
     {
-        return view('adminsettings/collabcat.create');
+        return view('adminsettings/consultcat.create');
     }
 
     /**
@@ -43,29 +43,29 @@ class CollabCategoriesController extends Controller
     public function store(Request $request)
     {
         $rules = [
-			'ot_name' => 'required|string|min:3|max:255',
+			'con_type_name' => 'required|string|min:3|max:255',
 		];
 
         $messages = [
-            'ot_name.required' => 'Category Name field is required.',
+            'con_type_name.required' => 'Category Name field is required.',
         ];
 
         $validator = Validator::make($request->all(),$rules, $messages);
 
         if ($validator->fails()) {
-			return redirect('collabcategories/create')
+			return redirect('consultcategory/create')
 			->withInput()
 			->withErrors($validator);
 		}else{
             $data = $request->input();
 			try{
-				$category_name = new CollabCategories;
-                $category_name->ot_name = $data['ot_name'];
+				$category_name = new ConsultCategories;
+                $category_name->con_type_name = $data['con_type_name'];
 				$category_name->save();
-				return redirect('collabcategories')->with('status',"Saved Successfully");
+				return redirect('consultcategory')->with('status',"Saved Successfully");
 			}
 			catch(Exception $e){
-				return redirect('collabcategories')->with('failed',"Operation Failed");
+				return redirect('consultcategory')->with('failed',"Operation Failed");
 			}           
         }
     }
@@ -89,9 +89,9 @@ class CollabCategoriesController extends Controller
      */
     public function edit($id)
     {
-        $show_collab = CollabCategories::findOrFail($id);
+        $show_consult = ConsultCategories::findOrFail($id);
 
-        return view('adminsettings/collabcat.edit', compact('show_collab'));
+        return view('adminsettings/consultcat.edit', compact('show_consult'));
     }
 
     /**
@@ -104,13 +104,13 @@ class CollabCategoriesController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-			'ot_name' => 'required|string|min:3|max:255',
+			'con_type_name' => 'required|string|min:3|max:255',
         ]);
 
-        CollabCategories::where("ot_id", "=", $id)->update($validatedData);
+        ConsultCategories::where("con_type_id", "=", $id)->update($validatedData);
 
 
-        return redirect('collabcategories')->with('status',"Category Updated Successfully");    
+        return redirect('consultcategory')->with('status',"Category Updated Successfully"); 
     }
 
     /**
@@ -121,9 +121,9 @@ class CollabCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $show = CollabCategories::findOrFail($id);
+        $show = ConsultCategories::findOrFail($id);
         $show->delete();
 
-        return redirect('collabcategories/')->with('status', 'Category Deleted');
+        return redirect('consultcategory/')->with('status', 'Category Deleted');
     }
 }

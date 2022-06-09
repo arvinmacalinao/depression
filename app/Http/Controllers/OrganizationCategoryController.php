@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\CollabCategories;
+use App\Models\OrganizationCategory;
 use Illuminate\Support\Facades\Validator;
 
-class CollabCategoriesController extends Controller
+class OrganizationCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,11 +17,11 @@ class CollabCategoriesController extends Controller
     {
         $cat_search = $request->input('cat_search');
 
-        $sel_collabs = CollabCategories::CategorySearch($cat_search)
-        ->orderBy('ot_name', 'ASC')
+        $sel_orgacats = OrganizationCategory::OrgaCatSearch($cat_search)
+        ->orderBy('ot_cat1_name', 'ASC')
         ->get();
 
-        return view('adminsettings/collabcat.index', compact('sel_collabs',));
+        return view('adminsettings/organizationcat.index', compact('sel_orgacats',));
     }
 
     /**
@@ -31,7 +31,7 @@ class CollabCategoriesController extends Controller
      */
     public function create()
     {
-        return view('adminsettings/collabcat.create');
+        return view('adminsettings/organizationcat.create');
     }
 
     /**
@@ -43,29 +43,29 @@ class CollabCategoriesController extends Controller
     public function store(Request $request)
     {
         $rules = [
-			'ot_name' => 'required|string|min:3|max:255',
+			'ot_cat1_name' => 'required|string|min:3|max:255',
 		];
 
         $messages = [
-            'ot_name.required' => 'Category Name field is required.',
+            'ot_cat1_name.required' => 'Category Name field is required.',
         ];
 
         $validator = Validator::make($request->all(),$rules, $messages);
 
         if ($validator->fails()) {
-			return redirect('collabcategories/create')
+			return redirect('organizationcategories/create')
 			->withInput()
 			->withErrors($validator);
 		}else{
             $data = $request->input();
 			try{
-				$category_name = new CollabCategories;
-                $category_name->ot_name = $data['ot_name'];
+				$category_name = new OrganizationCategory;
+                $category_name->ot_cat1_name = $data['ot_cat1_name'];
 				$category_name->save();
-				return redirect('collabcategories')->with('status',"Saved Successfully");
+				return redirect('organizationcategories')->with('status',"Saved Successfully");
 			}
 			catch(Exception $e){
-				return redirect('collabcategories')->with('failed',"Operation Failed");
+				return redirect('organizationcategories')->with('failed',"Operation Failed");
 			}           
         }
     }
@@ -89,9 +89,9 @@ class CollabCategoriesController extends Controller
      */
     public function edit($id)
     {
-        $show_collab = CollabCategories::findOrFail($id);
+        $show_organ = OrganizationCategory::findOrFail($id);
 
-        return view('adminsettings/collabcat.edit', compact('show_collab'));
+        return view('adminsettings/organizationcat.edit', compact('show_organ'));
     }
 
     /**
@@ -104,13 +104,13 @@ class CollabCategoriesController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-			'ot_name' => 'required|string|min:3|max:255',
+			'ot_cat1_name' => 'required|string|min:3|max:255',
         ]);
 
-        CollabCategories::where("ot_id", "=", $id)->update($validatedData);
+        OrganizationCategory::where("ot_cat1_id", "=", $id)->update($validatedData);
 
 
-        return redirect('collabcategories')->with('status',"Category Updated Successfully");    
+        return redirect('organizationcategories')->with('status',"Category Updated Successfully"); 
     }
 
     /**
@@ -121,9 +121,9 @@ class CollabCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $show = CollabCategories::findOrFail($id);
+        $show = OrganizationCategory::findOrFail($id);
         $show->delete();
 
-        return redirect('collabcategories/')->with('status', 'Category Deleted');
+        return redirect('organizationcategories/')->with('status', 'Category Deleted');
     }
 }

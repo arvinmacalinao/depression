@@ -96,7 +96,7 @@
 
                         </td>
                         <td>1</td>
-                        <td>{{  $d_usergroup->ug_name  }}</td>
+                        <td>{!!  $d_usergroup->ug_name  !!}</td>
                         <td>{{  $d_usergroup->num_users  }}</td>
                         <td>{{  $d_usergroup->ug_display_name  }}</td>
                         <td>{{  $d_usergroup->region_text  }}</td>
@@ -117,6 +117,7 @@
         deferRender:    true,
         searching:      false,
         paging:         true,
+        pageLength:     20,
         orderable:      false,
         targets:        0,
         order: [[ 1, 'desc' ]]

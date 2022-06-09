@@ -1,4 +1,4 @@
-@extends('./layouts.app', ['title' => 'Collaborating Agency Categories'])
+@extends('./layouts.app', ['title' => 'Organization Categories'])
 
 @section('content')
 <div class="container-fluid mt-3">
@@ -14,26 +14,28 @@
         </div>
     @endif  
 
-    <form action="{{route('collabcategories.update', $show_collab->ot_id)}}" method="post">
+    <form action="{{route('organizationcategories.store')}}" method="post">
     @csrf
-    @method('PATCH')
     <div class="card">
         <div class="card-header">
             <div class="d-flex justify-content-between">
-                    <h2>Collaborating Agency Categories (Edit)</h2>
+                    <h2>Organization Categories (Add)</h2>
                     <div></div>
                         <div id="buttonz">
-                            <a href="{{ URL::to('collabcategories') }}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>  Back</a>
+                            <a href="{{ URL::to('organizationcategories') }}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>  Back</a>
                         </div>
                 </div>  
         </div>
         <div class="card-body">
             <form>
             <div class="form-group">
-                <label for="ot_name">Category Name *</label>
-                <input type="text" class="form-control" name="ot_name" id="ot_name" aria-describedby="ot_name" value="{{ $show_collab->ot_name }}">
+                <label for="ot_cat1_name">Category Name *</label>
+                <input type="text" class="form-control" name="ot_cat1_name" id="ot_cat1_name" aria-describedby="ot_cat1_name">
+                @error('ot_cat1_name')
+                    <div class="alert alert-danger p-1">{{ $message }}</div>
+                @enderror
             </div>
-            <input class="btn btn-primary btn-block" type="submit" name="update" id="update" value="Update">
+            <input class="btn btn-primary btn-block" type="submit" name="save" id="save" value="Save">
             </form>           
         </div>
     </div>
