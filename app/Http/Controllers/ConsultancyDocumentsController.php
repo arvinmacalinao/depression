@@ -17,4 +17,17 @@ class ConsultancyDocumentsController extends Controller
 
 		return view('./projects/details/Consultancy/Documents/index', compact('project', 'consultancy', 'ducuments'));    
 	}
+
+	public function new($id, $con_id)
+    {
+        {   
+            $project = PsiProject::FindorFail($id);
+            $consultancy = Consultancy::find($con_id);
+            $doc_id = 0;
+
+            $pgkdesign = PackagingDesign::where('pkg_id',$con_id);
+            
+            return view('./projects/details/Consultancy/Documents/form', compact('project', 'consultancy', 'design', 'id', 'con_id', 'des_id', 'sel_drafts'));
+        } 
+    }
 }

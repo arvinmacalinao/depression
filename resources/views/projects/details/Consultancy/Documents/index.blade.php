@@ -35,7 +35,7 @@
             <thead>
                 <tr>
                     <th width="6%">&nbsp;</th>
-                    <th >#</th>
+                    <th width="3%" style="text-align: center">#</th>
                     <th >Document</th>
                     <th >Remarks</th>
                     <th >Date Uploaded</th>
@@ -55,7 +55,7 @@
                             <a href="" class="project-btn mr-1" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a>
                         </td>
                         <td style="text-align: center">{{ $loop->iteration }}</td>
-                        <td>{{ $ducument->condoc_filename }}</td>
+                        <td><a href="{{ $ducument->condoc_file }}">{{ $ducument->condoc_filename }}</a></td>
                         <td>{{ $ducument->condoc_remarks }}</td>
                         <td>{{ date('m/d/Y',strtotime($ducument->date_encoded)) }}</td>
                     </tr>

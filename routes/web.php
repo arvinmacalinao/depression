@@ -89,6 +89,7 @@ Route::get('project/{id}/Consultancy/delete/{con_id}', 'ProjectConsultancyContro
 // Route::get('project/{id}/Consultancy/{con_id}/view', 'ProjectConsultancyController@view')->name('View Consultancy');
 //(Consultancy Documents)
 Route::get('project/{id}/Consultancy/{con_id}/Documents/', 'ConsultancyDocumentsController@index')->name('Consultancy Documents');
+Route::get('project/{id}/Consultancy/{con_id}/Documents/add', 'ConsultancyDocumentsController@new')->name('New Documents');
 
 
 
