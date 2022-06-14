@@ -100,3 +100,255 @@
 td {
     white-space: nowrap;
 }
+
+
+.form-control .chosen-select{
+    background-color: red;
+
+}
+
+.text-wrap{
+    white-space:normal;
+    font-size : 13px;
+}
+
+.project-btn{
+    background-color: #03A9F4; /* Blue background */
+    border: solid; 
+    border-width: 1px;
+    color: white; /* White text */
+    padding: 4px 5px; /* Some padding */
+    font-size: 12px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+    border-color: #0094d8;
+    text-align: center;
+    border-radius: 0px;
+    padding-top:5px;
+}
+      
+      /* Darker background on mouse-over */
+.project-btn:hover {
+        background-color: #1e7aa5;
+        color: white;
+}
+
+.projectdetails-btn{
+    background-color: #03A9F4; /* Blue background */
+    border: solid; 
+    border-width: 1px;
+    color: white; /* White text */
+    padding: 7px 8px; /* Some padding */
+    font-size: 12px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+    border-color: #0094d8;
+    text-align: center;
+    border-radius: 0px;
+    padding-top:5px;
+}
+  
+  /* Darker background on mouse-over */
+.projectdetails-btn:hover {
+    background-color: #1e7aa5;
+    color: white;
+}
+
+
+
+.project-title{
+    color: #2ab1f0;
+}
+
+.project-type{
+    opacity: 80%;
+    color: #424242;
+}
+
+.form-control-viewproj {
+    display: block;
+    width: 100%;
+    height: calc(2em + 0.40rem + 1px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #363434;
+    background-color: #f3f3f3;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0;
+    border-color: rgb(160, 157, 157);
+}
+
+textarea.form-control-viewproj {
+    height: auto;
+    resize: none;
+  }
+
+.form-control-viewproj:focus {
+    outline: none;
+}
+
+.project_nav .btn{
+    margin-bottom: 4px;
+  
+  }
+.ul-assistance-12{
+  list-style-type: none; 
+  margin-left:-12px;
+}
+.ul-assistance-40{
+    list-style-type: none; 
+    margin-left:-40px;
+  }
+
+.search-btn{
+    background-color: #03A9F4; /* Blue background */
+    border: solid; 
+    border-width: 1px;
+    color: white; /* White text */
+    padding: 10px 15px; /* Some padding */
+    font-size: 12px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+    border-color: #0094d8;
+    text-align: center;
+    border-radius: 0;
+}
+.search-btn:hover {
+    background-color: #1e7aa5;
+    color: white;
+}
+
+.save-btn{
+    background-color: #03A9F4; /* Blue background */
+    width: 100%;
+    border: solid; 
+    border-width: 1px;
+    color: white; /* White text */
+    padding: 7px 8px; /* Some padding */
+    font-size: 14px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+    border-color: #0094d8;
+    text-align: center;
+    border-radius: 0px;
+    padding-top:5px;
+}
+.save-btn:hover {
+    background-color: #1e7aa5;
+    color: white;
+}
+
+.label-primary{
+    background-color: #03A9F4; /* Blue background */
+    width: 100%;
+    color: white; /* White text */
+    padding: 0px 8px; /* Some padding */
+    font-size: 14px; /* Set a font size */
+    border-color: #0094d8;
+    text-align: left;
+    border-radius: 0px;
+    padding-top:5px;
+}
+
+.form-control-sm-upload {
+    height: calc(2em + 0.5rem + 2px);
+    padding: 0.25rem 0.5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+}
+
+.design-btn{
+    background-color: #03A9F4; /* Blue background */
+    border: solid; 
+    border-width: 1px;
+    color: white; /* White text */
+    padding: 1px 4px; /* Some padding */
+    font-size: 12px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+    border-color: #0094d8;
+    text-align: center;
+    border-radius: 0px;
+}
+  
+  /* Darker background on mouse-over */
+.design-btn:hover {
+    background-color: #1e7aa5;
+    color: white;
+}
+.design-danger-btn{
+    background-color: #ff1b1b; /* Blue background */
+    border: solid; 
+    border-width: 1px;
+    color: white; /* White text */
+    padding: 1px 4px; /* Some padding */
+    font-size: 12px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+    border-color: #ce4c4c;
+    text-align: center;
+    border-radius: 0px;
+}
+  
+  /* Darker background on mouse-over */
+.design-danger-btn:hover {
+    background-color: #b42626;
+    color: white;
+}
+
+div.img_box{
+    display: inline-block;
+    width: 200px;
+    border: 1px solid #c0c0c0;
+    margin-bottom: 10px;
+    padding: 0;
+    background: #d0d0d0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  div.img_box:hover{
+    border: 1px solid #660000;
+    background: #660000;
+    color: #fff;
+  }
+  
+  div.img_box_clipper{
+    display: block;
+    overflow: hidden;
+    height: 100px;
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+  
+  img.img_box_thumbnail{
+    display: block;
+    width: 100%;  
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+  
+  div.well-scroller{
+    height:190px;
+    overflow: auto;
+  }
+
+  .upload-btn{
+    background-color: #8bc34a; /* Blue background */
+    border: solid; 
+    border-width: 1px;
+    color: white; /* White text */
+    padding: 7px 8px; /* Some padding */
+    font-size: 12px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+    border-color: #7eb73d;
+    text-align: center;
+    border-radius: 0px;
+    padding-top:5px;
+}
+  
+  /* Darker background on mouse-over */
+.upload-btn:hover {
+    background-color: #628a35;
+    color: white;
+}
