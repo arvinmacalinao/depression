@@ -7,7 +7,7 @@
         </h4>
         <p> 
             Beneficiaries: @foreach ($project->ProjectBeneficiary as $get_beneficiaries)
-            {{ $get_beneficiaries->cooperator->coop_name }}, 
+            {!! $get_beneficiaries->cooperator->coop_name !!}, 
                         @endforeach
             <br>
             Project Encoded on {{ date('m/d/Y h:i:s a',strtotime($project->date_encoded))  }} by {{ $project->encoder }}            
@@ -19,10 +19,13 @@
             @if ($project->prj_type_id == 6 || $project->prj_type_id == 12)
             <a class="projectdetails-btn pr" href="">Monitoring</a>
             @endif
-            @if($project->prj_type_id == 8 || $project->prj_type_id == 9)
+            @if($project->prj_type_id == 8 || $project->prj_type_id == 9 || $project->prj_type_id == 13 || $project->prj_type_id == 14)
             <a class="projectdetails-btn pr" href="">Monitoring</a>
             @endif
             <a class="projectdetails-btn pr" href="{{ route('Equipment', $project->prj_id) }}">Equipment</a>
+            <a class="projectdetails-btn pr" href="{{ route('Calibration', $project->prj_id) }}">Testings & Calibrations</a>
+            <a class="projectdetails-btn pr" href="{{ route('Packaging', $project->prj_id) }}">Packaging & Labeling</a>
+            <a class="projectdetails-btn pr" href="{{ route('Consultancy', $project->prj_id) }}">Consultancies</a>
         </div>
     </div>
 </div>

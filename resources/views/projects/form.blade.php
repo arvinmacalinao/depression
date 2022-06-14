@@ -8,7 +8,7 @@
         <div class="card-header">
             <h3>Add Project</h3>
             <div class="pull-right">
-                <a href="/projects" class="btn btn-primary">Back</a>
+                <a href="{{ URL::previous() }}" class="projectdetails-btn pr"><span class="fa fa-arrow-circle-left"> Back</a>
             </div>
         </div>
         
@@ -190,6 +190,7 @@
                         <label for="province_id" class="control-label">Province</label>
                         <select class="form-control input-sm province_select" id="province_id" name="province_id" placeholder="Select Province">
                             {{-- <option selected="false">--Select Province--</option> --}}
+                            <option disabled selected value>--Select Province--</option>
                             @foreach ($sel_provinces as $sel_province)
                             <option value="{{ $sel_province->province_id }}" {{ old('province_id', $project->province_id) == $sel_province->province_id ? 'selected' : '' }}>{{ $sel_province->province_name }}</option>
                             @endforeach
@@ -201,6 +202,7 @@
                         <select class="form-control input-sm city_select" id="city_id" name="city_id">
                             {{-- <option value="{{ old('city_id', $project->city_id) }}">{{ $project->city->city_name }}</option> --}}
                             {{-- <option selected="false"></option> --}}
+                            <option disabled selected value>--Select City--</option>
                             @foreach ($sel_cities as $sel_city)
                             <option value="{{ $sel_city->city_id }}" {{ old('city_id', $project->city_id) == $sel_city->city_id ? 'selected' : '' }}>{{ $sel_city->city_name }}</option>
                             @endforeach
@@ -212,7 +214,10 @@
                         {{-- <select class="form-control input-sm barangay_select" id="barangay_id" name="barangay_id">
                         </select> --}}
                         <select class="form-control input-sm barangay_select" id="barangay_id" name="barangay_id">
-                            <option value="{{ old('barangay_id', $project->barangay_id) }}">{{ $project->barangay->barangay_name }}</option>
+                            <option disabled selected value>--Select Barangay--</option>
+                            {{-- @foreach ($sel_barangays as $barangay)
+                            <option value="{{ $barangay->barangay_id }}" {{ old('barangay_id', $project->barangay_id) == $barangay->barangay_id ? 'selected' : '' }}>{{ $barangay->barangay_name }}</option>
+                            @endforeach --}}
                             {{-- <option {{ old('barangay_id', $project->barangay_id) }}>{{ $project->barangay->barangay_name }}</option> --}}
                         </select>
                     </div>
@@ -699,8 +704,6 @@ $(document).ready(function() {
     var provinceid = $("#province_id :selected").val(); 
     var cityid = $("#city_id :selected").val();
     var barangayid = $("#barangay_id :selected").val();
-    
-    alert(barangayid);
 
     if(type == 6 || type == 12) {
         $(".project-type-rtgg").hide();    

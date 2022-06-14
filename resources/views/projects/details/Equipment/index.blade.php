@@ -13,8 +13,8 @@
     <div class="card-header">                  
         <h3>Project Equipment
             <div class="pull-right">
-                <a href="" class="projectdetails-btn pr"><span class="fa fa-plus"></span> Add Equipment</a>
-                {{-- {{ route('New Product', $project->prj_id) }} --}}
+                <a href="{{ route('New Equipment', $project->prj_id) }}" class="projectdetails-btn pr"><span class="fa fa-plus"></span> Add Equipment</a>
+                
             </div>
         </h3>
     </div>
@@ -53,7 +53,7 @@
                     <th width="25%">Equipment Specs</th>
                     <th >Name</th>
                     <th >Improvement</th>
-                    <th >Qty</th>
+                    <th width="3%">Qty</th>
                     <th >Amount Approved</th>
                     <th >Provider</th>
                     <th >Remarks</th>
@@ -63,12 +63,9 @@
                 @foreach ($equipments as $equipment)
                                 <tr>
                                     <td>
-                                        {{-- {{ route('Edit PIS', ['id' => $project->prj_id, 'eq_id' => $equipment->eqp_id]) }} --}}
-                                        {{-- {{ route('Delete PIS', ['id' => $project->prj_id, 'eq_id' => $equipment->eqp_id]) }} --}}
-                                        {{-- {{ route('View Project', ['id' => $project->prj_id, 'eq_id' => $equipment->eqp_id]) }} --}}
-                                        <a href="" class="project-btn mr-1" title="View"><i class="fa fa-folder-open-o"></i></a>
-                                        <a href="" class="project-btn mr-1" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
-                                        <a href="" class="project-btn mr-1" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                        <a href="{{ route('View Equipment', ['id' => $project->prj_id, 'eq_id' => $equipment->eqp_id]) }}" class="project-btn mr-1" title="View"><i class="fa fa-folder-open-o"></i></a>
+                                        <a href="{{ route('Edit Equipment', ['id' => $project->prj_id, 'eq_id' => $equipment->eqp_id]) }}" class="project-btn mr-1" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
+                                        <a href="{{ route('Delete Equipment', ['id' => $project->prj_id, 'eq_id' => $equipment->eqp_id]) }}" class="project-btn mr-1" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a>
                                     </td>
                                     <td>{{ $equipment->eqp_property_no }}</td>
                                     <td class="text-wrap">
