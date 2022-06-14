@@ -182,12 +182,12 @@
                     <a class="dropdown-item" href="#">Location Listings</a>
                     <a class="dropdown-item" href="/organizationcategories">Organization Categories</a>
                     <a class="dropdown-item" href="/productunits">Product Units</a>
-                    <a class="dropdown-item" href="/projectcatergories">Project Categories</a>
-                    <a class="dropdown-item" href="#">S&T Activity Categories</a>
-                    <a class="dropdown-item" href="#">Sectors</a>
-                    <a class="dropdown-item" href="#">Technology</a>
+                    <a class="dropdown-item" href="/projectcategories">Project Categories</a>
+                    <a class="dropdown-item" href="/activitycategories">S&T Activity Categories</a>
+                    <a class="dropdown-item" href="/sectors">Sectors</a>
+                    <a class="dropdown-item" href="/technologies">Technology</a>
                   <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Course Categories</a>
+                    <a class="dropdown-item" href="/coursecategory">Course Categories</a>
                     <a class="dropdown-item" href="#">Courses</a>
                     <a class="dropdown-item" href="#">Scholarship Programs</a>
                     <a class="dropdown-item" href="#">Schools</a>

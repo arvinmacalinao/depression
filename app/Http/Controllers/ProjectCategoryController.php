@@ -160,6 +160,9 @@ class ProjectCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $show = ProjectCategory::findOrFail($id);
+        $show->delete();
+
+        return redirect('projectcatergories/')->with('status', 'Category Deleted');
     }
 }

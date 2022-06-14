@@ -30,7 +30,11 @@ Route::match(['put', 'patch'],'equipmentnames/{documentcategory}/update', 'Equip
 Route::resource('equipmentnames', 'EquipmentNameController');
 Route::resource('organizationcategories', 'OrganizationCategoryController');
 Route::resource('productunits', 'ProductUnitsController');
-Route::resource('projectcatergories', 'ProjectCategoryController');
+Route::resource('projectcategories', 'ProjectCategoryController');
+Route::resource('activitycategories', 'ActivityCategoriesController');
+Route::resource('sectors', 'SectorController');
+Route::resource('technologies', 'TechnologiesContoller');
+Route::resource('coursecategory', 'CourseCategoryController');
 Route::get('usergroups/create', 'UserGroupsController@create');
 Route::post('store','UserGroupsController@store');
 Route::get('usergroup/refactor', 'UserGroupsController@refactor_index');
