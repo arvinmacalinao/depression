@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="csrf-token" content=" {{ csrf_token() }} ">
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-      
+    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content=" {{ csrf_token() }} ">
+        
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+        <!-- CSS only -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>
+        <title>
+          @isset($title)
+               {{ $title }} - Impression
+          @endisset
+        </title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        <link href='https://fonts.googleapis.com/css?family=Roboto:500,900,100,300,700,400' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
       {{-- CSS --}}
       <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
       <link href="{{ asset('css/app.css') }}" rel="stylesheet"/>
@@ -47,15 +62,12 @@
       {{-- Date Picker --}}
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-
-
-      <title>Depression</title>
     </head>
 
     <body>
     <!--Navbar -->
-    <nav class="navbar navbar-expand-md navbar">
-          <a class="navbar-brand" href="./" style="margin-right: 0%">
+    <nav class="navbar navbar-expand-lg navbar">
+          <a class="navbar-brand" href="/" style="margin-right: 0%">
             <img src="{{URL::asset('/images/brand_white.png')}}" width="25" height="25" alt="">
           </a>
           
@@ -74,13 +86,15 @@
 
             <li class="nav-item">
               <form class="form-inline my-2 my-lg-0 ml-3">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
-                    </div>
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
-                    </div>
+              <div class="input-group ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fa fa-search"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="Search">
+                  <div class="input-group-append">
+                    <button class="btn btn-success btn-sm" type="button" id="button-addon2">Search</button>
+                  </div>
+              </div>
                 </form>
             </li>
           </ul>
@@ -93,7 +107,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-signal"></i>
                 BSC
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="#">Customer Perspective</a>
                   <a class="dropdown-item" href="#">Financial Perspective</a>
                   <a class="dropdown-item" href="#">Internal Process Perspective</a>
@@ -105,11 +119,17 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-industry"></i>
                 Projects
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{{ route('Projects') }}">All Projects</a>
-                  <a class="dropdown-item" href="#">Status Reports</a>
+                
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">All Projects</a>
+                  <a class="dropdown-item" href="/statreport">Status Reports</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/projects/gallery">Project Gallery</a>
+                  <a class="dropdown-item" href="/project-collage">Project Gallery</a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{{ route('Projects') }}">All Projects</a>
+                  <a class="dropdown-item" href="/statreport">Status Reports</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/project-collage">Project Gallery</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Project Data Quality Monitoring</a>
                   <a class="dropdown-item" href="#">Project Document Files Monitoring</a>
@@ -124,7 +144,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-wrench"></i>
                 Others
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="#">Possible Problematic SETUP Projects March 2022</a>
                   <a class="dropdown-item" href="#">User Activity 2022</a>
                   <div class="dropdown-divider"></div>
@@ -156,36 +176,36 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-address-card"></i>
                 Contacts
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="#">Cooperators</a>
                   <a class="dropdown-item" href="#">Service Providers</a>
                 </div>
               </li>
             
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"><i class="fa fa-cog"></i>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Collaborating Agencies</a>
-                    <a class="dropdown-item" href="#">Collaborating Agency Categories</a>
-                    <a class="dropdown-item" href="#">Colsultancy Categories</a>
-                    <a class="dropdown-item" href="#">Document Categories</a>
-                    <a class="dropdown-item" href="#">Equipment Names</a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/collabagency">Collaborating Agencies</a>
+                    <a class="dropdown-item" href="/collabcategories">Collaborating Agency Categories</a>
+                    <a class="dropdown-item" href="/consultcategory">Colsultancy Categories</a>
+                    <a class="dropdown-item" href="/documentcategory">Document Categories</a>
+                    <a class="dropdown-item" href="/equipmentnames">Equipment Names</a>
                     <a class="dropdown-item" href="#">Location Listings</a>
-                    <a class="dropdown-item" href="#">Organization Categories</a>
-                    <a class="dropdown-item" href="#">Product Units</a>
-                    <a class="dropdown-item" href="#">Project Categories</a>
-                    <a class="dropdown-item" href="#">S&T Activity Categories</a>
-                    <a class="dropdown-item" href="#">Sectors</a>
-                    <a class="dropdown-item" href="#">Technology</a>
+                    <a class="dropdown-item" href="/organizationcategories">Organization Categories</a>
+                    <a class="dropdown-item" href="/productunits">Product Units</a>
+                    <a class="dropdown-item" href="/projectcategories">Project Categories</a>
+                    <a class="dropdown-item" href="/activitycategories">S&T Activity Categories</a>
+                    <a class="dropdown-item" href="/sectors">Sectors</a>
+                    <a class="dropdown-item" href="/technologies">Technology</a>
                   <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Course Categories</a>
+                    <a class="dropdown-item" href="/coursecategory">Course Categories</a>
                     <a class="dropdown-item" href="#">Courses</a>
                     <a class="dropdown-item" href="#">Scholarship Programs</a>
                     <a class="dropdown-item" href="#">Schools</a>
                   <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Users</a>
-                    <a class="dropdown-item" href="#">User Groups</a>
+                    <a class="dropdown-item" href="/usergroups">User Groups</a>
                     <a class="dropdown-item" href="#">User Logs</a>
                   <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Agency Profile</a>
@@ -195,7 +215,7 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell"></i>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="#">Project Data Quality Monitoring</a>
                   <a class="dropdown-item" href="#">Project Document Files Monitoring</a>
                   <a class="dropdown-item" href="#">Project Liquidation Monitoring</a>
@@ -205,7 +225,7 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle"></i>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="#"><i class="fa fa-user"></i>Profile</a>
                   <a class="dropdown-item" href="#"><i class="fa fa-power-off"></i>Logout</a>
                 </div>
@@ -215,8 +235,6 @@
   </nav>
         @yield('content')
     </body>
-    
-    
     <footer class="footer">
          <div class="text-center">
               <a href="https://impression.dostcalabarzon.ph/privacy_policy.php" class="btn btn-danger mb-2" title="Privacy Policy">Privacy Policy</a>
@@ -230,4 +248,5 @@
          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMDx-ejfVStxIBhfqtBuLj98OV79kqbdY&callback=initMap&libraries=&v=weekly"
          async
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
 </html>

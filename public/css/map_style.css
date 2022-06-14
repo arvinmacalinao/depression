@@ -46,3 +46,97 @@ div.map-filter {
   line-height : 15px;
 }
 
+.text-wrap{
+  white-space:normal;
+  font-size : 13px;
+}
+#qyr{
+  width:100px;
+}
+
+.lds-dual-ring.hidden { 
+  display: none;
+  }
+  .lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 5% auto;
+    border-radius: 50%;
+    border: 6px solid #18FFFF;
+    border-color: #18FFFF transparent #18FFFF transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  
+  .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(0,0,0,.8);
+      z-index: 999;
+      opacity: 1;
+      transition: all 0.5s;
+  }
+
+  .collage-image {
+    display:inline-block;
+    width:320px;
+    height:180px;
+    margin-right:6px;
+    background-color:#e0e0e0;
+    background-size:cover;
+    border:1px solid #ccc
+  }
+
+  .collage-images {
+    padding-left:4px;
+  }
+
+  .collapsible {
+    background-color: #2AB1F0;
+    color: white;
+    cursor: pointer;
+    border: none;
+    text-align: left;
+    outline: none;
+  }
+  
+  .active, .collapsible:hover {
+    background-color: #3490DC;
+  }
+  
+  .content {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #F7F7F7;
+  }
+
+  .tago {
+    display: none;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .navbar-end .navbar-dropdown:last-child {
+        left: -35px;
+    }
+  }
+

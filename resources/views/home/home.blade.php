@@ -1,4 +1,4 @@
-@extends('./layouts.app')
+@extends('./layouts.app' , ['title' => 'Home'])
 
 @section('content')
 <div id="map_canvas">
@@ -425,12 +425,12 @@ function setIcons(){ // Setting and Placing Icons
             });
 
             const infowindow = new google.maps.InfoWindow({
-                content: "{{$icon->prj_title}}",
+                content: "{!! $icon->prj_title !!}",
             });
 
             p1.addListener('click', function() {
                 pj_addrs = `{{$icon->prj_address}}`;
-                pj_title = "{{$icon->prj_title}}";
+                pj_title = "{!! $icon->prj_title !!}";
                 pj_prjcode = "{{$icon->prj_code}}";
                 pj_prjya = "{{$icon->prj_year_approved}}";
                 pj_prjstat = "{{$icon->prj_status_id}}";
@@ -440,7 +440,7 @@ function setIcons(){ // Setting and Placing Icons
                 pj_distName = "{{$icon->district_name}}";
                 pj_prjtype = "{{$icon->prj_type_name}}";
                 pj_sector= "{{$icon->sector_name}}";
-                pj_coop = "{{$icon->coop_names}}";
+                pj_coop = "{!! $icon->coop_names !!}";
                 pj_collab = "{{$icon->collaborator_names}}";
                 res_loc = pj_region + "," + pj_provname + "," + pj_distName
 
@@ -477,7 +477,7 @@ function setIcons(){ // Setting and Placing Icons
                     window.document.getElementById("b_prj_status_name").innerText = "Completed";
                 }      
                 
-                $("a").attr("href", "https://hazardhunter.georisk.gov.ph/index.php?" + "lat=" + {{$icon->prj_latitude}} + "&lng=" + {{$icon->prj_longitude}});
+                $("#hazardlink").attr("href", "https://hazardhunter.georisk.gov.ph/index.php?" + "lat=" + {{$icon->prj_latitude}} + "&lng=" + {{$icon->prj_longitude}});
 
                 $('#mf_modal').modal('show');
             });
