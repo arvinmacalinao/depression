@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid mt-3">
 
-    <form action="{{route('projectcatergories.update', $show_projtypes->prj_type_id)}}" method="post">
+    <form action="{{route('projectcategories.update', $show_projtypes->prj_type_id)}}" method="post">
     @csrf
     @method('PATCH')
     <div class="card">
@@ -12,7 +12,7 @@
                     <h2>Project Categories (Edit)</h2>
                     <div></div>
                         <div id="buttonz">
-                            <a href="{{ URL::to('projectcatergories') }}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>  Back</a>
+                            <a href="{{ URL::to('projectcategories') }}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>  Back</a>
                         </div>
                 </div>  
         </div>

@@ -69,7 +69,7 @@ class ProjectCategoryController extends Controller
         $validator = Validator::make($request->all(),$rules, $messages);
 
         if ($validator->fails()) {
-			return redirect('projectcatergories/create')
+			return redirect('projectcategories/create')
 			->withInput()
 			->withErrors($validator);
 		}else{
@@ -88,10 +88,10 @@ class ProjectCategoryController extends Controller
                 $project_category->doctype_names = $data['doctype_names'];
 
 				$project_category->save();
-				return redirect('projectcatergories')->with('status',"Saved Successfully");
+				return redirect('projectcategories')->with('status',"Saved Successfully");
 			}
 			catch(Exception $e){
-				return redirect('projectcatergories')->with('failed',"Operation Failed");
+				return redirect('projectcategories')->with('failed',"Operation Failed");
 			}           
         }
     }
@@ -149,7 +149,7 @@ class ProjectCategoryController extends Controller
         ProjectCategory::where("prj_type_id", "=", $id)->update($validatedData);
 
 
-        return redirect('projectcatergories')->with('status',"Category Updated Successfully"); 
+        return redirect('projectcategories')->with('status',"Category Updated Successfully"); 
     }
 
     /**
@@ -163,6 +163,6 @@ class ProjectCategoryController extends Controller
         $show = ProjectCategory::findOrFail($id);
         $show->delete();
 
-        return redirect('projectcatergories/')->with('status', 'Category Deleted');
+        return redirect('projectcategories/')->with('status', 'Category Deleted');
     }
 }

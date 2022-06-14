@@ -18,6 +18,6 @@ class Album extends Model
     }
 
     public function project(){
-        return $this->belongsTo('App\psi_projects', 'prj_id', 'prj_id');
+        return $this->belongsTo('App\Markers', 'prj_id', 'prj_id');
     }
 }

@@ -21,7 +21,7 @@
             <h2>Project Categories</h2>
             <div></div>
                 <div id="buttonz">
-                    <a href="{{ URL::to('projectcatergories/create') }}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus" aria-hidden="true"></i>  Add Category</a>
+                    <a href="{{ URL::to('projectcategories/create') }}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus" aria-hidden="true"></i>  Add Category</a>
                 </div>
 
         </div>  
@@ -30,7 +30,7 @@
         <div class="row mb-5">
             <div class="col-sm-3">
 
-            <form action="{{ route('projectcatergories.index') }}" method="GET">
+            <form action="{{ route('projectcategories.index') }}" method="GET">
                 <div class="input-group input-group-sm">
                     <input type="text" class="form-control" name="projtype_search" id="projtype_search" placeholder="Category ..." aria-label="Category ..." aria-describedby="basic-addon2">
                     <div class="input-group-append">
@@ -59,8 +59,8 @@
                         <tr>
                             <td>
                             <div class="d-flex justify-content-start">
-                                <a class="btn btn-primary btn-xs" href="{{ route('projectcatergories.edit', $sel_prjtype->prj_type_id)}}"><span class="fa fa-pencil"></span></a>&nbsp;
-                                <form action="{{ route('projectcatergories.destroy', $sel_prjtype->prj_type_id)}}" method="post">
+                                <a class="btn btn-primary btn-xs" href="{{ route('projectcategories.edit', $sel_prjtype->prj_type_id)}}"><span class="fa fa-pencil"></span></a>&nbsp;
+                                <form action="{{ route('projectcategories.destroy', $sel_prjtype->prj_type_id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-primary btn-xs show_confirm" type="submit"><span class="fa fa-close"></span></button>
