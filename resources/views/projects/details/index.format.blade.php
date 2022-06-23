@@ -85,7 +85,7 @@
                                         <a href="{{ route('Edit PIS', ['id' => $project->prj_id, 'pis_id' => $get_pis->prjpis_id]) }}" class="project-btn mr-1" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
                                         <a href="{{ route('Delete PIS', ['id' => $project->prj_id, 'pis_id' => $get_pis->prjpis_id]) }}" class="project-btn mr-1" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a>
                                     </td>
-                                    <td></td>
+                                    <td style="text-align: center">{{ $loop->iteration }}</td>
                                     <td>{{ $get_pis->prjpis_year }}</td>
                                     <td>{{ $get_pis->semester->sem_name }}</td>
                                     <td class="text-right">Php {{ number_format($get_pis->prjpis_volume_production_local,2) }}</td>

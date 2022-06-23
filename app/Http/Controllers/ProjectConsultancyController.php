@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Quarter;
 use App\Models\PsiProject;
 use App\Models\Consultancy;
@@ -16,11 +17,15 @@ class ProjectConsultancyController extends Controller
     {
         $project = PsiProject::FindorFail($id);
 
+        $con_cat = $request->get('qcat');
+        $con_year = $request->get('qyear');
+        // $con_qtr = $request->get('qqtr');
+
         $sel_category = ConsultancyType::orderBy('con_type_id', 'asc')->get();
         $sel_years = Consultancy::groupBy('con_end_yr')->orderBy('con_end_yr', 'asc')->get();
         $sel_quarters = Quarter::orderBy('quarter_id', 'asc')->get();
 
-        $consultancies = Consultancy::where('prj_id', $id)->get();
+        $consultancies = Consultancy::where('prj_id', $id)->ConCat($con_cat)->ConYear($con_year)->get();
 
         return view('./projects/details/Consultancy/index', compact('project', 'consultancies', 'sel_category', 'sel_years', 'sel_quarters'));
     }
@@ -28,11 +33,11 @@ class ProjectConsultancyController extends Controller
     public function new($id)
     {
         {   
-            $project = PsiProject::FindorFail($id);
-            $con_id = 0;
+            $project        =   PsiProject::FindorFail($id);
+            $con_id         =   0;
             
-            $sel_suppliers = ServiceProvider::OrderBy('sp_name', 'asc')->get();
-            $sel_categories = ConsultancyType::orderBy('con_type_id', 'asc')->get();
+            $sel_suppliers  =   ServiceProvider::OrderBy('sp_name', 'asc')->get();
+            $sel_categories =   ConsultancyType::orderBy('con_type_id', 'asc')->get();
             
             $consultancy = new Consultancy;
 
@@ -42,13 +47,21 @@ class ProjectConsultancyController extends Controller
 
     public function store(Request $request, $id, $con_id)
     {
-        $projectdetails = PsiProject::FindorFail($id);
-        $coops = ProjectBeneficiary::where('prj_id', $id)->get();
-        $con_name = ConsultancyType::where('con_type_id', $request->con_type_id)->value('con_type_name');
-        $sp_name = ServiceProvider::where('sp_id', $request->sp_id)->value('sp_name');
+        $start_time       =   $request->request->get('con_start');
+        $end_time         =   $request->request->get('con_end');
+
+        $start_year       =   Carbon::createFromFormat('Y-m-d', $start_time)->year;
+        $start_month      =   Carbon::createFromFormat('Y-m-d', $start_time)->month;
+        
+        $end_year         =   Carbon::createFromFormat('Y-m-d', $end_time)->year;
+        $end_month        =   Carbon::createFromFormat('Y-m-d', $end_time)->month;
+
+        $projectdetails   =   PsiProject::FindorFail($id);
+        $coops            =   ProjectBeneficiary::where('prj_id', $id)->get();
+        $con_name         =   ConsultancyType::where('con_type_id', $request->con_type_id)->value('con_type_name');
+        $sp_name          =   ServiceProvider::where('sp_id', $request->sp_id)->value('sp_name');
 
         $rescoop = '';
-        
         if(strlen($coops) == 0){
             $request->request->add(['coop_name' => NULL]);
         }
@@ -100,7 +113,12 @@ class ProjectConsultancyController extends Controller
             }
             
             
-            
+            $request->request->add(['con_start_yr' => $start_year]);
+            $request->request->add(['con_start_mo' => $start_month]);
+            $request->request->add(['con_end_yr' => $end_year]);
+            $request->request->add(['con_end_mo' => $end_month]);
+
+
             $request->request->add(['sp_name' => $sp_name]);
             $request->request->add(['con_type_name' => $con_name]);
             $request->request->add(['ug_id' => $projectdetails->ug_id]);

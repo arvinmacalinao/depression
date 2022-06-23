@@ -16,11 +16,19 @@ class ConsultancyDocuments extends Model
     // {
     //     return $this->belongsTo('App\Models\DraftLevel', 'draftlevel_id', 'draftlevel_id');
     // }
+    
+    public function scopeDocSearch($query, $doc_search)
+    {
+        return $query->where(function($query) use($doc_search) {
+             $query->where('condoc_file', 'like', "%$doc_search%")->orwhere('condoc_filename', 'like', "%$doc_search%")
+             ->orwhere('condoc_remarks', 'like', "%$doc_search%");
+        });
+    }
 
-    // public function photo1()
-    // {
-    //     if(\Storage::disk('uploads')->exists('designs/'.$this->design_image1)) {
-    //         return asset('storage/uploads/designs/'.$this->design_image1);
-    //     }
-    // }
+    public function document1()
+    {
+        if(\Storage::disk('uploads')->exists('documents/'.$this->condoc_file)) {
+            return asset('storage/uploads/documents/'.$this->condoc_file);
+        }
+    }
 }

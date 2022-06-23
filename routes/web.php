@@ -63,24 +63,24 @@ Route::get('project/delete/{id}', 'PsiProjectsController@delete')->name('Delete 
 
 //Project Details
 
-//PIS
+//Project PIS
 Route::get('project/{id}/PIS/', 'ProjectPISController@index')->name('PIS');
 Route::get('project/{id}/PIS/add', 'ProjectPISController@new')->name('New PIS');
 Route::post('project/{id}/PIS/store/{pis_id}', 'ProjectPISController@store')->name('PIS Save');
 Route::get('project/{id}/PIS/delete/{pis_id}', 'ProjectPISController@delete')->name('Delete PIS');
 Route::get('project/{id}/PIS/edit/{pis_id}', 'ProjectPISController@edit')->name('Edit PIS');
 
-//Products
+//Project Products
 Route::get('project/{id}/Product/', 'ProjectProductController@index')->name('Product');
 Route::get('project/{id}/Product/add', 'ProjectProductController@new')->name('New Product');
 Route::post('project/{id}/Product/store/{prod_id}', 'ProjectProductController@store')->name('Product Save');
 Route::get('project/{id}/Product/delete/{prod_id}', 'ProjectProductController@delete')->name('Delete Product');
 Route::get('project/{id}/Product/edit/{prod_id}', 'ProjectProductController@edit')->name('Edit Product');
 
-//Monitoring
-//Monitoring2
+//Project Monitoring
+//Project Monitoring2
 
-//Equipment
+//Project Equipment
 Route::get('project/{id}/Equipment/', 'ProjectEquipmentController@index')->name('Equipment');
 Route::get('project/{id}/Equipment/add', 'ProjectEquipmentController@new')->name('New Equipment');
 Route::post('project/{id}/Equipment/store/{eq_id}', 'ProjectEquipmentController@store')->name('Equipment Save');
@@ -88,14 +88,14 @@ Route::get('project/{id}/Equipment/edit/{eq_id}', 'ProjectEquipmentController@ed
 Route::get('project/{id}/Equipment/delete/{eq_id}', 'ProjectEquipmentController@delete')->name('Delete Equipment');
 Route::get('project/{id}/Equipment/{eq_id}/view', 'ProjectEquipmentController@view')->name('View Equipment');
 
-//Calibration
+//Project Calibration
 Route::get('project/{id}/Calibration/', 'ProjectCalibrationController@index')->name('Calibration');
 Route::get('project/{id}/Calibration/add', 'ProjectCalibrationController@new')->name('New Calibration');
 Route::post('project/{id}/Calibration/store/{cal_id}', 'ProjectCalibrationController@store')->name('Calibration Save');
 Route::get('project/{id}/Calibration/edit/{cal_id}', 'ProjectCalibrationController@edit')->name('Edit Calibration');
 Route::get('project/{id}/Calibration/delete/{cal_id}', 'ProjectCalibrationController@delete')->name('Delete Calibration');
 
-//Packaging and Labeling
+//Project Packaging and Labeling
 Route::get('project/{id}/Packaging/', 'ProjectPackagingController@index')->name('Packaging');
 Route::get('project/{id}/Packaging/add', 'ProjectPackagingController@new')->name('New Packaging');
 Route::post('project/{id}/Packaging/store/{pack_id}', 'ProjectPackagingController@store')->name('Packaging Save');
@@ -109,17 +109,43 @@ Route::post('project/{id}/Packaging/{pack_id}/store/{des_id}', 'PackagingDesignC
 Route::get('project/{id}/Packaging/{pack_id}/delete/{des_id}', 'PackagingDesignController@delete')->name('Delete Design');
 Route::get('project/{id}/Packaging/{pack_id}/edit/{des_id}', 'PackagingDesignController@edit')->name('Edit Design');
 
-//Consultancy
+//Project Consultancy
 Route::get('project/{id}/Consultancy/', 'ProjectConsultancyController@index')->name('Consultancy');
 Route::get('project/{id}/Consultancy/add', 'ProjectConsultancyController@new')->name('New Consultancy');
 Route::post('project/{id}/Consultancy/store/{con_id}', 'ProjectConsultancyController@store')->name('Consultancy Save');
 Route::get('project/{id}/Consultancy/edit/{con_id}', 'ProjectConsultancyController@edit')->name('Edit Consultancy');
 Route::get('project/{id}/Consultancy/delete/{con_id}', 'ProjectConsultancyController@delete')->name('Delete Consultancy');
 // Route::get('project/{id}/Consultancy/{con_id}/view', 'ProjectConsultancyController@view')->name('View Consultancy');
-//(Consultancy Documents)
+//(Project Consultancy Documents)
 Route::get('project/{id}/Consultancy/{con_id}/Documents/', 'ConsultancyDocumentsController@index')->name('Consultancy Documents');
-Route::get('project/{id}/Consultancy/{con_id}/Documents/add', 'ConsultancyDocumentsController@new')->name('New Documents');
+Route::get('project/{id}/Consultancy/{con_id}/Document/add', 'ConsultancyDocumentsController@new')->name('New Document');
+Route::post('project/{id}/Consultancy/{con_id}/Document/{doc_id}', 'ConsultancyDocumentsController@store')->name('Document Save');
+Route::get('project/{id}/Consultancy/{con_id}/Document/delete/{doc_id}', 'ConsultancyDocumentsController@delete')->name('Delete Document');
+Route::get('project/{id}/Consultancy/{con_id}/Document/edit/{doc_id}', 'ConsultancyDocumentsController@edit')->name('Edit Document');
 
+//Project Fora Training
+Route::get('project/{id}/Training/', 'ProjectTrainingController@index')->name('Project Training');
+Route::get('project/{id}/Training/add', 'ProjectTrainingController@new')->name('New Project Training');
+Route::post('project/{id}/Training/store/{fr_id}', 'ProjectTrainingController@store')->name('Project Training Save');
+Route::get('project/{id}/Training/edit/{fr_id}', 'ProjectTrainingController@edit')->name('Edit Project Training');
+Route::get('project/{id}/Training/delete/{fr_id}', 'ProjectTrainingController@delete')->name('Delete Project Training');
+Route::get('project/{id}/Training/{fr_id}/view', 'ProjectTrainingController@view')->name('View Project Training');
+//(Project Fora Documents)
+Route::get('project/{id}/Training/{fr_id}/Documents/', 'ProjectTrainingDocumentsController@index')->name('Project Training Documents');
+Route::get('project/{id}/Training/{fr_id}/Document/add', 'ProjectTrainingDocumentsController@new')->name('New Project Training Document');
+Route::post('project/{id}/Training/{fr_id}/Document/{frdoc_id}', 'ProjectTrainingDocumentsController@store')->name('Project Training Document Save');
+Route::get('project/{id}/Training/{fr_id}/Document/delete/{frdoc_id}', 'ProjectTrainingDocumentsController@delete')->name('Delete Project Training Document');
+Route::get('project/{id}/Training/{fr_id}/Document/edit/{frdoc_id}', 'ProjectTrainingDocumentsController@edit')->name('Edit Project Training Document');
+
+//Project Documentation
+Route::get('project/{id}/Documentation/', 'ProjectDocumentationController@index')->name('Project Documentation');
+Route::get('project/{id}/Documentation/add', 'ProjectDocumentationController@new')->name('New Project documentation');
+Route::post('project/{id}/Documentation/store/{doc_id}', 'ProjectDocumentationController@store')->name('Project Documentation Save');
+Route::get('project/{id}/Documentation/{doc_id}/delete', 'ProjectDocumentationController@delete')->name('Delete Project Documentation');
+Route::get('project/{id}/Documentation/edit/{doc_id}', 'ProjectDocumentationController@edit')->name('Edit Project Documentation');
+
+//Project S & T Interventions
+Route::get('project/{id}/SATS/', 'ProjectSATSController@index')->name('SATS');
 
 
 

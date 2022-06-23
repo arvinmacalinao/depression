@@ -25,7 +25,7 @@
                         <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-sm">Category</span>
                         </div>
-                        <select class="form-control input-sm mr-2" id="qlab" name="qlab">
+                        <select class="form-control input-sm mr-2" id="qcat" name="qcat">
                             <option value="">ALL</option>
                             @foreach ($sel_category as $category)
                             <option value="{{ $category->con_type_id }}">{{ $category->con_type_name }}</option>
@@ -38,7 +38,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Year</span>
                         </div>
-                            <select class="form-control input-sm mr-2" id="qimp" name="qimp">
+                            <select class="form-control input-sm mr-2" id="qyear" name="qyear">
                             <option value="">ALL</option>
                             @foreach ($sel_years as $year)
                                 <option value="{{ $year->con_end_yr }}">{{ $year->con_end_yr }}</option>
@@ -51,7 +51,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Quarter</span>
                         </div>
-                        <select class="form-control input-sm" id="qyear" name="qyear">
+                        <select class="form-control input-sm" id="qqtr" name="qqtr">
                             <option value="">ALL</option>
                             @foreach ($sel_quarters as $quarter)
                                 <option value="{{ $quarter->quarter_id }}">{{ $quarter->quarter_name }}</option>
