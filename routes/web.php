@@ -146,8 +146,17 @@ Route::get('project/{id}/Documentation/edit/{doc_id}', 'ProjectDocumentationCont
 
 //Project S & T Interventions
 Route::get('project/{id}/SATS/', 'ProjectSATSController@index')->name('SATS');
+Route::get('project/{id}/SATS/add', 'ProjectSATSController@new')->name('New Project SATS');
+Route::post('project/{id}/SATS/store/{sat_id}', 'ProjectSATSController@store')->name('Project SATS Save');
+Route::get('project/{id}/SATS/{sat_id}/delete', 'ProjectSATSController@delete')->name('Delete Project SATS');
+Route::get('project/{id}/SATS/edit/{sat_id}', 'ProjectSATSController@edit')->name('Edit Project SATS');
 
-
+//Project Legal
+Route::get('project/{id}/Legals/', 'ProjectLegalController@index')->name('Project Legal');
+Route::get('project/{id}/Legal/add', 'ProjectLegalController@new')->name('New Project Legal');
+Route::post('project/{id}/Legal/store/{legal_id}', 'ProjectLegalController@store')->name('Project Legal Save');
+Route::get('project/{id}/Legal/{legal_id}/delete', 'ProjectLegalController@delete')->name('Delete Project Legal');
+Route::get('project/{id}/Legal/edit/{legal_id}', 'ProjectLegalController@edit')->name('Edit Project Legal');
 
 Route::get('/getCities/{id}', 'PsiProjectsController@getCities')->name('getCities');
 Route::get('/getBarangays/{id}', 'PsiProjectsController@getBarangays')->name('getBarangays');

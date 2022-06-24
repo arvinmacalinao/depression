@@ -14,34 +14,49 @@
         <div class="pull-right">
             <a href="{{ URL::previous() }}" class="projectdetails-btn pr"><span class="fa fa-arrow-circle-left"> Back</a>
         </div>
-        <h3><strong>Project Documentation (Add)</strong></h3>
+        <h3><strong>Project S & T Interventions (Add)</strong></h3>
     </div>
     <div class="card-body">
-        <form action="{{ route('Project Documentation Save', ['id' => $id, 'doc_id' => $doc_id]) }}" method="POST" files="true" enctype="multipart/form-data">
+        <form action="{{ route('Project SATS Save', ['id' => $id, 'sat_id' => $sat_id]) }}" method="POST" files="true" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="doctype_id" class="control-label"><Strong>Document Type *</Strong></label>
-                <select class="form-control input-sm" id="doctype_id" name="doctype_id">
-                @foreach ($sel_doctypes as $type)
-                <option value="{{ $type->doctype_id }}" {{ old('doctype_id', $documentation->doctype_id) == $type->doctype_id ? 'selected' : '' }}>{{ $type->doctype_name }}</option>
+                <label for="sat_date" class="control-label"><Strong>Intervention Date *</Strong></label>
+                <input class="form-control input-sm date-picker" placeholder="Date Acquired" maxlength="10" name="sat_date" id="sat_date" type="text" value="{{ old('sat_date', $sat->sat_date) }}">
+                </div>
+            <div class="form-group">
+                <label for="satt_id" class="control-label"><Strong>Type *</Strong></label>
+                <select class="form-control input-sm" id="satt_id" name="satt_id">
+                @foreach ($sel_types as $type)
+                <option value="{{ $type->satt_id }}" {{ old('satt_id', $sat->satt_id) == $type->satt_id ? 'selected' : '' }}>{{ $type->satt_name }}</option>
                 @endforeach
-                <option value="">Other</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="doc_file" class="control-label"><strong>Document *</strong></label>
-                @if ($documentation->doc_file != NULL)
-                    <a href="{{ $documentation->document1() }}" target="_blank" title="View {{ $documentation->doc_filename }}"><span class="fa fa-file-text"></span> Current File ({{ $documentation->doc_filename }})</a><br>
+                <label for="sat_file" class="control-label"><strong>Document *</strong></label>
+                @if ($sat->sat_file != NULL)
+                    <a href="{{ $sat->document1() }}" target="_blank" title="View {{ $sat->sat_filename }}"><span class="fa fa-file-text"></span> Current File ({{ $sat->sat_filename }})</a><br>
                 @endif
-                <input class="form-control input-sm" placeholder="Document" name="doc_file" id="doc_file" type="file" accept="application/ms*,application/vnd.ms*">
+                <input class="form-control input-sm" placeholder="Document" name="sat_file" id="sat_file" type="file" accept="application/ms*,application/vnd.ms*">
             </div>
             <div class="form-group">
-                <label for="doc_remarks" class="control-label"><Strong>Remarks</Strong></label>
-                <textarea class="form-control input-sm" placeholder="Remarks" name="doc_remarks" id="doc_remarks" cols="50" rows="4">{{ old('doc_remarks', $documentation->doc_remarks) }}</textarea>
+                <label for="sat_remarks" class="control-label"><Strong>Remarks</Strong></label>
+                <textarea class="form-control input-sm" placeholder="Remarks" name="sat_remarks" id="sat_remarks" cols="50" rows="4">{{ old('sat_remarks', $sat->sat_remarks) }}</textarea>
             </div>
         <input class="save-btn" type="submit" name="save" id="save" value="Save">
         </form>
     </div>
 </div>
+<script type="text/javascript"> 
+    $(document).ready(function() {
 
+    $('.date-picker').datepicker({
+        autoclose: true,
+        format: "yyyy-mm-dd",
+        todayBtn: true,
+        todayHighlight: true
+    });
+});
+
+
+</script>
 @endsection

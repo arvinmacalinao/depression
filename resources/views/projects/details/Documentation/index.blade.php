@@ -73,7 +73,7 @@
                         @endif
                         </td>   
                         <td>{{ $documentation->doc_remarks }}</td>
-                        <td>{{ date('m/d/Y h:i a',strtotime($documentation->date_encoded)) }}</td>
+                        <td>{{ date('m/d/Y h:i a',strtotime($documentation->date_encoded)) }}<br> by {{ $documentation->encoder }}</td>
                     </tr>
                 @endforeach
             </tbody>

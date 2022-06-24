@@ -12,8 +12,8 @@
 <div class="card">
     <div class="card-header">                  
         <div class="pull-right">
-            {{-- {{ route('New Project documentation', ['id' => $project->prj_id]) }} --}}
-            <a class="projectdetails-btn" href="" title="Edit"><span class="fa fa-plus"></span> Add Document</a>
+            {{--  --}}
+            <a class="projectdetails-btn" href="{{ route('New Project SATS', ['id' => $project->prj_id]) }}" title="Edit"><span class="fa fa-plus"></span> Add Document</a>
         </div>
         <h3><strong>Project S & T Interventions</strong></h3>
     </div>
@@ -24,13 +24,36 @@
                     <div class="col-sm-auto mb-2  ml-2">
                         <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
-                              <span class="input-group-text" id="inputGroup-sizing-sm">Document Type</span>
+                              <span class="input-group-text" id="inputGroup-sizing-sm">Type</span>
                             </div>
                             <select class="form-control input-sm" id="qtype" name="qtype">
                                 <option value="">ALL</option>
-                                {{-- @foreach ($sel_doctypes as $type)
-                                <option value="{{ $type->doctype_id }}">{{ $type->doctype_name }}</option>
-                                @endforeach --}}
+                                @foreach ($sel_types as $type)
+                                <option value="{{ $type->satt_id }}">{{ $type->satt_name }}</option>
+                                @endforeach
+                            </select>
+                          </div>
+                    </div>
+                    <div class="col-sm-auto mb-2  ml-2">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="inputGroup-sizing-sm">Year</span>
+                            </div>
+                            <select class="form-control input-sm" id="qyear" name="qyear">
+                            <option value="">ALL</option>
+                            </select>
+                          </div>
+                    </div>
+                    <div class="col-sm-auto mb-2  ml-2">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="inputGroup-sizing-sm">Quarter</span>
+                            </div>
+                            <select class="form-control input-sm" id="qqtr" name="qqtr">
+                                <option value="">ALL</option>
+                                @foreach ($sel_qtrs as $qtr)
+                                <option value="{{ $qtr->quarter_id }}">{{ $qtr->quarter_name }}</option>
+                                @endforeach
                             </select>
                           </div>
                     </div>
@@ -51,35 +74,38 @@
                 <tr>
                     <th width="6%">&nbsp;</th>
                     <th width="3%" style="text-align: center">#</th>
-                    <th>Intervention Date</th>
+                    <th width="10%">Intervention Date</th>
                     <th>Type</th>
-                    <th>Document</th>
+                    <th width="30%">Document</th>
                     <th>Remarks</th>
                     <th>Encoded</th>
                     <th>Updated</th>
                 </tr>
             </thead> 
             <tbody>
-                {{-- @foreach ($documentations as $documentation)
+                @foreach ($sats as $sat)
                     <tr>
-                        <td>
-                            <a href="{{ $documentation->document1() }}" target="_blank" class="project-btn mr-1" title="View"><i class="fa fa-folder-open-o"></i></a>
-                            <a href="{{ route('Edit Project Documentation', ['id' => $project->prj_id, 'doc_id' => $documentation->doc_id]) }}" class="project-btn mr-1" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
-                            <a href="{{ route('Delete Project Documentation', ['id' => $project->prj_id, 'doc_id' => $documentation->doc_id]) }}" class="project-btn mr-1" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a>
+                        <td>               
+                            <a href="{{ $sat->document1() }}" target="_blank" class="project-btn mr-1" title="View"><i class="fa fa-folder-open-o"></i></a>
+                            <a href="{{ route('Edit Project SATS', ['id' => $project->prj_id, 'sat_id' => $sat->sat_id]) }}" class="project-btn mr-1" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
+                            <a href="{{ route('Delete Project SATS', ['id' => $project->prj_id, 'sat_id' => $sat->sat_id]) }}" class="project-btn mr-1" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a>
                         </td>
                         <td style="text-align: center">{{ $loop->iteration }}</td>
-                        <td><a href="{{ $documentation->document1() }}" target="_blank" title="View">{{ $documentation->doc_filename }}</a></td>
+                        <td>{{ $sat->sat_date }}</td>
                         <td>
-                        @if ($documentation->doctype_id == 0)
-                        -
-                        @else
-                            {{ $documentation->type->doctype_name }}
-                        @endif
-                        </td>   
-                        <td>{{ $documentation->doc_remarks }}</td>
-                        <td>{{ date('m/d/Y h:i a',strtotime($documentation->date_encoded)) }}</td>
+                            @if ($sat->satt_id == 0)
+                            --
+                            @else
+                                {{ $sat->sattype->satt_name }}
+                            @endif
+                            </td>   
+                        <td><a href="{{ $sat->document1() }}" target="_blank" title="View">{{ $sat->sat_filename }}</a></td>
+                        <td>{{ $sat->sat_remarks }}</td>
+                        <td>{{ date('m/d/Y h:i:s a',strtotime($sat->date_encoded))  }} <br> by {{ $sat->encoder }}</td>
+                        <td>{{ date('m/d/Y h:i:s a',strtotime($sat->last_updated))  }} <br> by {{ $sat->encoder }}</td>
+                        
                     </tr>
-                @endforeach --}}
+                @endforeach
             </tbody>
         
         </table>
@@ -87,7 +113,7 @@
     <div class="card-footer">
         <div class="row">
             <div class="col-sm-12">
-                {{-- <div class="d-flex justify-content-center">{{  $documentations->appends(Request::all())->links() }}</div> --}}
+                {{-- <div class="d-flex justify-content-center">{{  $sats->appends(Request::all())->links() }}</div> --}}
             </div>
         </div>
     </div>
@@ -101,5 +127,19 @@
         targets:        0,
         order: [[ 1, 'asc' ]]
     }); 
+
+    var min = 2000;
+    max = new Date().getFullYear();
+    select = document.getElementById('qyear');
+
+    for (var i = min; i<=max; i++){
+        var opt = document.createElement('option');
+        opt.value = i;
+        opt.innerHTML = i;
+        select.appendChild(opt);
+    }
+
+select.value = new Date().getFullYear();
+$("#qyear").prop("selectedIndex", 0);
 </script>
 @endsection

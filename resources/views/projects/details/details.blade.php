@@ -32,7 +32,7 @@
             <a class="projectdetails-btn pr" href="{{ route('SATS', $project->prj_id) }}">S & T Interventions</a>
             <a class="projectdetails-btn pr" href="{{ route('Project Documentation', $project->prj_id) }}">Documentation</a>
             <a class="projectdetails-btn pr" href="">Photos*</a>
-            <a class="projectdetails-btn pr" href="">Legal*</a>
+            <a class="projectdetails-btn pr" href="{{ route('Project Legal', $project->prj_id) }}">Legal</a>
         </div>
     </div>
 </div>
