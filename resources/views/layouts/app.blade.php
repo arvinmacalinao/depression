@@ -19,7 +19,9 @@
           @endisset
         </title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-        <link href='https://fonts.googleapis.com/css?family=Roboto:500,900,100,300,700,400' rel='stylesheet' type='text/css'>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         
       {{-- CSS --}}
@@ -32,18 +34,16 @@
       {{-- Map JS --}}
       <script src="{{ asset('js/map.js') }}"></script>
       <script src="{{ asset('js/map_2.js') }}"></script>
+      <!-- <script src="{{ asset('js/merge-images.js') }}"></script> -->
+      <script src="https://cdn.jsdelivr.net/npm/merge-images@2.0.0/dist/index.umd.min.js"></script>
       <script src="http://maps.google.com/maps/api/js?key=AIzaSyCMDx-ejfVStxIBhfqtBuLj98OV79kqbdY"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Varela&display=swap" rel="stylesheet">
       <link rel="stylesheet" href=https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css>
-      <script src="https://unpkg.com/merge-images"></script>
+
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.6/dist/sweetalert2.all.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
       
-
       {{-- Datatable --}}
       <link  href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet"> 
       <script src="https://cdn.datatables.net/plug-ins/1.11.5/api/sum().js"></script>
@@ -186,26 +186,26 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"><i class="fa fa-cog"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/collabagency">Collaborating Agencies</a>
-                    <a class="dropdown-item" href="/collabcategories">Collaborating Agency Categories</a>
-                    <a class="dropdown-item" href="/consultcategory">Colsultancy Categories</a>
-                    <a class="dropdown-item" href="/documentcategory">Document Categories</a>
-                    <a class="dropdown-item" href="/equipmentnames">Equipment Names</a>
-                    <a class="dropdown-item" href="#">Location Listings</a>
-                    <a class="dropdown-item" href="/organizationcategories">Organization Categories</a>
-                    <a class="dropdown-item" href="/productunits">Product Units</a>
-                    <a class="dropdown-item" href="/projectcategories">Project Categories</a>
-                    <a class="dropdown-item" href="/activitycategories">S&T Activity Categories</a>
-                    <a class="dropdown-item" href="/sectors">Sectors</a>
-                    <a class="dropdown-item" href="/technologies">Technology</a>
+                    <a class="dropdown-item" href="{{ URL::to('collabagency') }}">Collaborating Agencies</a>
+                    <a class="dropdown-item" href="{{ URL::to('collabcategories') }}">Collaborating Agency Categories</a>
+                    <a class="dropdown-item" href="{{ URL::to('consultcategory') }}">Colsultancy Categories</a>
+                    <a class="dropdown-item" href="{{ URL::to('documentcategory') }}">Document Categories</a>
+                    <a class="dropdown-item" href="{{ URL::to('equipmentnames') }}">Equipment Names</a>
+                    <a class="dropdown-item" href="{{ URL::to('locationlistings/Regions') }}">Location Listings</a>
+                    <a class="dropdown-item" href="{{ URL::to('organizationcategories') }}">Organization Categories</a>
+                    <a class="dropdown-item" href="{{ URL::to('productunits') }}">Product Units</a>
+                    <a class="dropdown-item" href="{{ URL::to('projectcategories') }}">Project Categories</a>
+                    <a class="dropdown-item" href="{{ URL::to('activitycategories') }}">S&T Activity Categories</a>
+                    <a class="dropdown-item" href="{{ URL::to('sectors') }}">Sectors</a>
+                    <a class="dropdown-item" href="{{ URL::to('technologies') }}">Technology</a>
                   <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/coursecategory">Course Categories</a>
-                    <a class="dropdown-item" href="#">Courses</a>
-                    <a class="dropdown-item" href="#">Scholarship Programs</a>
-                    <a class="dropdown-item" href="#">Schools</a>
+                    <a class="dropdown-item" href="{{ URL::to('coursecategory') }}">Course Categories</a>
+                    <a class="dropdown-item" href="{{ URL::to('course') }}">Courses</a>
+                    <a class="dropdown-item" href="{{ URL::to('scholarprograms') }}">Scholarship Programs</a>
+                    <a class="dropdown-item" href="{{ URL::to('schools') }}">Schools</a>
                   <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Users</a>
-                    <a class="dropdown-item" href="/usergroups">User Groups</a>
+                    <a class="dropdown-item" href="{{ URL::to('usergroups') }}">User Groups</a>
                     <a class="dropdown-item" href="#">User Logs</a>
                   <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Agency Profile</a>

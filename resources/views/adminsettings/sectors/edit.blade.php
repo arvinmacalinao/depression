@@ -21,6 +21,9 @@
             <div class="form-group">
                 <label for="sector_name"> <b>Sector Name *</b> </label>
                 <input type="text" class="form-control" name="sector_name" id="sector_name" aria-describedby="sector_name" value="{!! $show_sector->sector_name !!}">
+                @error('sector_name')
+                    <div class="alert alert-danger p-1">{{ $message }}</div>
+                @enderror
             </div>
             <input class="btn btn-primary btn-block" type="submit" name="update" id="update" value="Update">
             </form>           

@@ -20,6 +20,7 @@ Route::get('/summary', 'ChartController@index');
 Route::get('/statreport', 'StatusReportController@index');
 Route::get('/project-monitoring', 'StatusReportController@index');
 Route::get('/project-collage', 'ProjectGalleryController@index')->name('Hehe');
+
 Route::resource('usergroups', 'UserGroupsController');
 Route::resource('collabcategories', 'CollabCategoriesController');
 Route::resource('collabagency', 'CollabAgencyController');
@@ -37,6 +38,15 @@ Route::resource('activitycategories', 'ActivityCategoriesController');
 Route::resource('sectors', 'SectorController');
 Route::resource('technologies', 'TechnologiesContoller');
 Route::resource('coursecategory', 'CourseCategoryController');
+Route::resource('course', 'CourseController');
+Route::resource('scholarprograms', 'ScholarProgramsController');
+Route::resource('schools', 'SchoolController');
+Route::resource('locationlistings/Regions', 'LocationListingRegionController');
+
+Route::resource('locationlistings/{Region}/Province', 'LocationListingProvinceController');
+Route::resource('locationlistings/{Province}/City', 'LocationListingCityController');
+Route::resource('locationlistings/{City}/Barangay', 'LocationListingBarangayController');
+
 Route::get('usergroups/create', 'UserGroupsController@create');
 Route::post('store','UserGroupsController@store');
 Route::get('usergroup/refactor', 'UserGroupsController@refactor_index');

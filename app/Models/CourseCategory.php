@@ -20,4 +20,8 @@ class CourseCategory extends Model
             $query->where('course_cat_name', 'like', "%$course_cat_name%");
         });
     }
+
+    public function course(){
+        return $this->hasMany('App\Models\Course', 'course_cat_id', 'course_cat_id');
+    }
 }

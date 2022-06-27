@@ -21,6 +21,9 @@
             <div class="form-group">
                 <label for="activity_type_name"> <b>Category Name *</b> </label>
                 <input type="text" class="form-control" name="activity_type_name" id="activity_type_name" aria-describedby="activity_type_name" value="{!! $show_activity->activity_type_name !!}">
+                @error('activity_type_name')
+                    <div class="alert alert-danger p-1">{{ $message }}</div>
+                @enderror
             </div>
             <input class="btn btn-primary btn-block" type="submit" name="update" id="update" value="Update">
             </form>           

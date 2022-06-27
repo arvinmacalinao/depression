@@ -25,16 +25,25 @@
                             </option>
                         @endforeach
                     </select>
+                    @error('sr_category')
+                        <div class="alert alert-danger p-1">{{ $message }}</div>
+                    @enderror
             </div>
 
             <div class="form-group">
-                <label for="ot_name"><b>Agency Name *</b></label>
+                <label for="col_name"><b>Agency Name *</b></label>
                 <input type="text" class="form-control" name="col_name" id="col_name" aria-describedby="col_name" value="{{ $show_agency->col_name }}">
+                @error('col_name')
+                        <div class="alert alert-danger p-1">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="form-group">
-                <label for="ot_name"> <b>Abbreviation * </b> </label>
+                <label for="col_abbr"> <b>Abbreviation * </b> </label>
                 <input type="text" class="form-control" name="col_abbr" id="col_abbr" aria-describedby="col_abbr" value="{{ $show_agency->col_abbr }}">
+                @error('col_abbr')
+                        <div class="alert alert-danger p-1">{{ $message }}</div>
+                @enderror
             </div>
             <input class="btn btn-primary btn-block" type="submit" name="update" id="update" value="Update">
         </div>

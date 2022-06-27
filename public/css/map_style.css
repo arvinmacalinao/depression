@@ -24,10 +24,6 @@ div.map-filter {
     cursor: pointer;
   }
 
-  body {
-    font-family: 'Varela', sans-serif;
-}
-
 .footer {
   /* position: fixed; */
   margin-top: 50px;
@@ -138,5 +134,10 @@ div.map-filter {
     .navbar-end .navbar-dropdown:last-child {
         left: -35px;
     }
+  }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
   }
 

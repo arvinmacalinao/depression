@@ -21,6 +21,9 @@
             <div class="form-group">
                 <label for="prj_type_name"> <b>Category Name *</b> </label>
                 <input type="text" class="form-control" name="prj_type_name" id="prj_type_name" aria-describedby="prj_type_name" value="{!! $show_projtypes->prj_type_name !!}">
+                @error('prj_type_name')
+                    <div class="alert alert-danger p-1">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="form-group">
@@ -33,6 +36,9 @@
                             </option>
                     @endforeach
                     </select>
+                    @error('section_ids')
+                    <div class="alert alert-danger p-1">{{ $message }}</div>
+                    @enderror
             </div>
 
             <div class="form-group">
@@ -45,6 +51,9 @@
                             </option>
                     @endforeach
                     </select>
+                    @error('doctype_ids')
+                    <div class="alert alert-danger p-1">{{ $message }}</div>
+                    @enderror
             </div>
 
             <input class="btn btn-primary btn-block" type="submit" name="update" id="update" value="Update">   

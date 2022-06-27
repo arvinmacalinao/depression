@@ -1,4 +1,4 @@
-@extends('./layouts.app', ['title' => 'Course'])
+@extends('./layouts.app', ['title' => 'Location Listings - Barangays'])
 
 @section('content')
 <div class="container-fluid mt-3">
@@ -18,64 +18,49 @@
     <div class="card">
     <div class="card-header">
         <div class="d-flex justify-content-between">
-            <h2>Course</h2>
+            <h2>Location Listings - Barangays</h2>
             <div></div>
                 <div id="buttonz">
-                    <a href="{{ URL::to('course/create') }}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus" aria-hidden="true"></i>  Add Course</a>
+                    <a href="{{ URL::to('Barangay/create') }}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus" aria-hidden="true"></i>  Add Region</a>
                 </div>
 
         </div>  
+        <h2 class="text-primary">{{$show_city->city_name}}</h2>
+        <h4 class="text-muted">{{$show_province->province_name}}</h4>
+        <h4 class="text-muted">{{$show_region->region_code}} ({{$show_region->region_name}})</h4>
     </div>
     <div class="card-body">
-    <form action="{{ route('course.index') }}" method="GET">
         <div class="row mb-5">
+            <div class="col-sm-3">
 
-        
-            <div class="col-sm-3">
+            <form action="{{ route('Barangay.index', $show_city->city_id) }}" method="GET">
                 <div class="input-group input-group-sm">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Category</span>
-                </div>
-                    <select class="form-control input-sm"  id="course_cat_id" name="course_cat_id">
-                        @foreach($show_course_cats as $show_course_cat)
-                            <option value="{{ $show_course_cat->course_cat_id }}">
-                                {{ $show_course_cat->course_cat_name }}
-                            </option>
-                        @endforeach                   
-                    </select>
-                </div>
-            </div>
-        
-            <div class="col-sm-3">
-                <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" name="coursename_search" id="coursename_search" placeholder="Course ..." aria-label="Course ..." aria-describedby="basic-addon2">
+                    <input type="text" class="form-control" name="barangay_search" id="barangay_search" placeholder="Barangay ..." aria-label="Barangay ..." aria-describedby="basic-addon2">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="submit">Search</button>
                     </div>
                 </div>
-            </div>
+            </form>
 
+            </div>
         </div>
-        </form>
 
             <table class="table table-striped table-bordered" style="width: 100%" id="mydatatable">
                 <thead>
                     <tr>
                         <th width="6%">&nbsp;</th>
                         <th width="4%">#</th>
-                        <th >Category</th>
-                        <th >Course</th>
-                        <th >Years</th>
+                        <th >Barangay</th>
                     </tr>
                 </thead> 
 
                 <tbody>
-                    @foreach($courses as $course) 
+                    @foreach($sel_barangays as $sel_barangay) 
                         <tr>
                             <td>
                             <div class="d-flex justify-content-start">
-                                <a class="btn btn-primary btn-xs" href="{{ route('course.edit', $course->course_id)}}"><span class="fa fa-pencil"></span></a>&nbsp;
-                                <form action="{{ route('course.destroy', $course->course_id)}}" method="post">
+                                <a class="btn btn-primary btn-xs" href="{{ route('Barangay.edit', [$show_city->city_id,$sel_barangay->barangay_id])}}"><span class="fa fa-pencil"></span></a>&nbsp;
+                                <form action="{{ route('Barangay.destroy', [$show_city->city_id,$sel_barangay->barangay_id])}}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-primary btn-xs show_confirm" type="submit"><span class="fa fa-close"></span></button>
@@ -83,9 +68,7 @@
                             </div>
                             </td>
                             <td>1</td>
-                            <td>{!!  $course->coursecategory->course_cat_name  !!}</td>
-                            <td>{!!  $course->course_name  !!}</td>
-                            <td>{!!  $course->course_yearcount  !!}</td>
+                            <td>{!!  $sel_barangay->barangay_name  !!}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -129,5 +112,6 @@
             }
           });
       });
+
 </script>
 @endsection

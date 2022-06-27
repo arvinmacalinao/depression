@@ -21,6 +21,9 @@
             <div class="form-group">
                 <label for="tech_name"> <b>Technology Name *</b> </label>
                 <input type="text" class="form-control" name="tech_name" id="tech_name" aria-describedby="tech_name" value="{!! $show_tech->tech_name !!}">
+                @error('tech_name')
+                    <div class="alert alert-danger p-1">{{ $message }}</div>
+                @enderror
             </div>
             <input class="btn btn-primary btn-block" type="submit" name="update" id="update" value="Update">
             </form>           
