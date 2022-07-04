@@ -77,8 +77,8 @@ Route::post('project/{id}/Product/store/{prod_id}', 'ProjectProductController@st
 Route::get('project/{id}/Product/delete/{prod_id}', 'ProjectProductController@delete')->name('Delete Product');
 Route::get('project/{id}/Product/edit/{prod_id}', 'ProjectProductController@edit')->name('Edit Product');
 
-//Project Monitoring
-//Project Monitoring2
+//Project Monitoring 
+//Project Monitoring2 (Progress Report)
 
 //Project Equipment
 Route::get('project/{id}/Equipment/', 'ProjectEquipmentController@index')->name('Equipment');
@@ -157,6 +157,24 @@ Route::get('project/{id}/Legal/add', 'ProjectLegalController@new')->name('New Pr
 Route::post('project/{id}/Legal/store/{legal_id}', 'ProjectLegalController@store')->name('Project Legal Save');
 Route::get('project/{id}/Legal/{legal_id}/delete', 'ProjectLegalController@delete')->name('Delete Project Legal');
 Route::get('project/{id}/Legal/edit/{legal_id}', 'ProjectLegalController@edit')->name('Edit Project Legal');
+
+//Project Liquidation
+Route::get('project/{id}/Liquidation/', 'ProjectLiquidationController@index')->name('Project Liquidation');
+Route::get('project/{id}/Liquidation/add', 'ProjectLiquidationController@new')->name('New Project Liquidation');
+Route::post('project/{id}/Liquidation/store/{liq_id}', 'ProjectLiquidationController@store')->name('Project Liquidation Save');
+Route::get('project/{id}/Liquidation/{liq_id}/delete', 'ProjectLiquidationController@delete')->name('Delete Project Liquidation');
+Route::get('project/{id}/Liquidation/edit/{liq_id}', 'ProjectLiquidationController@edit')->name('Edit Project Liquidation');
+
+//Project Albums
+Route::get('project/{id}/Album/', 'ProjectAlbumController@index')->name('Project Album');
+Route::get('project/{id}/Album/add', 'ProjectAlbumController@new')->name('New Project Album');
+Route::post('project/{id}/Album/store/{album_id}', 'ProjectAlbumController@store')->name('Project Album Save');
+Route::get('project/{id}/Album/{album_id}/delete', 'ProjectAlbumController@delete')->name('Delete Project Album');
+Route::get('project/{id}/Album/edit/{album_id}', 'ProjectAlbumController@edit')->name('Edit Project Album');
+Route::get('project/{id}/Album/{album_id}/view', 'ProjectAlbumController@view')->name('View Project Album');
+
+//Project Sites
+Route::get('project/{id}/Sites/', 'ProjectSiteController@index')->name('Sites');
 
 Route::get('/getCities/{id}', 'PsiProjectsController@getCities')->name('getCities');
 Route::get('/getBarangays/{id}', 'PsiProjectsController@getBarangays')->name('getBarangays');

@@ -158,9 +158,9 @@
                 </div>
             </div>
             <div class="card-map">
-            <div id="map" style="height: 330px; width: 100%;"></div>
+                <div id="map" style="height: 330px; width: 100%;"></div>
             </div>
-            
+
             <div id="map-location-picker" class="form-group map-location-picker">
             </div>
 

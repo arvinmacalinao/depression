@@ -247,7 +247,7 @@ var t =  $('#mydatatable').DataTable({
         orderable:      false,
         targets:        0,
         
-        
+
     });
     $(document).ready( function () {
     $t_rep_paid = $("#rep_paid").text();
