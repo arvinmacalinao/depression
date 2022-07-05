@@ -13,8 +13,8 @@
     <div class="card-header">                  
         <h3>Project Products
             <div class="pull-right">
-                <a href="" class="projectdetails-btn pr"><span class="fa fa-plus"></span> Add Products</a>
-                {{-- {{ route('New Product', $project->prj_id) }} --}}
+                <a class="projectdetails-btn-success pr" href="" title="Print" target="_blank"><span class="fa fa-print"></span> Print</a>
+                <a href="{{ route('New Project Sites', $project->prj_id) }}" class="projectdetails-btn pr"><span class="fa fa-plus"></span> Add Sites</a>
             </div>
         </h3>
     </div>
@@ -43,7 +43,6 @@
                         </div>
                         <select class="form-control input-sm mr-2" id="qyear" name="qyear">
                             <option value="">ALL</option>
-                            
                         </select>
                     </div>
                 </div>
@@ -62,10 +61,9 @@
                 </div>
                 <div class="col-sm-auto mb-2">
                     <div class="input-group input-group-sm">
-                        <input class="form-control input-sm" placeholder="Keywords..." type="text" maxlength="255" name="qsearch" id="qsearch" value="">
+                        <input class="form-control input-sm" placeholder="Keywords..." type="text" maxlength="255" name="qsearch" id="qsearch" value="{{ old('qsearch', $site_search) }}">
                         <input class="projectdetails-btn btn-sm" type="submit"  value="Search">
                     </div>
-                    {{-- {{ old('search', $project_search) }} --}}
                 </div>
             </div>
         </form>
@@ -96,10 +94,9 @@
                 @foreach ($sites as $site)
                                 <tr>
                                     <td>
-                                        {{-- {{ route('Edit PIS', ['id' => $project->prj_id, 'pis_id' => $site->prjpis_id]) }} --}}
-                                        {{-- {{ route('Delete PIS', ['id' => $project->prj_id, 'pis_id' => $site->prjpis_id]) }} --}}
-                                        <a href="" class="project-btn mr-1" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
-                                        <a href="" class="project-btn mr-1" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                        
+                                        <a href="{{ route('Edit Project Sites', ['id' => $project->prj_id, 'ps_id' => $site->prj_site_id]) }}" class="project-btn mr-1" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
+                                        <a href="{{ route('Delete Project Sites', ['id' => $project->prj_id, 'ps_id' => $site->prj_site_id]) }}" class="project-btn mr-1" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></a>
                                     </td>
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $site->prj_site_date }}</td>

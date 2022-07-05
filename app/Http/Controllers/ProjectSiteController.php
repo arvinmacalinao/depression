@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\Brand;
 use App\Models\Quarter;
+use App\Models\Barangay;
+use App\Models\Province;
 use App\Models\PsiProject;
 use App\Models\ProjectSite;
 use Illuminate\Http\Request;
@@ -12,87 +15,75 @@ class ProjectSiteController extends Controller
 {
     public function index(Request $request, $id)
 	{
-        // $liq_search = $request->get('qsearch');
-        // $liq_type = $request->get('qtype');
-        // $sat_year = $request->get('qyear');
+        $site_brand = $request->get('qbrand');
+        $site_year = $request->get('qyear');
+        $site_search = $request->get('qsearch');
+        // $site_qtr = $request->get('qqtr');
 		
         $sel_brands = Brand::get();
         $sel_qtrs = Quarter::get();
 
         $project = PsiProject::FindorFail($id);
-        $sites = ProjectSite::where('prj_id', $id)->paginate(20);
+        $sites = ProjectSite::where('prj_id', $id)->SiteBrand($site_brand)->SiteYear($site_year)->SiteYear($site_search)->paginate(20);
     
-		return view('./projects/details/Sites/index', compact('project', 'sites', 'sel_brands', 'sel_qtrs'))->with('i', ($request->input('page', 1) - 1) * 20);    
+		return view('./projects/details/Sites/index', compact('project', 'sites', 'sel_brands', 'sel_qtrs', 'site_search'))->with('i', ($request->input('page', 1) - 1) * 20);    
 	}
     
 
-    // public function new($id)
-    // {
-    //     {   
-    //         $project = PsiProject::FindorFail($id);
-    //         $liq_id = 0;
-    //         $liquidation = new ProjectLiquidation;
+    public function new($id)
+    {
+        {   
+            $project        =   PsiProject::FindorFail($id);
+            $ps_id         =   0;
+            
+            $sel_brands = Brand::orderBy('brand_name', 'asc')->get();
+            $sel_provinces = Province::where('region_id', $project->region_id)->get();
+            
+            $site = new ProjectSite;
 
-    //         $sel_types = ProjectLiquidationType::get();
+            return view('./projects/details/Sites/form', compact('project', 'site', 'id', 'ps_id', 'sel_brands', 'sel_provinces'));
+        }
+    }
 
-    //         return view('./projects/details/Liquidation/form', compact('project', 'liquidation', 'id', 'liq_id', 'sel_types'));
-    //     } 
-    // }
-
-    // public function store(Request $request, $id, $liq_id)
-    // {   
-    //     $now            = date('Ymdhis');        
-    //     if ($request->hasFile('liq_file')) {
-    //         $attachment     = $request->file('liq_file');
-    //         $extension      = $attachment->getClientOriginalExtension();
-    //         $orig_name      = $attachment->getClientOriginalName();
-    //         $filename       = explode('.',$orig_name)[0];
-    //         $doc1         = $now.'_'.$orig_name;
-
-    //         $attachment->storeAs('public/uploads/documents/', $doc1);            
-    //     } else {
-    //         $doc1         = NULL;
-    //     }
-    
-    //     if($liq_id == 0) {
-    //         $alert 					= 'alert-success';
-	// 		$message				= 'New Project Liquidation successfully added.';
-    //         $request->request->add(['liq_filename' => $filename]);
-    //         $request->request->add(['prj_id' => $id]);
-    //         $liquidation = ProjectLiquidation::create($request->except(['liq_file']));
-    //         $liquidation->update(['liq_file' => $doc1]);
-    //     } 
-    //     else {
-    //         $alert 					= 'alert-info';
-	// 		$message				= 'Project Liquidation record successfully updated.';
-    //         $liquidation = ProjectLiquidation::find($liq_id);
-    //         $liquidation->update($request->except(['liq_file']));
-
-    //         if($request->hasFile('liq_file')){
-    //         $liquidation->update(['liq_file' => $doc1]);
-    //         $liquidation->update(['liq_filename' => $filename]);
-    //         }
-    //     }
-    //     return redirect()->route('Project Liquidation', [$id])->with('message', $message)->with('alert', $alert);
-    // }
-
-    // public function delete($id, $liq_id)
-	// {
-	// 	$alert 					= 'alert-warning';
-	// 	$message				= 'Project Liquidation record successfully deleted.';
-    //     $liquidation                    = ProjectLiquidation::find($liq_id);
-	// 	$liquidation->delete();
-
-	// 	return redirect()->back()->with('message', $message)->with('alert', $alert);
-	// }
-
-    // public function edit($id, $liq_id)
-    // {
-    //     $project        = PsiProject::FindorFail($id);
-    //     $liquidation    = ProjectLiquidation::Find($liq_id);
-
-    //     $sel_types      = ProjectLiquidationType::get();
+    public function store(Request $request, $id, $ps_id)
+    {
         
-    //     return view('./projects/details/Liquidation/form', compact('project', 'liquidation', 'id', 'liq_id', 'sel_types'));
-    // }
+        if($ps_id == 0) {
+            $alert 					= 'alert-success';
+			$message				= 'New Project Site record successfully added.';
+            $request->request->add(['prj_id' => $id]);
+            $site = ProjectSite::create($request->all());
+
+        } else {
+            $alert 			= 'alert-info';
+			$message		= 'Project Site record successfully updated.';
+            $site           = ProjectSite::find($ps_id);
+            $site->update($request->all());
+        }
+
+        return redirect()->route('Sites', $id)->with('message', $message)->with('alert', $alert);
+    }
+
+    public function delete($id, $ps_id)
+	{
+		$alert 		        = 'alert-warning';
+		$message	        = 'Project Site record successfully deleted.';
+        $site               = ProjectSite::find($ps_id);
+		$site->delete();
+
+		return redirect()->back()->with('message', $message)->with('alert', $alert);
+	}
+
+    public function edit($id, $ps_id)
+    {
+        $project = PsiProject::FindorFail($id);
+        $site = ProjectSite::Find($ps_id);
+
+        $sel_brands = Brand::orderBy('brand_name', 'asc')->get();
+        $sel_provinces = Province::where('region_id', $project->region_id)->get();
+        $sel_cities = City::where('province_id', $site->province_id)->get();
+        $sel_barangays = Barangay::where('city_id', $site->city_id)->get();
+        
+        return view('./projects/details/Sites/form', compact('project', 'id', 'ps_id', 'site', 'sel_brands', 'sel_provinces', 'sel_cities', 'sel_barangays'));    
+    }
 }

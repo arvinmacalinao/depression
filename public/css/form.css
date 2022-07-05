@@ -349,3 +349,23 @@ div.img_box{
     background-color: #628a35;
     color: white;
 }
+
+.projectdetails-btn-success{
+    background-color: #8bc34a; /* Blue background */
+    border: solid; 
+    border-color: #7eb73d;
+    border-width: 1px;
+    color: white; /* White text */
+    padding: 7px 8px; /* Some padding */
+    font-size: 12px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+    text-align: center;
+    border-radius: 0px;
+    padding-top:5px;
+}
+  
+  /* Darker background on mouse-over */
+.projectdetails-btn-success:hover {
+    background-color: #517528;
+    color: white;
+}

@@ -13,6 +13,32 @@ class ProjectSite extends Model
     protected $fillable = ['prj_site_date', 'prj_site_remarks', 'prj_site_address', 'prj_site_longitude', 'prj_site_latitude', 'prj_site_elevation', 'brand_id', 'prj_id', 'encoder', 'date_encoded', 'updater', 'last_updated', 'province_id', 'city_id', 'barangay_id', 'region_id', 'synched', 'sync_date'];
     
 
+    public function scopeSiteBrand($query, $site_brand) 
+    {
+        if($site_brand) {
+            $query->where('brand_id', $site_brand);
+        }
+        return $query;
+    }
+    
+    public function scopeSiteYear($query, $site_year) 
+    {
+        if($site_year) {
+            $query->where('prj_site_date', 'like', "%$site_year%");
+        }
+        return $query;
+    }
+    
+    public function scopeSiteSearch($query, $site_search)
+    {
+        return $query->where(function($query) use($site_search) {
+             $query->where('prj_site_remarks', 'like', "%$site_search%")->orwhere('prj_site_date', 'like', "%$site_search%")
+             ->orwhere('prj_site_remarks', 'like', "%$site_search%")->orWhereHas('brand', function($brand) use($site_search) {
+                $brand->where('brand_name', 'like', "%$site_search%");
+                });
+        });
+    }
+
     public function brand()
     {
         return $this->belongsTo('App\Models\Brand', 'brand_id', 'brand_id');

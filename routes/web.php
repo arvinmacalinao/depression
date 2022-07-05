@@ -175,6 +175,10 @@ Route::get('project/{id}/Album/{album_id}/view', 'ProjectAlbumController@view')-
 
 //Project Sites
 Route::get('project/{id}/Sites/', 'ProjectSiteController@index')->name('Sites');
+Route::get('project/{id}/Sites/add', 'ProjectSiteController@new')->name('New Project Sites');
+Route::post('project/{id}/Sites/store/{ps_id}', 'ProjectSiteController@store')->name('Project Sites Save');
+Route::get('project/{id}/Sites/{ps_id}/delete', 'ProjectSiteController@delete')->name('Delete Project Sites');
+Route::get('project/{id}/Sites/edit/{ps_id}', 'ProjectSiteController@edit')->name('Edit Project Sites');
 
 Route::get('/getCities/{id}', 'PsiProjectsController@getCities')->name('getCities');
 Route::get('/getBarangays/{id}', 'PsiProjectsController@getBarangays')->name('getBarangays');

@@ -19,8 +19,8 @@ function initMap() {
     else{
       map = new google.maps.Map(document.getElementById("map"), myOptions2);
     }
-    
-    
+
+  
     
     // marker refers to a global variable
     
@@ -50,7 +50,27 @@ function initMap() {
                 map: map
              });
     });
+
+    initMapSites();
+    initialize();
   }   
+
+  function initMapSites() {
+    var myLatLng = {
+      lat: 14.171,
+      lng: 121.223
+    };
+  
+    var map = new google.maps.Map(document.getElementById('map3'), {
+      zoom: 15,
+      center: myLatLng
+    });
+  
+    var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+    });
+  }
   
   
 

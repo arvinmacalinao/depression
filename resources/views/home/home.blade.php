@@ -221,7 +221,6 @@
 <script>
 
 let map;
-google.maps.event.addDomListener(window, 'load', initialize);
 
 m1 = [];
 imagePath = "../images/markers/"
