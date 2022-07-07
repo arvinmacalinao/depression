@@ -27,7 +27,7 @@ class UserGroupsController extends Controller
         $d_usergroups = UserGroups::orderBy('ug_name', 'ASC')
             ->get();
 
-        return view('usergroups.index', compact('sel_regions','sel_provinces', 'd_usergroups'));
+        return view('adminsettings/usergroups.index', compact('sel_regions','sel_provinces', 'd_usergroups'));
     }
 
     public function create(){
@@ -47,7 +47,7 @@ class UserGroupsController extends Controller
         $ug_users = Users::orderBy('u_name', 'ASC')
             ->get();        
         
-        return view('usergroups.create', compact('sel_regions','sel_provinces', 'd_usergroups', 'c_userrights', 'ug_rights', 'ug_users'));
+        return view('adminsettings/usergroups.create', compact('sel_regions','sel_provinces', 'd_usergroups', 'c_userrights', 'ug_rights', 'ug_users'));
 
     }
 
@@ -155,7 +155,7 @@ class UserGroupsController extends Controller
 
     public function edit($id){
 
-            $show = UGroup::findOrFail($id);
+            $show_ur = UGroup::findOrFail($id);
 
             $ug_Rights = UserGroupRights::select('ur_id', 'ugr_view', 'ugr_add', 'ugr_edit', 'ugr_delete')
                 ->where('ug_id', '=', $id)
@@ -173,7 +173,7 @@ class UserGroupsController extends Controller
             $ug_users = Users::orderBy('u_name', 'ASC')
                 ->get(); 
             
-            return view('usergroups.edit', compact('show', 'sel_regions', 'sel_provinces', 'd_usergroups', 'ug_users', 'c_userrights', 'ug_Rights'));
+            return view('adminsettings/usergroups.edit', compact('show_ur', 'sel_regions', 'sel_provinces', 'd_usergroups', 'ug_users', 'c_userrights', 'ug_Rights'));
     }
 
     public function getChkData(){
@@ -196,12 +196,12 @@ class UserGroupsController extends Controller
         ]);
 
         $urid=$request->get('ur_id');
-        // dd($urid);
+        dd($urid);
 
         UGroup::where("ug_id", "=", $id)->update($validatedData);
 
 
-        return redirect('usergroups/'.$id.'/edit')->with('status',"Updated Successfully");       
+        return redirect('usergroups')->with('status',"Updated Successfully");       
     }
 
     public function show($id){
@@ -212,7 +212,7 @@ class UserGroupsController extends Controller
             $show = UGroup::findOrFail($id);
             $show->delete();
 
-            return redirect('usergroups/')->with('status', 'Usergroup Deleted');
+            return redirect('usergroups')->with('status', 'Usergroup Deleted');
     }
 
     public function refactor_index(){
@@ -228,7 +228,7 @@ class UserGroupsController extends Controller
 
         // dd($g_tables);
 
-        return view('usergroups.refactor', compact('d_usergroups', 'g_tables'));
+        return view('adminsettings/usergroups.refactor', compact('d_usergroups', 'g_tables'));
     }
 
 }

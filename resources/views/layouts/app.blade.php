@@ -204,7 +204,7 @@
                     <a class="dropdown-item" href="{{ URL::to('scholarprograms') }}">Scholarship Programs</a>
                     <a class="dropdown-item" href="{{ URL::to('schools') }}">Schools</a>
                   <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Users</a>
+                    <a class="dropdown-item" href="{{ URL::to('users') }}">Users</a>
                     <a class="dropdown-item" href="{{ URL::to('usergroups') }}">User Groups</a>
                     <a class="dropdown-item" href="#">User Logs</a>
                   <div class="dropdown-divider"></div>

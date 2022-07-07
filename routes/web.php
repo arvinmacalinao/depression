@@ -46,6 +46,7 @@ Route::resource('locationlistings/Regions', 'LocationListingRegionController');
 Route::resource('locationlistings/{Region}/Province', 'LocationListingProvinceController');
 Route::resource('locationlistings/{Province}/City', 'LocationListingCityController');
 Route::resource('locationlistings/{City}/Barangay', 'LocationListingBarangayController');
+Route::resource('users', 'UserController');
 
 Route::get('usergroups/create', 'UserGroupsController@create');
 Route::post('store','UserGroupsController@store');

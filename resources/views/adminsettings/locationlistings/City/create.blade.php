@@ -22,7 +22,7 @@
                     <h2>Location Listings - Cities (Add)</h2>
                     <div></div>
                         <div id="buttonz">
-                            <a href="{{ route('Province.index',$show_region->region_id)}}" type="button" class="btn btn-primary btn-sm">Back</a>
+                            <a href="{{ route('City.index',$show_province->province_id)}}" type="button" class="btn btn-primary btn-sm">Back</a>
                         </div>
                 </div>
 

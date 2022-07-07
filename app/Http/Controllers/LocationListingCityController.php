@@ -50,7 +50,7 @@ class LocationListingCityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $Province)
     {
         $rules = [
             'city_name' => 'required|string|min:3|max:255',
@@ -73,13 +73,13 @@ class LocationListingCityController extends Controller
 		}else{
             $data = $request->input();
 			try{
-				$province = new Province;
+				$cities = new City;
 
-                $province->city_name = $data['city_name'];
-                $province->district_id = $data['district_id'];
-                $province->province_id = $data['province_id'];
+                $cities->city_name = $data['city_name'];
+                $cities->district_id = $data['district_id'];
+                $cities->province_id = $data['province_id'];
                 
-				$province->save();
+				$cities->save();
 
 				return redirect()->route('City.index', $Province)->with('status',"Saved Successfully");
 			}
@@ -106,9 +106,16 @@ class LocationListingCityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($Province, $City)
     {
-        //
+        $show_city = City::findOrFail($City);
+        $show_province = Province::findOrFail($Province);
+        $show_region = Region::findOrFail($show_province->region_id);
+        $show_district = District::findOrFail($show_city->district_id);
+        $sel_disctricts = District::get();
+        $sel_provinces = Province::get();
+
+        return view('adminsettings/locationlistings/City.edit', compact('show_city','show_province','show_region','show_district','sel_disctricts','sel_provinces'));
     }
 
     /**
@@ -118,9 +125,15 @@ class LocationListingCityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $Province, $City)
     {
-        //
+        $validatedData = $request->validate([
+			'city_name' => 'required|string|min:3|max:255',
+            'district_id' => 'required',
+            'province_id' => 'required',
+        ]);
+        City::where("city_id", "=", $City)->update($validatedData);
+        return redirect()->route('City.index', $Province)->with('status',"City/Municipality Updated Successfully");
     }
 
     /**
@@ -129,8 +142,11 @@ class LocationListingCityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($Province, $City)
     {
-        //
+        $show = City::findOrFail($City);
+        $show->delete();
+
+        return redirect()->route('City.index', $Province)->with('status', 'City/Municipality Deleted');
     }
 }

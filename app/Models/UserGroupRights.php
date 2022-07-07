@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class UserGroupRights extends Model
 
 {
-
     use SoftDeletes;
 
     const CREATED_AT = 'date_encoded';
@@ -18,4 +17,9 @@ class UserGroupRights extends Model
     protected $table = 'psi_usergroup_rights';
     protected $primaryKey = 'ugr_id';
     protected $fillable = ['ur_id', 'ug_id'];
+
+    public function UserGroup()
+    {
+        return $this->belongsTo('App\Models\UGroup');
+    }
 }

@@ -21,7 +21,8 @@
             <h2>Location Listings - Barangays</h2>
             <div></div>
                 <div id="buttonz">
-                    <a href="{{ URL::to('Barangay/create') }}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus" aria-hidden="true"></i>  Add Region</a>
+                    <a href="{{ route('Barangay.create',$show_city->city_id)}}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus" aria-hidden="true"></i>  Add Barangay</a>
+                    <a href="{{ route('City.index',$show_province->province_id)}}" type="button" class="btn btn-primary btn-sm">Back</a>
                 </div>
 
         </div>  

@@ -14,7 +14,7 @@
         </div>
     @endif  
     
-<form action = "{{route('usergroups.update', $show->ug_id)}}" method = "post">
+<form action = "{{route('usergroups.update', $show_ur->ug_id)}}" method = "post">
     @csrf
     @method('PATCH')
     <div class="card">
@@ -30,7 +30,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="ug_name" class="control-label"><b>Group Name *</b></label>   
-                    <input class="form-control input-sm @error('ug_name') is-invalid @enderror" placeholder="Group Name" name="ug_name" id="ug_name" type="text" value="{{ $show->ug_name }}">
+                    <input class="form-control input-sm @error('ug_name') is-invalid @enderror" placeholder="Group Name" name="ug_name" id="ug_name" type="text" value="{{ $show_ur->ug_name }}">
                     @error('ug_name')
                         <div class="alert alert-danger p-1">{{ $message }}</div>
                     @enderror
@@ -39,7 +39,7 @@
                 <div class="form-group">
                     <label for="ug_display_name" class="control-label"><b>Short Display Name * (Used in Buttons)</b></label>
                     <span class="text-danger"><small></small></span>
-                    <input class="form-control input-sm @error('ug_display_name') is-invalid @enderror" placeholder="Short Display Name" name="ug_display_name" id="ug_display_name" type="text" value="{{ $show->ug_display_name }}">
+                    <input class="form-control input-sm @error('ug_display_name') is-invalid @enderror" placeholder="Short Display Name" name="ug_display_name" id="ug_display_name" type="text" value="{{ $show_ur->ug_display_name }}">
                     @error('ug_display_name')
                         <div class="alert alert-danger p-1">{{ $message }}</div>
                     @enderror
@@ -86,7 +86,7 @@
                 <label for="ug_unit_head" class="control-label"><b>Unit Head</b></label>
                 <select class="form-control input-sm @error('ug_unit_head') is-invalid @enderror" id="ug_unit_head" name="ug_unit_head">
                     @foreach($ug_users as $ug_user)
-                        <option value="{{ $ug_user->u_id }}">{{ $ug_user->u_name }}</option>
+                        <option value="{{ $ug_user->u_id }}">{{ $ug_user->u_name }}</option {{ $ug_user->ug_id == $show_ur->ug_id}} ? 'selected':''>
                     @endforeach 
                 </select>
                     @error('ug_unit_head')
@@ -96,7 +96,7 @@
 
                 <div class="checkbox">
                     <label>
-                        @if($show->ug_is_admin == '1')
+                        @if($show_ur->ug_is_admin == '1')
                         <input type="checkbox" name="ug_is_admin" id="ug_is_admin" value="1" checked> Is Administrator Group
                         @else
                         <input type="checkbox" name="ug_is_admin" id="ug_is_admin" value="0"> Is Administrator Group
@@ -169,7 +169,7 @@
                             <div class="checkbox">
                                 <label>
                                     @if($c_userright->ur_id =='72' || $c_userright->ur_id =='73' || $c_userright->ur_id =='74' || $c_userright->ur_id =='75') 
-                                        <input type="checkbox" class="chk1" name="ur{{  $c_userright->ur_id  }}_view" id="ur{{  $c_userright->ur_id  }}_view" value="1"> Approval 1
+                                        <input type="checkbox" class="chk1" name="ur{{  $c_userright->ur_id  }}_view" id="ur{{  $c_userright->ur_id  }}_view" value="1" > Approval 1
                                     @else
                                         <input type="checkbox" class="chk1" name="ur{{  $c_userright->ur_id  }}_view" id="ur{{  $c_userright->ur_id  }}_view" value="1"> View
                                     @endif
@@ -229,35 +229,151 @@
 </div>
 
 <script>
-    $("#region_id option[value='" + {{ $show->region_id }} + "']").attr("selected","selected");
-    $("#province_id option[value='" + {{ $show->province_id }} + "']").attr("selected","selected");
-    $("#ug_parent_id option[value='" + {{ $show->ug_parent_id }} + "']").attr("selected","selected");
-    $("#ug_unit_head option[value='" + {{ $show->ug_unit_head }} + "']").attr("selected","selected");
 
-    @foreach($ug_Rights as $ug_Right)
-        if({{ $ug_Right->ugr_view }} == '1'){
-            $("#ur" + {{ $ug_Right->ur_id }} + "_view").attr("checked", "checked");
-        }else{
-            $("#ur" + {{ $ug_Right->ur_id }} + "_view").attr("checked", "false");
-        }
+ug_admin_is = document.querySelector('input[name="ug_is_admin"]');
+ug_admin_is.value = "0";
 
-        if({{ $ug_Right->ugr_add }} == '1'){
-            $("#ur" + {{ $ug_Right->ur_id }} + "_add").attr("checked", "checked");
-        }else{
-            $("#ur" + {{ $ug_Right->ur_id }} + "_add").attr("checked", "false");
-        }
+$("#ug_is_admin").change( function(){
+    if($(this).is(':checked')) {
+        ug_admin_is.value = "1"
+    } else {
+        ug_admin_is.value = "0"
+    }
+});
 
-        if({{ $ug_Right->ugr_edit }} == '1'){
-            $("#ur" + {{ $ug_Right->ur_id }} + "_edit").attr("checked", "checked");
-        }else{
-            $("#ur" + {{ $ug_Right->ur_id }} + "_edit").attr("checked", "false");
-        }
+select_id="";
 
-        if({{ $ug_Right->ugr_delete }} == '1'){
-            $("#ur" + {{ $ug_Right->ur_id }} + "_delete").attr("checked", "checked");
-        }else{
-            $("#ur" + {{ $ug_Right->ur_id }} + "_delete").attr("checked", "false");
-        }
-    @endforeach
+if ($('#copy_rights').length) {
+	    $('#copy_rights').change(function (){
+            select_id = $(this).children(":selected").attr("value");
+            getChkData()
+		});
+}
+
+
+
+// user groups check all
+	
+if ($('#chk_all_1').length){
+		$('#chk_all_1').click(function (){
+			var _checked = this.checked;
+			$('.chk1').each(function (){
+				this.checked = _checked;
+			});
+		});
+
+		$('.chk1').click(function (){
+			var _checked = this.checked;
+			$('.chk1').each(function (){
+				_checked &= this.checked;
+			});
+			$('#chk_all_1').prop('checked', _checked);
+		});
+	}
+
+	if ($('#chk_all_2').length){
+		$('#chk_all_2').click(function (){
+			var _checked = this.checked;
+			$('.chk2').each(function (){
+				this.checked = _checked;
+			});
+		});
+
+		$('.chk2').click(function (){
+			var _checked = this.checked;
+			$('.chk2').each(function (){
+				_checked &= this.checked;
+			});
+			$('#chk_all_2').prop('checked', _checked);
+		});
+	}
+
+	if ($('#chk_all_3').length){
+		$('#chk_all_3').click(function (){
+			var _checked = this.checked;
+			$('.chk3').each(function (){
+				this.checked = _checked;
+			});
+		});
+
+		$('.chk3').click(function (){
+			var _checked = this.checked;
+			$('.chk3').each(function (){
+				_checked &= this.checked;
+			});
+			$('#chk_all_3').prop('checked', _checked);
+		});
+	}
+
+	if ($('#chk_all_4').length){
+		$('#chk_all_4').click(function (){
+			var _checked = this.checked;
+			$('.chk4').each(function (){
+				this.checked = _checked;
+			});
+		});
+
+		$('.chk4').click(function (){
+			var _checked = this.checked;
+			$('.chk4').each(function (){
+				_checked &= this.checked;
+			});
+			$('#chk_all_4').prop('checked', _checked);
+		});
+	}
+
+    function getChkData(){
+    $.ajax({
+            url: "{!! URL::to('usergroups/create/get-by-selid')!!}",
+            type: "GET",
+            data:{ 
+                select_id: select_id
+            },
+            beforeSend: function () { // Before we send the request, remove the .hidden class from the spinner and default to inline-block.
+                $('#loader').removeClass('hidden')
+            },
+            success:function(response){
+                var data = response
+                jQuery.each(data,function(index, value){
+                    if(value.ugr_view == "1"){
+                        $("#ur" + value.ur_id + "_view").prop('checked', true);
+                        document.getElementById("ur" + value.ur_id + "_view").setAttribute("value", "1");
+                        
+                    }else{
+                        $("#ur" + value.ur_id + "_view").prop('checked', false);
+                        document.getElementById("ur" + value.ur_id + "_view").setAttribute("value", "0");
+                    }
+
+                    if(value.ugr_add == "1"){
+                        $("#ur" + value.ur_id + "_add").prop('checked', true);
+                        document.getElementById("ur" + value.ur_id + "_add").setAttribute("value", "1");
+                    }else{
+                        $("#ur" + value.ur_id + "_add").prop('checked', false);
+                        document.getElementById("ur" + value.ur_id + "_add").setAttribute("value", "0");
+                    }
+
+                    if(value.ugr_edit == "1"){
+                        $("#ur" + value.ur_id + "_edit").prop('checked', true);
+                        document.getElementById("ur" + value.ur_id + "_edit").setAttribute("value", "1");
+                    }else{
+                        $("#ur" + value.ur_id + "_edit").prop('checked', false);
+                        document.getElementById("ur" + value.ur_id + "_edit").setAttribute("value", "0");
+                    }
+
+                    if(value.ugr_delete == "1"){
+                        $("#ur" + value.ur_id + "_delete").prop('checked', true);
+                        document.getElementById("ur" + value.ur_id + "_delete").setAttribute("value", "1");
+                    }else{
+                        $("#ur" + value.ur_id + "_delete").prop('checked', false);
+                        document.getElementById("ur" + value.ur_id + "_delete").setAttribute("value", "0");
+                    }
+                });
+                // $("#ur26_view").prop('checked', true);
+            },
+            complete: function () { // Set our complete callback, adding the .hidden class and hiding the spinner.
+                    $('#loader').addClass('hidden');
+            },
+        });    
+}
 </script>
 @endsection

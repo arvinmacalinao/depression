@@ -120,11 +120,7 @@ class LocationListingProvinceController extends Controller
 			'province_name' => 'required|string|min:3|max:255',
             'region_name' => 'required|string|min:3|max:255',
         ]);
-
-        
-
         Province::where("province_id", "=", $Province)->update($validatedData);
-
         return redirect()->route('Province.index', $Region)->with('status',"Province Updated Successfully");
     }
 
