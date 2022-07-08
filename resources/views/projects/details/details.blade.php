@@ -20,7 +20,7 @@
             <a class="projectdetails-btn pr" href="">Monitoring*</a>
             @endif
             @if($project->prj_type_id == 8 || $project->prj_type_id == 9 || $project->prj_type_id == 13 || $project->prj_type_id == 14)
-            <a class="projectdetails-btn pr" href="">Monitoring*</a>
+            <a class="projectdetails-btn pr" href="{{ route('Progress Reports', $project->prj_id) }}">Monitoring</a>
             @endif
             <a class="projectdetails-btn pr" href="{{ route('Sites', $project->prj_id) }}">Sites</a>
             <a class="projectdetails-btn pr" href="{{ route('Equipment', $project->prj_id) }}">Equipment</a>

@@ -162,13 +162,6 @@
 
     $(document).ready( function () {
 
-        table.on( 'draw.dt', function () {
-            var PageInfo = $('#mydatatable').DataTable().page.info();
-            table.column(0, { page: 'current' }).nodes().each( function (cell, i) {
-            cell.innerHTML = i + 1 + PageInfo.start;
-            });
-    }).draw();
-
 });
 </script>
 @endsection

@@ -39,11 +39,11 @@ class PackagingDesignController extends Controller
             $design = new PackagingDesign;
             if($pgkcount == 3)
             {
-            return redirect()->back()->with('message', $message)->with('alert', $alert);
+                return redirect()->back()->with('message', $message)->with('alert', $alert);
             }
             else
             {
-            return view('./projects/details/Packaging/Design/form', compact('project', 'packaging', 'design', 'id', 'pack_id', 'des_id', 'sel_drafts'));
+                return view('./projects/details/Packaging/Design/form', compact('project', 'packaging', 'design', 'id', 'pack_id', 'des_id', 'sel_drafts'));
             }
         } 
     }

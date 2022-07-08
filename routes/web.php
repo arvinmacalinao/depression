@@ -79,6 +79,16 @@ Route::get('project/{id}/Product/edit/{prod_id}', 'ProjectProductController@edit
 
 //Project Monitoring 
 //Project Monitoring2 (Progress Report)
+Route::get('project/{id}/ProgressReports/', 'ProjectProgressController@index')->name('Progress Reports');
+Route::get('project/{id}/ProgressReport/add', 'ProjectProgressController@new')->name('New Progress Reports');
+Route::post('project/{id}/ProgressReport/store/{prog_id}', 'ProjectProgressController@store')->name('Progress Reports Save');
+
+//Targets
+Route::get('project/{id}/ProgressReport/Targets/', 'ProjectProgressTargetController@index')->name('Progress Reports Targets');
+Route::get('project/{id}/ProgressReport/Target/add', 'ProjectProgressTargetController@new')->name('New Progress Report Target');
+Route::post('project/{id}/ProgressReport/Target/{tar_id}', 'ProjectProgressTargetController@store')->name('Progress Report Target Save');
+Route::get('project/{id}/ProgressReport/Target/delete/{tar_id}', 'ProjectProgressTargetController@delete')->name('Delete Progress Report Target');
+Route::get('project/{id}/ProgressReport/Target/edit/{tar_id}', 'ProjectProgressTargetController@edit')->name('Edit Progress Report Target');
 
 //Project Equipment
 Route::get('project/{id}/Equipment/', 'ProjectEquipmentController@index')->name('Equipment');

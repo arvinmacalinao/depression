@@ -121,6 +121,7 @@ td {
     text-align: center;
     border-radius: 0px;
     padding-top:5px;
+    
 }
       
       /* Darker background on mouse-over */
@@ -369,3 +370,7 @@ div.img_box{
     background-color: #517528;
     color: white;
 }
+
+.is-marked, div.is-marked, tr.is-marked td {
+    background-color: #fff9c4 !important;
+  }
