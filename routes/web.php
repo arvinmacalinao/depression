@@ -48,9 +48,11 @@ Route::resource('locationlistings/{Province}/City', 'LocationListingCityControll
 Route::resource('locationlistings/{City}/Barangay', 'LocationListingBarangayController');
 Route::resource('users', 'UserController');
 
-Route::get('usergroups/create', 'UserGroupsController@create');
-Route::post('store','UserGroupsController@store');
-Route::get('usergroup/refactor', 'UserGroupsController@refactor_index');
+Route::resource('usergroups', 'UserGroupController');
+
+// Route::get('usergroups/create', 'UserGroupsController@create');
+// Route::post('store','UserGroupsController@store');
+// Route::get('usergroup/refactor', 'UserGroupsController@refactor_index');
 
 // Route::post('ugUpdate','UserGroupsController@update');
 

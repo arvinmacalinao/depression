@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Model
 {
+    use SoftDeletes;
+    
     const CREATED_AT = 'date_encoded';
     const UPDATED_AT = 'last_updated';
     protected $table = 'psi_users';
@@ -40,5 +43,9 @@ class User extends Model
         });
     }
 
+    public function groups()
+    {
+        return $this->belongsToMany('App\Models\UserGroup', 'UserGroup', 'ug_id', 'ug_id');
+    }
 }
 
