@@ -51,4 +51,6 @@ class UserGroup extends Model
     public function parent() {
         return $this->hasOne(self::class, 'ug_id', 'ug_parent_id');
     }
+
+
 }

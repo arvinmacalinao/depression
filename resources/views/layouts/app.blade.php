@@ -208,7 +208,7 @@
                     <a class="dropdown-item" href="{{ URL::to('usergroups') }}">User Groups</a>
                     <a class="dropdown-item" href="#">User Logs</a>
                   <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Agency Profile</a>
+                    <a class="dropdown-item" href="{{ URL::to('agencyprofile') }}">Agency Profile</a>
                 </div>
               </li>
 

@@ -113,7 +113,7 @@
 
                 <div class="form-group form-group-sm">
                     <label>
-                        <input type="checkbox" name="u_head" id="u_head" value="1" {{ ( $show_user->u_head == '1') ? 'checked' : '' }}>  <b>Agency Head or Authorized Representative</b> 
+                        <input type="checkbox" name="u_head" id="u_head" value="0" {{ ( $show_user->u_head == '1') ? 'checked' : '' }}>  <b>Agency Head or Authorized Representative</b> 
                     </label>
                 </div>
 
@@ -130,4 +130,5 @@
     </div>
     </form>
 </div>
+
 @endsection

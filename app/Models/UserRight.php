@@ -13,4 +13,8 @@ class UserRight extends Model
     const UPDATED_AT = 'last_updated';
     protected $table = 'psi_user_rights';
     protected $primaryKey = 'ur_id';
+
+    public function urights(){
+        return $this->hasMany('App\Models\UserGroupRight','ur_id','ur_id');
+    }
 }

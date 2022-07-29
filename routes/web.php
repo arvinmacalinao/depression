@@ -42,6 +42,7 @@ Route::resource('course', 'CourseController');
 Route::resource('scholarprograms', 'ScholarProgramsController');
 Route::resource('schools', 'SchoolController');
 Route::resource('locationlistings/Regions', 'LocationListingRegionController');
+Route::resource('agencyprofile', 'AgencyController');
 
 Route::resource('locationlistings/{Region}/Province', 'LocationListingProvinceController');
 Route::resource('locationlistings/{Province}/City', 'LocationListingCityController');
@@ -49,6 +50,8 @@ Route::resource('locationlistings/{City}/Barangay', 'LocationListingBarangayCont
 Route::resource('users', 'UserController');
 
 Route::resource('usergroups', 'UserGroupController');
+Route::get('usergroups/{usergroup}/edit/checkData', 'UserGroupController@getURData');
+
 
 // Route::get('usergroups/create', 'UserGroupsController@create');
 // Route::post('store','UserGroupsController@store');
@@ -60,7 +63,6 @@ Route::resource('usergroups', 'UserGroupController');
 Route::get('map-filter', 'MapFilterController@sort');
 Route::get('get-by-year', 'StatusReportFilter@status_sort');
 Route::get('get-by-imgid', 'ProjectGalleryController@getImg');
-Route::get('usergroups/create/get-by-selid', 'UserGroupsController@getChkData');
 
 
 // Projects

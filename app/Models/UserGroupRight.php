@@ -14,7 +14,7 @@ class UserGroupRight extends Model
     protected $table = 'psi_usergroup_rights';
     protected $primaryKey = 'ug_id';
 
-    public function urights(){
-        return $this->belongsTo('App\Models\UserRight', 'ur_id', 'ur_id');
+    public function ugroups(){
+        return $this->belongsTo('App\Models\UserGroup','ug_id','ug_id');
     }
 }

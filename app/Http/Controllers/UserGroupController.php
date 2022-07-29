@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Region;
 use App\Models\Province;
 use App\Models\UserGroup;
+use App\Models\UserRight;
 use Illuminate\Http\Request;
 use App\Models\UserGroupRight;
 
@@ -77,8 +78,8 @@ class UserGroupController extends Controller
         $sel_usergroups = UserGroup::orderBy('ug_name', 'ASC')->get();
         $ug_users = User::orderBy('u_fname', 'ASC')->get();
         $usergroup_rights = UserGroupRight::where('ug_id', $id)->get();
-
-        return view('adminsettings/usergroups.edit', compact('show_ug','sel_regions','sel_provinces','sel_usergroups','ug_users','usergroup_rights'));
+        $default_rights = UserRight::orderBy('ur_name')->get();
+        return view('adminsettings/usergroups.edit', compact('default_rights','show_ug','sel_regions','sel_provinces','sel_usergroups','ug_users','usergroup_rights'));
     }
 
     /**
@@ -90,7 +91,20 @@ class UserGroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $default_rights = UserRight::orderBy('ur_name')->get();
+        $rights =  $default_rights->urights->get();   
+
+        foreach($rights as $right) {
+            $right->ugr_view = $request->has('ur'.$right->ur_id.'_view');
+            if($right->ugr_view == 'false'){
+                $right->ugr_view = '0';
+            }else{
+                $right->ugr_view = '1';
+            }
+            $right->save();
+        }
+
+        return redirect('usergroups')->with('status',"User Group Updated Successfully");
     }
 
     /**
@@ -102,5 +116,14 @@ class UserGroupController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getURData(){
+        $data_id = $_GET['data_id'];
+        
+        $data_ids = UserGroupRight::where("ug_id", "=", $data_id)
+        ->get();
+
+        return $data_ids;
     }
 }

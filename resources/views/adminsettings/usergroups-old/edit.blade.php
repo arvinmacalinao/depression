@@ -254,7 +254,7 @@ if ($('#copy_rights').length) {
 
 // user groups check all
 	
-if ($('#chk_all_1').length){
+    if ($('#chk_all_1').length){
 		$('#chk_all_1').click(function (){
 			var _checked = this.checked;
 			$('.chk1').each(function (){

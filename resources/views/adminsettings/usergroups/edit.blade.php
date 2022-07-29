@@ -12,7 +12,8 @@
             <button type="button" class="close" data-dismiss="alert">×</button>
             {{ session('failed') }}
         </div>
-    @endif  
+    @endif 
+    <div id="loader" class="lds-dual-ring hidden overlay"></div> 
     
 <form action = "{{route('usergroups.update', $show_ug->ug_id)}}" method = "post">
     @csrf
@@ -72,9 +73,9 @@
                 <div class="form-group form-group-sm">
                     <label for="ug_parent_id" class="control-label"><b>Parent</b></label>
                     <select class="form-control input-sm @error('ug_parent_id') is-invalid @enderror" id="ug_parent_id" name="ug_parent_id">
-                        <option value="0" selected>None</option>    
+                        <option value="0">None</option>    
                         @foreach($sel_usergroups as $sel_usergroup)
-                            <option value="{{ $sel_usergroup->ug_id }}" {{ ($sel_usergroup->ug_parent_id == $show_ug->ug_id)  ? 'selected':''}} >{{ $sel_usergroup->ug_name }}</option>
+                            <option value="{{ $sel_usergroup->ug_id }}" {{ ($sel_usergroup->ug_id == $show_ug->ug_parent_id)  ? 'selected':''}} >{{ $sel_usergroup->ug_name }}</option>
                         @endforeach 
                     </select>
                     @error('ug_parent_id')
@@ -85,6 +86,7 @@
                 <div class="form-group form-group-sm">
                 <label for="ug_unit_head" class="control-label"><b>Unit Head</b></label>
                 <select class="form-control input-sm @error('ug_unit_head') is-invalid @enderror" id="ug_unit_head" name="ug_unit_head">
+                    <option value="0">None</option>     
                     @foreach($ug_users as $ug_user)
                         <option value="{{ $ug_user->u_id }}" {{ ($ug_user->u_id == $show_ug->ug_unit_head)  ? 'selected':''}} >{{ $ug_user->u_fname }} {{ $ug_user->u_mname }} {{ $ug_user->u_lname }}</option>
                     @endforeach 
@@ -110,7 +112,7 @@
                         <th>
                             <label for="copy_rights">Copy access rights from</label>
                             <select class="form-control @error('copy_rights') is-invalid @enderror" name="copy_rights" id="copy_rights">
-                                <option value="0">--</option>
+                                <option value="{{  $show_ug->ug_id  }}">--</option>
                             @foreach($sel_usergroups as $sel_usergroup) 
                                 <option value="{{  $sel_usergroup->ug_id  }}">{{  $sel_usergroup->ug_name  }}</option>
                             @endforeach
@@ -150,21 +152,43 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($usergroup_rights as $usergroup_right)
+                @foreach($default_rights as $default_right)
                     <tr>
                         <td>
                             <div class="checkbox">
                                 <label>
-                                    {{  $usergroup_right->urights->ur_name  }}
+                                    {{  $default_right->ur_name  }}
+                                    {{  $default_right->ur_id  }}
                                 </label>
-                                <input name="ur_id[]" value="{{  $usergroup_right->urights->ur_id }}" type="hidden">
+                                
                             </div>
                         </td>
 
                         <td class="text-left">
                             <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" name="ur{{  $usergroup_right->ur_id  }}_view" id="ur{{  $usergroup_right->ur_id  }}_view" value="{{ ( $usergroup_right->ugr_view == '1') ? '1' : '0' }}" {{ ( $usergroup_right->ugr_view == '1') ? 'checked' : '' }}>
-                                <label class="form-check-label">{!! ($usergroup_right->ur_id =='72' || $usergroup_right->ur_id =='73' || $usergroup_right->ur_id =='74' || $usergroup_right->ur_id =='75') ? 'Approval 1' : 'View'  !!}</label>
+                                <input type="checkbox" class="form-check-input chk1" name="ur{{  $default_right->ur_id  }}_view[]" id="ur{{  $default_right->ur_id  }}_view" value="0">
+                                <label class="form-check-label">{!! ($default_right->ur_id =='72' || $default_right->ur_id =='73' || $default_right->ur_id =='74' || $default_right->ur_id =='75') ? 'Approval 1' : 'View'  !!}</label>
+                            </div>
+                        </td>
+
+                        <td class="text-left">
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input chk2" name="ur{{  $default_right->ur_id  }}_add" id="ur{{  $default_right->ur_id  }}_add" value="0">
+                                <label class="form-check-label">{!! ($default_right->ur_id =='72' || $default_right->ur_id =='73' || $default_right->ur_id =='74' || $default_right->ur_id =='75') ? 'Approval 2' : 'Add'  !!}</label>
+                            </div>
+                        </td>
+
+                        <td class="text-left">
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input chk3" name="ur{{  $default_right->ur_id  }}_edit" id="ur{{  $default_right->ur_id  }}_edit" value="0">
+                                <label class="form-check-label">{!! ($default_right->ur_id =='72' || $default_right->ur_id =='73' || $default_right->ur_id =='74' || $default_right->ur_id =='75') ? 'Approval 3' : 'Edit'  !!}</label>
+                            </div>
+                        </td>
+
+                        <td class="text-left">
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input chk4" name="ur{{  $default_right->ur_id  }}_delete" id="ur{{  $default_right->ur_id  }}_delete" value="0">
+                                <label class="form-check-label">{!! ($default_right->ur_id =='72' || $default_right->ur_id =='73' || $default_right->ur_id =='74' || $default_right->ur_id =='75') ? 'Approval 3' : 'Delete'  !!}</label>
                             </div>
                         </td>
 
@@ -182,4 +206,211 @@
     </div>
 </form>
 </div>
+
+<script>
+    var select_  = document.querySelector('select[id="copy_rights"] option[selected]');
+    $( document ).ready(function() {
+        getUGBox();
+    });
+
+    if ($('#copy_rights').length) {
+	    $('#copy_rights').change(function (){
+            data_id = $(this).children(":selected").attr("value");
+            getUGBox()
+		});
+}
+    
+    if ($('#chk_all_1').length){
+		$('#chk_all_1').click(function (){
+            var _checked = this.checked;
+            if($(this).is(":checked")) {
+                $('.chk1').each(function (){
+                    this.checked = _checked;
+                    this.value = "1";
+                });
+            }else{
+                $('.chk1').each(function (){
+                    this.checked = "";
+                    this.value = "0";
+                });                
+            }
+		});
+	}
+
+	if ($('#chk_all_2').length){
+		$('#chk_all_2').click(function (){
+            var _checked = this.checked;
+            if($(this).is(":checked")) {
+                $('.chk2').each(function (){
+                    this.checked = _checked;
+                    this.value = "1";
+                });
+            }else{
+                $('.chk2').each(function (){
+                    this.checked = "";
+                    this.value = "0";
+                });                
+            }
+		});
+	}
+
+	if ($('#chk_all_3').length){
+		$('#chk_all_3').click(function (){
+            var _checked = this.checked;
+            if($(this).is(":checked")) {
+                $('.chk3').each(function (){
+                    this.checked = _checked;
+                    this.value = "1";
+                });
+            }else{
+                $('.chk3').each(function (){
+                    this.checked = "";
+                    this.value = "0";
+                });                
+            }
+		});
+	}
+
+	if ($('#chk_all_4').length){
+		$('#chk_all_4').click(function (){
+            var _checked = this.checked;
+            if($(this).is(":checked")) {
+                $('.chk4').each(function (){
+                    this.checked = _checked;
+                    this.value = "1";
+                });
+            }else{
+                $('.chk4').each(function (){
+                    this.checked = "";
+                    this.value = "0";
+                });                
+            }
+		});
+	}
+
+    function clearChkBox(){
+        $('.chk1').each(function (){
+            this.checked = "";
+            this.value = "0";
+        });  
+
+        $('.chk2').each(function (){
+            this.checked = "";
+            this.value = "0";
+        });  
+
+        $('.chk3').each(function (){
+            this.checked = "";
+            this.value = "0";
+        });  
+
+        $('.chk4').each(function (){
+            this.checked = "";
+            this.value = "0";
+        });  
+    }
+
+    data_id = {{ $show_ug->ug_id }};
+
+    function getUGBox(){
+        $.ajax({
+            url: "{!! URL::to('usergroups/{usergroup}/edit/checkData')!!}",
+            type: "GET",
+            data:{ 
+                data_id: data_id
+            },
+            beforeSend: function () { // Before we send the request, remove the .hidden class from the spinner and default to inline-block.
+                $('#loader').removeClass('hidden')
+                clearChkBox()
+            },
+            success:function(response){
+                var data = response
+                jQuery.each(data,function(index, value){
+                    if(value.ugr_view == "1"){
+                        $("#ur" + value.ur_id + "_view").prop('checked', true);
+                        document.getElementById("ur" + value.ur_id + "_view").setAttribute("value", "1");
+                        
+                    }else{
+                        $("#ur" + value.ur_id + "_view").prop('checked', false);
+                        document.getElementById("ur" + value.ur_id + "_view").setAttribute("value", "0");
+                    }
+
+                    if(value.ugr_add == "1"){
+                        $("#ur" + value.ur_id + "_add").prop('checked', true);
+                        document.getElementById("ur" + value.ur_id + "_add").setAttribute("value", "1");
+                    }else{
+                        $("#ur" + value.ur_id + "_add").prop('checked', false);
+                        document.getElementById("ur" + value.ur_id + "_add").setAttribute("value", "0");
+                    }
+
+                    if(value.ugr_edit == "1"){
+                        $("#ur" + value.ur_id + "_edit").prop('checked', true);
+                        document.getElementById("ur" + value.ur_id + "_edit").setAttribute("value", "1");
+                    }else{
+                        $("#ur" + value.ur_id + "_edit").prop('checked', false);
+                        document.getElementById("ur" + value.ur_id + "_edit").setAttribute("value", "0");
+                    }
+
+                    if(value.ugr_delete == "1"){
+                        $("#ur" + value.ur_id + "_delete").prop('checked', true);
+                        document.getElementById("ur" + value.ur_id + "_delete").setAttribute("value", "1");
+                    }else{
+                        $("#ur" + value.ur_id + "_delete").prop('checked', false);
+                        document.getElementById("ur" + value.ur_id + "_delete").setAttribute("value", "0");
+                    }
+                });
+                // $("#ur26_view").prop('checked', true);
+            },
+            complete: function () { // Set our complete callback, adding the .hidden class and hiding the spinner.
+                $('#loader').addClass('hidden');
+            },
+        });
+    }
+
+    @foreach($default_rights as $default_right)
+        $('#ur{{$default_right->ur_id}}_view').click(function (){
+            var _checked = this.checked;
+            if($(this).is(":checked")) {
+                this.checked = _checked;
+                this.value = "1";
+            }else{
+                this.checked = "";
+                this.value = "0";             
+            }
+		}); 
+
+        $('#ur{{$default_right->ur_id}}_add').click(function (){
+            var _checked = this.checked;
+            if($(this).is(":checked")) {
+                this.checked = _checked;
+                this.value = "1";
+            }else{
+                this.checked = "";
+                this.value = "0";             
+            }
+		}); 
+
+        $('#ur{{$default_right->ur_id}}_edit').click(function (){
+            var _checked = this.checked;
+            if($(this).is(":checked")) {
+                this.checked = _checked;
+                this.value = "1";
+            }else{
+                this.checked = "";
+                this.value = "0";             
+            }
+		}); 
+
+        $('#ur{{$default_right->ur_id}}_delete').click(function (){
+            var _checked = this.checked;
+            if($(this).is(":checked")) {
+                this.checked = _checked;
+                this.value = "1";
+            }else{
+                this.checked = "";
+                this.value = "0";             
+            }
+		}); 
+    @endforeach
+</script>
 @endsection
